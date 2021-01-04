@@ -25,6 +25,18 @@ urlpatterns = [
 
     # web services
     path('ws/tags', views.get_tags),
+    path('ws/article', views.get_article),
+    path('ws/articles', views.get_articles),
+    path('ws/create/article', views.create_article),
+    path('ws/update/article', views.update_article),
+    path('ws/delete/article/<int:id>', views.delete_article),
+    path('ws/users', views.get_users),
+    path('ws/item', views.get_item),
+    path('ws/items', views.get_items),
+    path('ws/game', views.get_game),
+    path('ws/games', views.get_games),
+    path('ws/console', views.get_console),
+    path('ws/consoles', views.get_consoles),
 ]
 
 # Serving the media files in development mode
