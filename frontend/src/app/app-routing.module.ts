@@ -1,13 +1,23 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import {TagFilterComponent} from './tag-filter/tag-filter.component';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { PageNotFoundComponent } from './page-not-found.component';
 
 const routes: Routes = [
-  {path: 'tags', component: TagFilterComponent},
+  {
+    path: '',
+    redirectTo: 'articles',
+    pathMatch: 'full'
+  },
+  {path: 'articles', loadChildren: './features/articles/articles.module#ArticlesModule'},
+  {path: 'profile', loadChildren: './features/profile/profile.module#ProfileModule'},
+  {path: '**', component: PageNotFoundComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    // preload all modules
+    preloadingStrategy: PreloadAllModules
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

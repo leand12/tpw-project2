@@ -1,7 +1,9 @@
-<script></script>
-<h1>{{ title }}</h1>
-<nav>
-  <a routerLink="">Home</a>
-  <a routerLink="/tags">Tags</a>
-</nav>
-<router-outlet></router-outlet>
+<app-navbar></app-navbar>
+
+<div class="nk-gap-2"></div>
+
+<main role="main">
+  <div class="container body-content py-5 mt-5">
+    <router-outlet></router-outlet>
+  </div>
+</main>
