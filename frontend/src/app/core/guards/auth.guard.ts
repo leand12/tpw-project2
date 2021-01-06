@@ -22,9 +22,9 @@ export class AuthGuard implements CanActivate {
   }
 }*/
 
-import {CanActivate, Router} from '@angular/router';
-import {AuthService} from '../services/auth.service';
 import {Injectable} from '@angular/core';
+import { CanActivate, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -32,7 +32,6 @@ export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) { }
 
   canActivate(): boolean {
-    console.log('can activate');
     if (this.authService.isLoggedIn()) {
       this.authService.refreshToken();
       return true;
