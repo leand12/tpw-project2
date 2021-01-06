@@ -18,10 +18,14 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 import rest_api.views as views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('auth/login/', obtain_jwt_token),
+    path('auth/refresh-token/', refresh_jwt_token),
 
     # web services
     path('ws/tags', views.get_tags),

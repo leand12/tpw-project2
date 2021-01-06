@@ -7,10 +7,11 @@ from rest_framework import serializers
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
-        fields = ['name', 'is_popular']
+        fields = ('name', 'is_popular')
 
 
 class ArticleSerializer(serializers.ModelSerializer):
+    # user = serializers.StringRelatedField(many=False)
     class Meta:
         model = Article
         fields = (
@@ -21,7 +22,7 @@ class ArticleSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'email')
+        fields = ('id', 'username', 'email', 'first_name', 'last_name')
 
 
 class ItemSerializer(serializers.ModelSerializer):

@@ -10,6 +10,8 @@ import {TagService} from '../../../../core/services/tag.service';
 })
 export class StoreComponent implements OnInit {
   tags: TagModel[];
+  error: any;
+
   constructor(private tagService: TagService) { }
 
   ngOnInit(): void {
@@ -17,6 +19,9 @@ export class StoreComponent implements OnInit {
   }
 
   getTags(): void {
-    this.tagService.getNTags(2).subscribe(tags => this.tags = tags);
+    this.tagService.getNTags(2).subscribe(
+      tags => this.tags = tags,
+      error => this.error = error
+    );
   }
 }
