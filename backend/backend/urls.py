@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.urls import path
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
@@ -24,23 +24,27 @@ import rest_api.views as views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('auth/login/', obtain_jwt_token),
+
+    # path('auth/login/', obtain_jwt_token),
+    path('auth/refresh-token/', refresh_jwt_token),
+    path('auth/', include('rest_auth.urls')),
+    path('auth/signup/', include('rest_auth.registration.urls')),
     path('auth/refresh-token/', refresh_jwt_token),
 
     # web services
-    path('ws/tags', views.get_tags),
-    path('ws/article', views.get_article),
-    path('ws/articles', views.get_articles),
-    path('ws/create/article', views.create_article),
-    path('ws/update/article', views.update_article),
-    path('ws/delete/article/<int:id>', views.delete_article),
-    path('ws/users', views.get_users),
-    path('ws/item', views.get_item),
-    path('ws/items', views.get_items),
-    path('ws/game', views.get_game),
-    path('ws/games', views.get_games),
-    path('ws/console', views.get_console),
-    path('ws/consoles', views.get_consoles),
+    path('ws/tags/', views.get_tags),
+    path('ws/article/', views.get_article),
+    path('ws/articles/', views.get_articles),
+    path('ws/create/article/', views.create_article),
+    path('ws/update/article/', views.update_article),
+    path('ws/delete/article/<int:id>/', views.delete_article),
+    path('ws/users/', views.get_users),
+    path('ws/item/', views.get_item),
+    path('ws/items/', views.get_items),
+    path('ws/game/', views.get_game),
+    path('ws/games/', views.get_games),
+    path('ws/console/', views.get_console),
+    path('ws/consoles/', views.get_consoles),
 ]
 
 # Serving the media files in development mode
