@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 
 import { ArticlesModule } from '../../features/articles/articles.module';
 
 import { TagModel } from '../models/tag.model';
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  })
+};
 
 @Injectable()
 export class TagService {
@@ -14,6 +19,6 @@ export class TagService {
 
   getNTags(num: number): Observable<TagModel[]> {
     const url = this.baseURL + 'tags?num=' + num;
-    return this.http.get<TagModel[]>(url);
+    return this.http.get<TagModel[]>(url, httpOptions);
   }
 }

@@ -36,7 +36,6 @@ import { EditComponent } from './pages/edit/edit.component';
     EditComponent
   ],
   exports: [
-    CompactArticleRendererComponent
   ],
 })
 export class ArticlesModule { }
