@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 
-import { ArticlesModule } from '../../features/articles/articles.module';
-
 import { TagModel } from '../models/tag.model';
 
 const httpOptions = {

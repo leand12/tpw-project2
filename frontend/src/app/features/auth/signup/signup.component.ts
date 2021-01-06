@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import {AuthService} from '../../../core/services/auth.service';
-import {Router} from '@angular/router';
+import { AuthService } from '../../../core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -9,30 +9,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-//   signupForm: FormGroup;
-//   username: any;
-//   firstName: any;
-//   lastName: any;
-//   email: any;
-//   password1: any;
-//   password2: any;
-//   constructor() { }
-//
-//   ngOnInit(): void {
-//     this.signupForm = new FormGroup({
-//       username: new FormControl(),
-//       firstName: new FormControl(),
-//       lastName: new FormControl(),
-//       email: new FormControl(),
-//       password1: new FormControl(),
-//       password2: new FormControl(),
-//     });
-//   }
-//
-//   onSubmit(): void {
-//     console.log(this.signupForm.value);
-//   }
-// }
+  signupForm: FormGroup;
   error: any;
 
   constructor(
@@ -41,12 +18,21 @@ export class SignupComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.signupForm = new FormGroup({
+      username: new FormControl(),
+      firstName: new FormControl(),
+      lastName: new FormControl(),
+      email: new FormControl(),
+      password1: new FormControl(),
+      password2: new FormControl(),
+    });
   }
 
   // tslint:disable-next-line:typedef
-  signup(username: string, email: string, password1: string, password2: string) {
-    this.authService.signup(username, email, password1, password2).subscribe(
-      success => this.router.navigate(['list']),
+  signup() {
+    const user = this.signupForm.value;
+    this.authService.signup(user.username, user.email, user.password1, user.password2).subscribe(
+      success => this.router.navigate(['home']),
       error => this.error = error
     );
   }

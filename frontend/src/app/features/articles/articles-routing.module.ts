@@ -8,9 +8,8 @@ import { OwnedComponent } from './pages/owned/owned.component';
 import { SavedComponent } from './pages/saved/saved.component';
 import { ShopCartComponent } from './pages/shop-cart/shop-cart.component';
 import { StoreComponent } from './pages/store/store.component';
-import {AuthGuard} from '../../core/guards/auth.guard';
+import { AuthGuard } from '../../core/guards/auth.guard';
 
-// import { NoAuthGuard } from './no-auth-guard.service';
 
 const routes: Routes = [
   {
@@ -18,13 +17,16 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {path: 'create', component: CreateComponent},
-      {path: 'details', component: DetailsComponent},
-      {path: 'edit', component: EditComponent},
-      {path: 'owned', component: OwnedComponent},
+      {path: 'details/:id', component: DetailsComponent},
+      {path: 'edit/:id', component: EditComponent},
+      {path: 'owned/:id', component: OwnedComponent},
       {path: 'saved', component: SavedComponent},
       {path: 'shopcart', component: ShopCartComponent},
-      {path: ':articleType', component: StoreComponent},
-      {path: '', component: StoreComponent, pathMatch: 'full'},
+      {path: 'store', children: [
+        {path: '', component: StoreComponent},
+        {path: ':type', component: StoreComponent},
+        {path: ':type/:platform', component: StoreComponent},
+      ]},
     ]
   }
 ];

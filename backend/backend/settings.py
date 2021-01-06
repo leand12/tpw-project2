@@ -38,6 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth',
+    'rest_auth.registration',
+
     'rest_api.apps.RestApiConfig',
     'rest_framework',
     'corsheaders',
@@ -67,12 +74,16 @@ REST_FRAMEWORK = {
     'NON_FIELD_ERRORS_KEY': 'global',
 }
 
+# allauth
+SITE_ID = 1
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
 # JWT settings
+REST_USE_JWT = True
 JWT_AUTH = {
     'JWT_ALLOW_REFRESH': True,
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=2),
 }
-
 
 # CORS (Cross-Origin Resource Sharing) config
 CORS_ORIGIN_ALLOW_ALL = True

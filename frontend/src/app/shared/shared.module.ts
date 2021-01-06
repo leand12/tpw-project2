@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
 
 import {
   NavbarComponent,
 } from './components/';
+import { ErrorBoxComponent } from './components/error-box/error-box.component';
 
 /*
 * Contains all the commonly used directives, pipes, and components.
@@ -20,20 +20,20 @@ import {
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
     RouterModule
   ],
   declarations: [
     NavbarComponent,
+    ErrorBoxComponent,
   ],
   exports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
     RouterModule,
 
     NavbarComponent,
+    ErrorBoxComponent,
   ]
 })
 export class SharedModule { }
