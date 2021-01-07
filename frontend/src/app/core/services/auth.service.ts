@@ -41,10 +41,10 @@ export class AuthService {
     );
   }
 
-  signup(username: string, email: string, password1: string, password2: string): Observable<any> {
+  signup(username: string, firstName: string, lastName: string, email: string, password1: string, password2: string): Observable<any> {
     return this.http.post(
       this.baseURL.concat('signup/'),
-      { username, email, password1, password2 }
+      { username, first_name: firstName, last_name: lastName, email, password1, password2 }
     ).pipe(
       tap(response => this.setSession(response)),
       shareReplay(),

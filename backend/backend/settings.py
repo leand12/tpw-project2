@@ -73,6 +73,9 @@ REST_FRAMEWORK = {
     ),
     'NON_FIELD_ERRORS_KEY': 'global',
 }
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'rest_api.serializers.RegisterSerializer',
+}
 
 # allauth
 SITE_ID = 1
