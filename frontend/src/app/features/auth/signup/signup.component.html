@@ -6,44 +6,51 @@
     <div class="form-group">
       <label for="username">Username:</label>
       <input id="username" formControlName="username" type="text" value="" class="form-control">
-      <ul *ngFor="let e of error?.error.username">
-        <li><a href="#" class="error">{{ e }}</a></li>
-      </ul>
+      <div *ngFor="let e of error?.error.username">
+        <a href="#" class="error">{{ e }}</a>
+      </div>
     </div>
     <div class="form-group form-row">
       <div class="col">
         <label for="firstName">First Name:</label>
         <input id="firstName" formControlName="firstName" type="text" value="" class="form-control">
-<!--        {{ form.first_name.help_text|safe }}-->
+        <div *ngFor="let e of error?.error.first_name">
+          <a href="#" class="error">{{ e }}</a>
+        </div>
       </div>
       <div class="col">
         <label for="lastName">Last Name:</label>
         <input id="lastName" formControlName="lastName" type="text" value="" class="form-control">
-<!--        {{ form.last_name.help_text|safe }}-->
+        <div *ngFor="let e of error?.error.last_name">
+          <a href="#" class="error">{{ e }}</a>
+        </div>
       </div>
     </div>
     <div class="form-group">
       <label for="email">Email:</label>
       <input id="email" formControlName="email" type="email" value="" class="form-control">
-      <ul *ngFor="let e of error?.error.email">
-        <li><a href="#" class="error">{{ e }}</a></li>
-      </ul>
+      <div *ngFor="let e of error?.error.email">
+        <a href="#" class="error">{{ e }}</a>
+      </div>
     </div>
     <div class="form-group form-row">
       <div class="col">
         <label for="password1">Password:</label>
         <input id="password1" formControlName="password1" type="password" value="" class="form-control">
-        <ul *ngFor="let e of error?.error.password1">
-          <li><a href="#" class="error">{{ e }}</a></li>
-        </ul>
+        <div *ngFor="let e of error?.error.password1">
+          <a href="#" class="error">{{ e }}</a>
+        </div>
       </div>
       <div class="col">
         <label for="password2">Confirm Password:</label>
         <input id="password2" formControlName="password2" type="password" value="" class="form-control">
-        <ul *ngFor="let e of error?.error.password2">
-          <li><a href="#" class="error">{{ e }}</a></li>
-        </ul>
+        <div *ngFor="let e of error?.error.password2">
+          <a href="#" class="error">{{ e }}</a>
+        </div>
       </div>
+    </div>
+    <div *ngFor="let e of error?.error.global">
+      <a href="#" class="error">{{ e }}</a>
     </div>
 
     <div class="nk-gap-1"></div>
@@ -60,7 +67,10 @@
         </div>
       </div>
     </div>
+
+    <!-- TODO: remove debug lines -->
     <p>{{ error?.message }}</p>
     <p *ngIf="error">{{ error?.error | json }}</p>
+
   </form>
 </div>

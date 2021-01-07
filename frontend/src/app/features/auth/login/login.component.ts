@@ -9,23 +9,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-//   loginForm: FormGroup;
-//   username: any;
-//   password: any;
-//   constructor() { }
-//
-//   ngOnInit(): void {
-//     this.loginForm = new FormGroup({
-//       username: new FormControl(),
-//       password: new FormControl(),
-//     });
-//   }
-//
-//   onSubmit(): void {
-//     console.log(this.loginForm.value);
-//   }
-//
-// }
+  loginForm: FormGroup;
   error: any;
 
   constructor(
@@ -34,10 +18,15 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.loginForm = new FormGroup({
+      username: new FormControl(),
+      password: new FormControl(),
+    });
   }
 
-  login(username: string, password: string): void {
-    this.authService.login(username, password).subscribe(
+  login(): void {
+    const user = this.loginForm.value;
+    this.authService.login(user.username, user.password).subscribe(
       success => this.router.navigate(['home']),
       error => this.error = error
     );

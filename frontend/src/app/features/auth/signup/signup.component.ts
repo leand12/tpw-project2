@@ -31,7 +31,7 @@ export class SignupComponent implements OnInit {
   // tslint:disable-next-line:typedef
   signup() {
     const user = this.signupForm.value;
-    this.authService.signup(user.username, user.email, user.password1, user.password2).subscribe(
+    this.authService.signup(user.username, user.firstName, user.lastName, user.email, user.password1, user.password2).subscribe(
       success => this.router.navigate(['home']),
       error => this.error = error
     );
