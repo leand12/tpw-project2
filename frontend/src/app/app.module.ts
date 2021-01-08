@@ -15,7 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 /* App Root */
 import { AppComponent } from './app.component';
 
-import { PageNotFoundComponent } from './page-not-found.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -36,7 +36,3 @@ import { PageNotFoundComponent } from './page-not-found.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-
-
-
