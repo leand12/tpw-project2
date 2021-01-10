@@ -2,6 +2,7 @@ import { TagModel } from './tag.model';
 import { UserModel } from './user.model';
 
 export class ArticleModel {
+  id: number;
   name: string;
   totalPrice: number;
   description: string;
