@@ -12,10 +12,8 @@ import { OwnedComponent } from './pages/owned/owned.component';
 import { CreateComponent } from './pages/create/create.component';
 import { EditComponent } from './pages/edit/edit.component';
 
-import { WidgetPriceFilterComponent } from './components/widget-price-filter/widget-price-filter.component';
-import { InlinePriceFilterComponent } from './components/inline-price-filter/inline-price-filter.component';
 import { RichArticleRendererComponent } from './components/rich-article-renderer/rich-article-renderer.component';
-
+import { CompactArticleRendererComponent } from './components/compact-article-renderer/compact-article-renderer.component';
 
 
 @NgModule({
@@ -34,8 +32,7 @@ import { RichArticleRendererComponent } from './components/rich-article-renderer
     EditComponent,
 
     RichArticleRendererComponent,
-    WidgetPriceFilterComponent,
-    InlinePriceFilterComponent,
+    CompactArticleRendererComponent,
   ],
   exports: [
   ],

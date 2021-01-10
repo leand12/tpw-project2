@@ -22,7 +22,9 @@ export class NavbarComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    $.getScript('assets/js/goodgames.min.js');
+    $.getScript('assets/vendor/gsap/src/minified/TweenMax.min.js');
+    $.getScript('assets/vendor/gsap/src/minified/plugins/ScrollToPlugin.min.js');
+    $.getScript('assets/js/goodgames.js');
     $.getScript('assets/js/goodgames-init.js');
   }
 

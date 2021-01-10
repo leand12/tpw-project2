@@ -6,9 +6,10 @@ import { RouterModule } from '@angular/router';
 import {
   NavbarComponent,
   ErrorBoxComponent,
-  CompactArticleRendererComponent,
   ViewGamesFilterComponent,
+  ArticlesWidgetComponent,
 } from './components/';
+import { ArticlesWidgetChildComponent } from './components/articles-widget-child/articles-widget-child.component';
 
 /*
 * Contains all the commonly used directives, pipes, and components.
@@ -27,8 +28,9 @@ import {
   declarations: [
     NavbarComponent,
     ErrorBoxComponent,
-    CompactArticleRendererComponent,
     ViewGamesFilterComponent,
+    ArticlesWidgetComponent,
+    ArticlesWidgetChildComponent,
   ],
   exports: [
     CommonModule,
@@ -38,8 +40,8 @@ import {
 
     NavbarComponent,
     ErrorBoxComponent,
-    CompactArticleRendererComponent,
     ViewGamesFilterComponent,
+    ArticlesWidgetComponent,
   ]
 })
 export class SharedModule { }

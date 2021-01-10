@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WidgetPriceFilterComponent } from './widget-price-filter.component';
+import { ArticlesWidgetComponent } from './articles-widget.component';
 
-describe('WidgetPriceFilterComponent', () => {
-  let component: WidgetPriceFilterComponent;
-  let fixture: ComponentFixture<WidgetPriceFilterComponent>;
+describe('ArticleWidgetComponent', () => {
+  let component: ArticlesWidgetComponent;
+  let fixture: ComponentFixture<ArticlesWidgetComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WidgetPriceFilterComponent ]
+      declarations: [ ArticlesWidgetComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WidgetPriceFilterComponent);
+    fixture = TestBed.createComponent(ArticlesWidgetComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

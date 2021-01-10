@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
+declare var $: any;
 
 @Component({
   selector: 'app-saved',
   templateUrl: './saved.component.html',
   styleUrls: ['./saved.component.css']
 })
-export class SavedComponent implements OnInit {
+export class SavedComponent implements OnInit, AfterViewInit {
   articles: any;
 
   constructor() { }
@@ -35,4 +36,10 @@ export class SavedComponent implements OnInit {
     ];
   }
 
+  ngAfterViewInit(): void {
+    $.getScript('assets/vendor/bootstrap-slider/dist/bootstrap-slider.min.js');
+    $.getScript('assets/js/goodgames2.js');
+    $.getScript('assets/js/goodgames-init.js');
+    $.getScript('assets/js/demo.js');
+  }
 }
