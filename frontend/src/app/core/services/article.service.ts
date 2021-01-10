@@ -19,8 +19,51 @@ export class ArticleService {
     return this.http.get<ArticleModel[]>(url, httpOptions);
   }
 
-  getNArticles(num: number): Observable<ArticleModel[]> {
-    const url = this.baseURL + 'articles?num=' + num;
+  // tslint:disable-next-line:max-line-length
+  getArticlesFiltered(num = null, maxPrice = null, minPrice = null, isSold = null, seller = null, buyer = null, tags = null): Observable<ArticleModel[]> {
+    let url: string = this.baseURL + 'articles?';
+
+    if (num != null)
+    {
+      url += 'num=' + num;
+    }
+
+    if (maxPrice != null)
+    {
+      url += 'max_price=' + maxPrice;
+    }
+
+    if (minPrice != null)
+    {
+      url += 'min_price=' + minPrice;
+    }
+
+    if (isSold != null)
+    {
+      url += 'is_sold=' + isSold;
+    }
+
+    if (seller != null)
+    {
+      url += 'seller=' + seller;
+    }
+
+    if (buyer != null)
+    {
+      url += 'buyer=' + buyer;
+    }
+
+    if (tags != null)
+    {
+      // tags=New,Blizzard
+      let tagString = '';
+      tags.forEach((element) => {
+        tagString += element + ',';
+      });
+      url += 'tags=' + tagString;
+    }
+
+    url += '/';
     return this.http.get<ArticleModel[]>(url, httpOptions);
   }
 
