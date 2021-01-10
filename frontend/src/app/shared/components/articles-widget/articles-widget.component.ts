@@ -1,24 +1,18 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
-import { TagModel } from '../../../../core/models/tag.model';
-import { TagService } from '../../../../core/services/tag.service';
-declare var $: any;
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-store',
-  templateUrl: './store.component.html',
-  styleUrls: ['./store.component.css'],
-  providers: [TagService]
+  selector: 'app-article-widget',
+  templateUrl: './articles-widget.component.html',
+  styleUrls: ['./articles-widget.component.css']
 })
-export class StoreComponent implements OnInit, AfterViewInit {
-  tags: TagModel[];
-  error: any;
-  selectedPlatform: string;
-  articles: any;
+export class ArticlesWidgetComponent implements OnInit {
+  @Input() redTitle?: string;
+  @Input() title: string;
+  @Input() articles: any;
 
-  constructor(private tagService: TagService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.selectedPlatform = 'WI';
     this.articles = [
       {id: 1, name: 'Artigo Teste', total_price: '20.00', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting' +
           'industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley' +
@@ -41,20 +35,6 @@ export class StoreComponent implements OnInit, AfterViewInit {
           ' electronic typesetting, remaining essentially unchanged. ', shipping_fee: '0.00', date_posted: '2021-01-07', tag: [],
         is_sold: false, times_viewed: 0, shop_cart: [], saved: [], seller: 1, buyer: null}
     ];
-    this.getTags();
   }
 
-  getTags(): void {
-    this.tagService.getNTags(2).subscribe(
-      tags => this.tags = tags,
-      error => this.error = error
-    );
-  }
-
-  ngAfterViewInit(): void {
-    $.getScript('assets/vendor/bootstrap-slider/dist/bootstrap-slider.min.js');
-    $.getScript('assets/js/goodgames2.js');
-    $.getScript('assets/js/goodgames-init.js');
-    $.getScript('assets/js/demo.js');
-  }
 }

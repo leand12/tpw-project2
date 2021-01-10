@@ -5,8 +5,11 @@ import { RouterModule } from '@angular/router';
 
 import {
   NavbarComponent,
+  ErrorBoxComponent,
+  ViewGamesFilterComponent,
+  ArticlesWidgetComponent,
 } from './components/';
-import { ErrorBoxComponent } from './components/error-box/error-box.component';
+import { ArticlesWidgetChildComponent } from './components/articles-widget-child/articles-widget-child.component';
 
 /*
 * Contains all the commonly used directives, pipes, and components.
@@ -20,11 +23,14 @@ import { ErrorBoxComponent } from './components/error-box/error-box.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
   ],
   declarations: [
     NavbarComponent,
     ErrorBoxComponent,
+    ViewGamesFilterComponent,
+    ArticlesWidgetComponent,
+    ArticlesWidgetChildComponent,
   ],
   exports: [
     CommonModule,
@@ -34,6 +40,8 @@ import { ErrorBoxComponent } from './components/error-box/error-box.component';
 
     NavbarComponent,
     ErrorBoxComponent,
+    ViewGamesFilterComponent,
+    ArticlesWidgetComponent,
   ]
 })
 export class SharedModule { }

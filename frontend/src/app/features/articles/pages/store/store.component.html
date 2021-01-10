@@ -9,23 +9,7 @@
     <!--    {% endif %}-->
 
     <!-- START: Categories -->
-    <div class="row vertical-gap">
-      <!--      {% for p in platforms %}-->
-      <!--      <div class="col-lg-4">-->
-      <!--        <div class="nk-feature-1"-->
-      <!--             {% if form.article_platform == p.0 %}style="border: 1px solid #dd163b"{% endif %}>-->
-      <!--          <div class="nk-feature-icon">-->
-      <!--            <img src="{% static 'assets/images/icon-platform-' %}{{ p.0 }}.png" alt="{{ p.1 }}">-->
-      <!--          </div>-->
-      <!--          <div class="nk-feature-cont">-->
-      <!--            <h3 class="nk-feature-title"><a href="#">{{ p.1 }}</a></h3>-->
-      <!--            <h3 class="nk-feature-title text-main-1"><a href="{% url 'articles_platform' p.0 %}">View-->
-      <!--              Games</a></h3>-->
-      <!--          </div>-->
-      <!--        </div>-->
-      <!--      </div>-->
-      <!--      {% endfor %}-->
-    </div>
+    <app-view-games-filter [selected]="selectedPlatform"></app-view-games-filter>
     <!-- END: Categories -->
 
     <div class="nk-gap-2"></div>
@@ -41,37 +25,9 @@
 
         <!-- START: Products -->
         <div class="row vertical-gap">
-          <!--          {% for a in page_obj.object_list %}-->
-          <!--          <div class="col-md-6">-->
-          <!--            <div class="nk-product-cat">-->
-          <!--              <a class="nk-product-image" href="{% url 'article_details' a.id %}">-->
-          <!--                <img src="{% item_img_path a.items_in_article.all.0.id %}"-->
-          <!--                     alt="{{ a.name }}">-->
-          <!--              </a>-->
-          <!--              <div class="nk-product-cont">-->
-          <!--                <h3 class="nk-product-title h5">-->
-          <!--                  <a href="{% url 'article_details' a.id %}">{{ a.name }}</a>-->
-          <!--                </h3>-->
-          <!--                <div class="nk-gap-1"></div>-->
-          <!--                <div>-->
-          <!--                  <div class="nk-product-rating"-->
-          <!--                       data-rating="{% article_rating a.id %}"></div>-->
-          <!--                  ({% user_reviews_number a.id %})-->
-          <!--                </div>-->
-          <!--                <div class="nk-gap-1"></div>-->
-          <!--                <div class="nk-product-price">{{ a.total_price }} €</div>-->
-          <!--                <div class="nk-gap-1"></div>-->
-          <!--                {% if user.is_authenticated %}-->
-          <!--                <form action="." method="post">-->
-          <!--                  {% csrf_token %}-->
-          <!--                  <input name="add_cart" value="{{ a.id }}" hidden>-->
-          <!--                  <button type="submit" class="nk-btn nk-btn-rounded nk-btn-color-dark-3">Add to Cart</button>-->
-          <!--                </form>-->
-          <!--                {% endif %}-->
-          <!--              </div>-->
-          <!--            </div>-->
-          <!--          </div>-->
-          <!--          {% endfor %}-->
+          <div class="col-md-6" *ngFor="let a of articles">
+            <app-compact-article-renderer [article]="a"></app-compact-article-renderer>
+          </div>
         </div>
         <!-- END: Products -->
 
@@ -144,9 +100,9 @@
               <div class="nk-widget-content">
                 <input type="text" name="?" value="" hidden>
                 <ul class="nk-widget-categories">
-                  <li *ngFor="let tag of tags"><a href="#">
-                    {{ tag.name }}
-                  </a></li>
+                  <li *ngFor="let tag of tags">
+                    <a href="#">{{ tag.name }}</a>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -155,12 +111,12 @@
               </h4>
               <div class="nk-widget-content">
                 <div class="nk-input-slider">
-<!--                  <input type="text" name="price" data-slider-min="0"-->
-<!--                         data-slider-max="1800" data-slider-step="1"-->
-<!--                         data-slider-tooltip="hide"-->
-<!--                         data-slider-value="[{{ form.price.0 }}, {{ form.price.1 }}]"-->
-<!--                         data-value="{{ form.price.0 }},{{ form.price.1 }}"-->
-<!--                         value="{{ form.price.0 }},{{ form.price.1 }}" style="display: none;">-->
+                  <input type="text" name="price" data-slider-min="0"
+                         data-slider-max="1800" data-slider-step="1"
+                         data-slider-tooltip="hide"
+                         data-slider-value="[0, 500]"
+                         data-value="0,500"
+                         value="0,500" style="display: none;">
                   <div class="nk-gap"></div>
                   <div>
                     <div class="text-white mt-4 float-left">

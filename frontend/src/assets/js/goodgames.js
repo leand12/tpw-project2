@@ -500,34 +500,34 @@ var GOODGAMES = function () {
             self.initNavbar();
             self.initNavbarSide();
             self.initNavbarDropEffect1();
-            self.initStore();
-            self.initBackgrounds();
-            self.initCounters();
-            self.initNewsBox();
-            self.initAnchors();
-            self.initVideoBlocks();
-            self.initGIF();
-            self.initInfoBoxes();
-            self.initForms();
-            self.initFormsMailChimp();
-            self.initAudioPlayer();
-            self.initImageSlider();
-            self.initFacebook();
-            self.initInstagram();
-            self.initTwitter();
-
-            // init plugins
-            self.initPluginFastClick();
-            self.initPluginNano();
-            self.initPluginJarallax();
-            self.initPluginFlickity();
-            self.initPluginPhotoswipe();
-            self.initPluginModal();
-            self.initPluginTabs();
-            self.initPluginAccordions();
-            self.initPluginCountdown();
-            self.initPluginSeiyriaBootstrapSlider();
-            self.initPluginSummernote();
+            // self.initStore();
+            // self.initBackgrounds();
+            // self.initCounters();
+            // self.initNewsBox();
+            // self.initAnchors();
+            // self.initVideoBlocks();
+            // self.initGIF();
+            // self.initInfoBoxes();
+            // self.initForms();
+            // self.initFormsMailChimp();
+            // self.initAudioPlayer();
+            // self.initImageSlider();
+            // self.initFacebook();
+            // self.initInstagram();
+            // self.initTwitter();
+            //
+            // // init plugins
+            // self.initPluginFastClick();
+            // self.initPluginNano();
+            // self.initPluginJarallax();
+            // self.initPluginFlickity();
+            // self.initPluginPhotoswipe();
+            // self.initPluginModal();
+            // self.initPluginTabs();
+            // self.initPluginAccordions();
+            // self.initPluginCountdown();
+            // self.initPluginSeiyriaBootstrapSlider();
+            // self.initPluginSummernote();
 
             return self;
         }

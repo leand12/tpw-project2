@@ -2,9 +2,6 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../../shared/shared.module';
 import { ArticlesRoutingModule } from './articles-routing.module';
 
-import { RichArticleRendererComponent } from './components/rich-article-renderer/rich-article-renderer.component';
-import { CompactArticleRendererComponent } from './components/compact-article-renderer/compact-article-renderer.component';
-import { ViewGamesFilterComponent } from './components/view-games-filter/view-games-filter.component';
 
 import { StoreComponent } from './pages/store/store.component';
 import { SavedComponent } from './pages/saved/saved.component';
@@ -15,6 +12,9 @@ import { OwnedComponent } from './pages/owned/owned.component';
 import { CreateComponent } from './pages/create/create.component';
 import { EditComponent } from './pages/edit/edit.component';
 
+import { RichArticleRendererComponent } from './components/rich-article-renderer/rich-article-renderer.component';
+import { CompactArticleRendererComponent } from './components/compact-article-renderer/compact-article-renderer.component';
+
 
 @NgModule({
   imports: [
@@ -22,10 +22,6 @@ import { EditComponent } from './pages/edit/edit.component';
     ArticlesRoutingModule,
   ],
   declarations: [
-    RichArticleRendererComponent,
-    CompactArticleRendererComponent,
-    ViewGamesFilterComponent,
-
     StoreComponent,
     SavedComponent,
     ShopCartComponent,
@@ -33,7 +29,10 @@ import { EditComponent } from './pages/edit/edit.component';
     DetailsComponent,
     OwnedComponent,
     CreateComponent,
-    EditComponent
+    EditComponent,
+
+    RichArticleRendererComponent,
+    CompactArticleRendererComponent,
   ],
   exports: [
   ],

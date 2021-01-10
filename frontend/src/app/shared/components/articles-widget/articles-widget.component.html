@@ -1,0 +1,9 @@
+<div class="nk-widget nk-widget-highlighted">
+  <h4 class="nk-widget-title"><span><span class="text-main-1">{{ redTitle }}</span> {{ title }}</span>
+  </h4>
+  <div class="nk-widget-content">
+    <div class="nk-widget-post" *ngFor="let a of articles">
+      <app-articles-widget-child [article]="a"></app-articles-widget-child>
+    </div>
+  </div>
+</div>

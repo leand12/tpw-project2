@@ -1,1 +1,31 @@
-<p>rich-article-renderer works!</p>
+<div class="nk-product-cat-2">
+  <a class="nk-product-image" href="/articles/details/{{ article.id }}">
+    <img src="{{ articleImage }}" alt="{{ article.name }}">
+  </a>
+  <div class="nk-product-cont">
+    <h3 class="nk-product-title h5">
+      <a href="/articles/details/{{ article.id }}">{{ article.name }}</a>
+    </h3>
+    <div class="nk-gap-1"></div>
+    <div>
+      <div class="nk-product-rating" [attr.data-rating]="articleRating"></div>
+      ({{ userReviewsNum }})
+    </div>
+    <div class="nk-gap-1"></div>
+    {{ article.description | slice:0:140 }}<span *ngIf="article.description.length > 140">&nbsp;(...)</span>
+    <div class="nk-gap-2"></div>
+    <div class="nk-product-price">{{ article.total_price }} €</div>
+    <div class="nk-gap-1"></div>
+<!--    <form action="." method="post">-->
+<!--      {% csrf_token %}-->
+<!--      <button type="submit" name="add_cart"-->
+<!--              class="nk-btn nk-btn-rounded nk-btn-color-main-1" style="margin-left: 20px"-->
+<!--              value={{ article.id }}>Add to Cart-->
+<!--      </button>-->
+<!--      <button type="submit"-->
+<!--              class="nk-btn nk-btn-rounded nk-btn-color-danger nk-btn-hover-color-main-1"-->
+<!--              name="del" value={{ article.id }}>Remove-->
+<!--      </button>-->
+<!--    </form>-->
+  </div>
+</div>
