@@ -68,41 +68,9 @@
 
     <!-- START: Products -->
     <div class="row vertical-gap">
-<!--      {% for a in page_obj.object_list %}-->
-<!--      <div class="col-lg-6">-->
-<!--        <div class="nk-product-cat-2">-->
-<!--          <a class="nk-product-image" href="{% url 'article_details' a.id %}">-->
-<!--            <img src="{% item_img_path a.items_in_article.all.0.id %}" alt="{{ a.name }}">-->
-<!--          </a>-->
-<!--          <div class="nk-product-cont">-->
-<!--            <h3 class="nk-product-title h5"><a-->
-<!--              href="{% url 'article_details' a.id %}">{{ a.name }}</a></h3>-->
-<!--            <div class="nk-gap-1"></div>-->
-<!--            <div>-->
-<!--              <div class="nk-product-rating" data-rating="{% article_rating a.id %}"></div>-->
-<!--              ({% user_reviews_number a.id %})-->
-<!--            </div>-->
-<!--            <div class="nk-gap-1"></div>-->
-<!--            {{ a.description|make_list|slice:':140'|join:'' }}{% if a.description|length > 140 %}-->
-<!--            (...){% endif %}-->
-<!--            <div class="nk-gap-2"></div>-->
-<!--            <div class="nk-product-price">{{ a.total_price }} €</div>-->
-<!--            <div class="nk-gap-1"></div>-->
-<!--            <form action="." method="post">-->
-<!--              {% csrf_token %}-->
-<!--              <button type="submit" name="add_cart"-->
-<!--                      class="nk-btn nk-btn-rounded nk-btn-color-main-1" style="margin-left: 20px"-->
-<!--                      value={{ a.id }}>Add to Cart-->
-<!--              </button>-->
-<!--              <button type="submit"-->
-<!--                      class="nk-btn nk-btn-rounded nk-btn-color-danger nk-btn-hover-color-main-1"-->
-<!--                      name="del" value={{ a.id }}>Remove-->
-<!--              </button>-->
-<!--            </form>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      {% endfor %}-->
+      <div class="col-lg-6" *ngFor="let a of articles">
+        <app-rich-article-renderer [article]="a"></app-rich-article-renderer>
+      </div>
     </div>
     <!-- END: Products -->
 
