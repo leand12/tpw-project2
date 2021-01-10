@@ -55,7 +55,6 @@ export class ArticleService {
 
     if (tags != null)
     {
-      // tags=New,Blizzard
       let tagString = '';
       tags.forEach((element) => {
         tagString += element + ',';
