@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import { TagModel } from '../../../../core/models/tag.model';
 import { TagService } from '../../../../core/services/tag.service';
 import { ArticleService } from '../../../../core/services/article.service';
+import {ActivatedRoute} from '@angular/router';
 
 declare var $: any;
 
@@ -16,13 +17,21 @@ export class StoreComponent implements OnInit, AfterViewInit {
   error: any;
   selectedPlatform: string;
   articles: any;
+  type: string;
+  platform: string;
 
-  constructor(private tagService: TagService, private articleService: ArticleService) { }
+
+  constructor(private tagService: TagService, private articleService: ArticleService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.selectedPlatform = 'WI';
+    this.selectedPlatform = '';
     this.getArticles();
     this.getTags();
+
+    this.type = this.route.snapshot.paramMap.get('type');
+    this.platform = this.route.snapshot.paramMap.get('platform');
+    console.log(this.type); console.log(this.platform);
   }
 
   getTags(): void {

@@ -100,8 +100,8 @@
               <div class="nk-widget-content">
                 <input type="text" name="?" value="" hidden>
                 <ul class="nk-widget-categories">
-                  <li *ngFor="let tag of tags">
-                    <a href="#">{{ tag.name }}</a>
+                  <li *ngFor="let t of tags">
+                    <a [routerLink]="route.snapshot.fragment" [queryParams]="{tag: t.name}">{{ t.name }}</a>
                   </li>
                 </ul>
               </div>
@@ -136,7 +136,7 @@
               </div>
             </div>
             <div class="nk-widget nk-widget-highlighted">
-              <a href="#" class="nk-btn nk-btn-rounded nk-btn-lg nk-btn-color-dark-3 w-100">
+              <a routerLink="/articles/store" class="nk-btn nk-btn-rounded nk-btn-lg nk-btn-color-dark-3 w-100">
                 Clear All
               </a>
             </div>

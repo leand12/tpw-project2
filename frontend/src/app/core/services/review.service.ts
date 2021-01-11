@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ArticlesModule } from '../../features/articles/articles.module';
 
+import {baseURL} from '../constants/consts';
 
-@Injectable({
-  providedIn: ArticlesModule
-})
+@Injectable()
 export class ReviewService {
 
   constructor() { }
