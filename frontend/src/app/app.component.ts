@@ -45,6 +45,5 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     $.getScript('assets/js/goodgames.min.js');
     $.getScript('assets/js/goodgames-init.js');
-    $.getScript('assets/js/demo.js');
   }
 }

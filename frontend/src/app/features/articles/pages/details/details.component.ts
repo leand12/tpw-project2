@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {htmlRatingIcons} from '../../../../core/utils/html-rating-icons';
 
 @Component({
   selector: 'app-article-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css']
 })
-export class DetailsComponent implements OnInit {
+export class DetailsComponent implements OnInit, AfterViewInit {
+  @ViewChild('rating') ratingView: ElementRef;
   article: any;
   articleImage: any;
   articleTags: any;
   relatedArticles: any;
+  userRating: number;
+  userReviews: any;
 
   constructor() { }
 
@@ -19,6 +23,8 @@ export class DetailsComponent implements OnInit {
       {id: 9, name: 'Cheap', is_popular: true},
       {id: 11, name: 'Cheap', is_popular: true},
     ];
+    this.userReviews = [];
+    this.userRating = 2;
     this.article = {id: 1, name: 'Artigo Teste', total_price: '20.00', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting' +
         'industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley' +
         ' of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into' +
@@ -46,6 +52,10 @@ export class DetailsComponent implements OnInit {
           ' electronic typesetting, remaining essentially unchanged. ', shipping_fee: '0.00', date_posted: '2021-01-07', tag: [],
         is_sold: false, times_viewed: 0, shop_cart: [], saved: [], seller: 1, buyer: null}
     ];
+  }
+
+  ngAfterViewInit(): void {
+    this.ratingView.nativeElement.innerHTML = htmlRatingIcons(this.userRating);
   }
 
 }

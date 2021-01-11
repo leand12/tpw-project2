@@ -22,7 +22,7 @@
               <!-- START: Product Photos -->
               <div class="nk-popup-gallery" data-pswp-uid="1">
                 <div class="nk-gallery-item-box">
-                  <a href="#" class="nk-gallery-item"
+                  <a href="{{ articleImage }}" class="nk-gallery-item"
                      data-size="1200x554">
                     <div class="nk-gallery-item-overlay"><span class="ion-eye"></span></div>
                     <img src="{{ articleImage }}"
@@ -91,17 +91,17 @@
                   <div class="nk-gap"></div>
                   <strong class="text-white">Tags:</strong>
                   <div class="nk-gap"></div>
-                  <div *ngFor="let t of articleTags">
-                    <a routerLink="/store?tag={{ t.name }}">{{ t.name }}</a>,
-                  </div>
+                  <span *ngFor="let t of articleTags">
+                    <a routerLink="/articles/store" [queryParams]="{ tag: t.name }">{{ t.name }}</a>,
+                  </span>
                   <div class="nk-gap"></div>
                 </div>
                 <div class="col-md-6">
                   <div class="nk-gap"></div>
-                  <strong class="text-white">Customer Rating:</strong>
+                  <strong class="text-white">User Rating:</strong>
                   <div class="nk-gap"></div>
-                  <div class="nk-product-rating" data-rating="{% article_rating article.id %}"></div>
-<!--                  ({% user_reviews_number article.id %})-->
+                  <div #rating class="nk-product-rating" [attr.data-rating]="userRating"></div>
+                  ({{ userRating }})
                   <div class="nk-gap"></div>
                 </div>
               </div>
@@ -121,8 +121,8 @@
                    aria-selected="true">Description</a>
               </li>
               <li class="nav-item">
-<!--                <a class="nav-link" href="#tab-reviews" role="tab" data-toggle="tab"-->
-<!--                   aria-selected="false">User Reviews ({{ reviews|length }})</a>-->
+                <a class="nav-link" href="#tab-reviews" role="tab" data-toggle="tab"
+                   aria-selected="false">User Reviews ({{ userReviews|arrayLength }})</a>
               </li>
             </ul>
 
@@ -131,7 +131,7 @@
               <!-- START: Tab Description -->
               <div role="tabpanel" class="tab-pane fade active show" id="tab-description">
                 <div class="nk-gap"></div>
-                <strong class="text-white">Date Posted: {{ article.date_posted|date:"n F, Y" }}</strong> <!-- TODO?: show date not working?-->
+                <strong class="text-white">Date Posted:&emsp;{{ article.date_posted|date:'longDate' }}</strong>
                 <div class="nk-gap"></div>
                 <p>{{ article.description }}</p>
 

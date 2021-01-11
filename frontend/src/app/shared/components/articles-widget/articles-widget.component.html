@@ -5,5 +5,11 @@
     <div class="nk-widget-post" *ngFor="let a of articles">
       <app-articles-widget-child [article]="a"></app-articles-widget-child>
     </div>
+    <div *ngIf="viewMoreUrl">
+      <div class="nk-gap-2"></div>
+      <div class="text-center">
+        <a [routerLink]="viewMoreUrl" class="nk-btn nk-btn-rounded nk-btn-color-main-1">View More</a>
+      </div>
+    </div>
   </div>
 </div>
