@@ -39,7 +39,7 @@ def get_articles(request):
     if 'min_price' in request.GET:
         articles = articles.filter(total_price__mte=request.GET['min_price'])
     if 'tags' in request.GET:
-        tags = request.GET['tags'].split(',')       # Tag filter example: ws/articles?tags=New,Blizzard
+        tags = request.GET['tags'].split(',')  # Tag filter example: ws/articles?tags=New,Blizzard
         for tag in tags:
             articles = articles.filter(tag__name=tag)
     if 'seller' in request.GET:
@@ -48,6 +48,8 @@ def get_articles(request):
         articles = articles.filter(buyer=request.GET['buyer'])
     if 'is_sold' in request.GET:
         articles = articles.filter(is_sold=True)
+    if 'console' in request.GET:
+        articles = [a for a in articles if Game.objects.filter(pertaining_article=a.id, platform=request.GET['console']).exists()]
     if 'num' in request.GET:
         num = int(request.GET['num'])
         articles = articles[:num]

@@ -20,7 +20,7 @@ export class ArticleService {
   }
 
   // tslint:disable-next-line:max-line-length
-  getArticlesFiltered(num = null, maxPrice = null, minPrice = null, isSold = null, seller = null, buyer = null, tags = null): Observable<ArticleModel[]> {
+  getArticlesFiltered(num = null, maxPrice = null, minPrice = null, isSold = null, seller = null, buyer = null, tags = null, console = null): Observable<ArticleModel[]> {
     let url: string = this.baseURL + 'articles?';
 
     if (num != null)
@@ -60,6 +60,11 @@ export class ArticleService {
         tagString += element + ',';
       });
       url += 'tags=' + tagString;
+    }
+
+    if (console != null)
+    {
+      url += 'console=' + console;
     }
 
     url += '/';

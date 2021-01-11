@@ -66,7 +66,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         model = Article
         fields = (
             'id', 'name', 'total_price', 'description', 'shipping_fee', 'date_posted', 'tag', 'is_sold', 'times_viewed',
-            'shop_cart', 'saved', 'seller', 'buyer')
+            'shop_cart', 'saved', 'seller', 'buyer', 'items_in_article')
 
 
 class UserSerializer(serializers.ModelSerializer):

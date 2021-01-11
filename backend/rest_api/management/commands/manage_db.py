@@ -43,7 +43,7 @@ class Command(BaseCommand):
         user = User.objects.get(id=1)
         a = Article(name='Artigo Teste4', seller=user, total_price=5.00)
         a.save()
-        i1 = Game(name="Game1", rating='Everyone', pertaining_article=a, price=2.50, release_year=2010).save()
+        i1 = Game(name="Game1", rating='Everyone', pertaining_article=a, price=2.50, release_year=2010, platform='Playstation').save()
         i2 = Console(name="Console1", pertaining_article=a, price=2.50, color='red', release_year=2009).save()
         a.save()
 
