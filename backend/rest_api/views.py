@@ -4,8 +4,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_api.serializers import TagSerializer, ArticleSerializer, UserSerializer, ItemSerializer, GameSerializer, \
-    ConsoleSerializer
-from rest_api.models import Tag, Article, Item, Game, Console
+    ConsoleSerializer, ReviewSerializer
+from rest_api.models import Tag, Article, Item, Game, Console, Review
 
 
 # Create your views here.
@@ -39,7 +39,7 @@ def get_articles(request):
     if 'min_price' in request.GET:
         articles = articles.filter(total_price__mte=request.GET['min_price'])
     if 'tags' in request.GET:
-        tags = request.GET['tags'].split(',')       # Tag filter example: ws/articles?tags=New,Blizzard
+        tags = request.GET['tags'].split(',')  # Tag filter example: ws/articles?tags=New,Blizzard
         for tag in tags:
             articles = articles.filter(tag__name=tag)
     if 'seller' in request.GET:
@@ -47,7 +47,9 @@ def get_articles(request):
     if 'buyer' in request.GET:
         articles = articles.filter(buyer=request.GET['buyer'])
     if 'is_sold' in request.GET:
-        articles = articles.filter(is_sold=True)
+        articles = articles.filter(is_sold=request.GET['is_sold'])
+    if 'console' in request.GET:
+        articles = [a for a in articles if Game.objects.filter(pertaining_article=a.id, platform=request.GET['console']).exists()]
     if 'num' in request.GET:
         num = int(request.GET['num'])
         articles = articles[:num]
@@ -86,6 +88,17 @@ def delete_article(request, id):
         return Response(status=status.HTTP_404_NOT_FOUND)
     article.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET'])
+def get_user(request):
+    id = int(request.GET['id'])
+    try:
+        user = User.objects.get(id=id)
+    except User.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = UserSerializer(user)
+    return Response(serializer.data)
 
 
 @api_view(['GET'])
@@ -158,4 +171,31 @@ def get_consoles(request):
         num = int(request.GET['num'])
         consoles = consoles[:num]
     serializer = ConsoleSerializer(consoles, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def get_review(request):
+    id = int(request.GET['id'])
+    try:
+        review = Review.objects.get(id=id)
+    except Review.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = ReviewSerializer(review)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def get_reviews(request):
+    reviews = Review.objects.all()
+    if 'reviewer' in request.GET:
+        reviews = reviews.filter(reviewer_id=request.GET['reviewer'])
+    if 'reviewed' in request.GET:
+        reviews = reviews.filter(reviewed_id=request.GET['reviewed'])
+    if 'rate' in request.GET:
+        reviews = reviews.filter(rate=request.GET['rate'])
+    if 'num' in request.GET:
+        num = int(request.GET['num'])
+        reviews = reviews[:num]
+    serializer = ReviewSerializer(reviews, many=True)
     return Response(serializer.data)

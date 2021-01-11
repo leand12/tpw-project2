@@ -37,6 +37,7 @@ urlpatterns = [
     path('ws/create/article/', views.create_article),
     path('ws/update/article/', views.update_article),
     path('ws/delete/article/<int:id>/', views.delete_article),
+    path('ws/user/', views.get_users),
     path('ws/users/', views.get_users),
     path('ws/item/', views.get_item),
     path('ws/items/', views.get_items),
@@ -44,6 +45,8 @@ urlpatterns = [
     path('ws/games/', views.get_games),
     path('ws/console/', views.get_console),
     path('ws/consoles/', views.get_consoles),
+    path('ws/review/', views.get_review),
+    path('ws/reviews/', views.get_reviews),
 ]
 
 # Serving the media files in development mode

@@ -6,7 +6,7 @@ from allauth.utils import email_address_exists
 from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
 
-from rest_api.models import Tag, Article, Item, Game, Console
+from rest_api.models import Tag, Article, Item, Game, Console, Review
 from rest_framework import serializers
 
 
@@ -66,7 +66,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         model = Article
         fields = (
             'id', 'name', 'total_price', 'description', 'shipping_fee', 'date_posted', 'tag', 'is_sold', 'times_viewed',
-            'shop_cart', 'saved', 'seller', 'buyer')
+            'shop_cart', 'saved', 'seller', 'buyer', 'items_in_article')
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -94,3 +94,8 @@ class ConsoleSerializer(serializers.ModelSerializer):
         fields = ('id', 'id2', 'price', 'name', 'image', 'condition', 'pertaining_article', 'release_year', 'brand',
                   'storage_capacity', 'color')
 
+
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = ('id', 'rate', 'description', 'date_posted', 'reviewer', 'reviewed')

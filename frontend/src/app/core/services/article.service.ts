@@ -20,37 +20,37 @@ export class ArticleService {
   }
 
   // tslint:disable-next-line:max-line-length
-  getArticlesFiltered(num = null, maxPrice = null, minPrice = null, isSold = null, seller = null, buyer = null, tags = null): Observable<ArticleModel[]> {
-    let url: string = baseURL + 'articles?';
+  getArticlesFiltered(num = null, maxPrice = null, minPrice = null, isSold = null, seller = null, buyer = null, tags = null, console = null): Observable<ArticleModel[]> {
+    let url: string = this.baseURL + 'articles?';
 
     if (num != null)
     {
-      url += 'num=' + num;
+      url += '&num=' + num;
     }
 
     if (maxPrice != null)
     {
-      url += 'max_price=' + maxPrice;
+      url += '&max_price=' + maxPrice;
     }
 
     if (minPrice != null)
     {
-      url += 'min_price=' + minPrice;
+      url += '&min_price=' + minPrice;
     }
 
     if (isSold != null)
     {
-      url += 'is_sold=' + isSold;
+      url += '&is_sold=' + isSold;
     }
 
     if (seller != null)
     {
-      url += 'seller=' + seller;
+      url += '&seller=' + seller;
     }
 
     if (buyer != null)
     {
-      url += 'buyer=' + buyer;
+      url += '&buyer=' + buyer;
     }
 
     if (tags != null)
@@ -59,7 +59,12 @@ export class ArticleService {
       tags.forEach((element) => {
         tagString += element + ',';
       });
-      url += 'tags=' + tagString;
+      url += '&tags=' + tagString;
+    }
+
+    if (console != null)
+    {
+      url += '&console=' + console;
     }
 
     url += '/';
