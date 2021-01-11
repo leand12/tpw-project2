@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import { TagModel } from '../../../../core/models/tag.model';
 import { TagService } from '../../../../core/services/tag.service';
 import { ArticleService } from '../../../../core/services/article.service';
+import {ActivatedRoute} from '@angular/router';
 
 declare var $: any;
 
@@ -14,15 +15,30 @@ declare var $: any;
 export class StoreComponent implements OnInit, AfterViewInit {
   tags: TagModel[];
   error: any;
-  selectedPlatform: string;
   articles: any;
+  type: string;
+  platform: string;
+  tag: string;
 
-  constructor(private tagService: TagService, private articleService: ArticleService) { }
+
+  constructor(private tagService: TagService, private articleService: ArticleService,
+              public activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.selectedPlatform = 'WI';
+    this.getURLState();
+    // then apply filters somehow
     this.getArticles();
     this.getTags();
+  }
+
+  getURLState(): void {
+    this.activeRoute.params.subscribe(routeParams => {
+      this.type = routeParams.type;
+      this.platform = routeParams.platform;
+    });
+    this.activeRoute.queryParams.subscribe(routeQueryParams => {
+      this.tag = routeQueryParams.tag;
+    });
   }
 
   getTags(): void {

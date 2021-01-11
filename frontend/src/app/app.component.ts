@@ -13,8 +13,6 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log('ok');
-
     // $.getScript('assets/vendor/object-fit-images/dist/ofi.min.js'),
 
     $.getScript('assets/vendor/gsap/src/minified/TweenMax.min.js');

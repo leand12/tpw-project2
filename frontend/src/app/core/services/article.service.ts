@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import {ArticleModel} from '@models/article.model';
+import {baseURL} from '../constants/consts';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -11,11 +12,10 @@ const httpOptions = {
 
 @Injectable()
 export class ArticleService {
-  private baseURL = 'http://localhost:8000/ws/';
   constructor(private http: HttpClient) { }
 
   getArticles(): Observable<ArticleModel[]> {
-    const url = this.baseURL + 'articles';
+    const url = baseURL + 'articles';
     return this.http.get<ArticleModel[]>(url, httpOptions);
   }
 
@@ -72,22 +72,22 @@ export class ArticleService {
   }
 
   getArticle(id: number): Observable<ArticleModel> {
-    const url = this.baseURL + 'article?id=' + id;
+    const url = baseURL + 'articles?id=' + id;
     return this.http.get<ArticleModel>(url, httpOptions);
   }
 
   createArticle(art: ArticleModel): Observable<any> {
-    const url = this.baseURL + 'create/article/';
+    const url = baseURL + 'create/article/';
     return this.http.post(url, art, httpOptions);
   }
 
   updateArticle(art: ArticleModel): Observable<any> {
-    const url = this.baseURL + 'update/article/';
+    const url = baseURL + 'update/article/';
     return this.http.put(url, art, httpOptions);
   }
 
   deleteArticle(art: ArticleModel): Observable<any> {
-    const url = this.baseURL + 'delete/article/' + art.id + '/';
+    const url = baseURL + 'delete/article/' + art.id + '/';
     return this.http.delete<ArticleModel>(url, httpOptions);
   }
 }
