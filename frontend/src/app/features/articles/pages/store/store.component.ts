@@ -22,20 +22,23 @@ export class StoreComponent implements OnInit, AfterViewInit {
 
 
   constructor(private tagService: TagService, private articleService: ArticleService,
-              public route: ActivatedRoute) { }
+              public activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.getURLState();
+    // then apply filters somehow
     this.getArticles();
     this.getTags();
+  }
 
-    this.type = this.route.snapshot.paramMap.get('type');
-    this.platform = this.route.snapshot.paramMap.get('platform');
-    this.tag = this.route.snapshot.queryParamMap.get('tag');
-
-    console.log('type' + this.type);
-    console.log('platform' + this.platform);
-    console.log('tag' + this.tag);
-
+  getURLState(): void {
+    this.activeRoute.params.subscribe(routeParams => {
+      this.type = routeParams.type;
+      this.platform = routeParams.platform;
+    });
+    this.activeRoute.queryParams.subscribe(routeQueryParams => {
+      this.tag = routeQueryParams.tag;
+    });
   }
 
   getTags(): void {

@@ -101,7 +101,8 @@
                 <input type="text" name="?" value="" hidden>
                 <ul class="nk-widget-categories">
                   <li *ngFor="let t of tags">
-                    <a [routerLink]="route.snapshot.fragment" [queryParams]="{tag: t.name}" queryParamsHandling="merge">
+                    <a [routerLink]="activeRoute.snapshot.fragment" [queryParams]="{tag: t.name}"
+                       queryParamsHandling="merge" [class.selected-tag]="tag==t.name">
                       {{ t.name }}
                     </a>
                   </li>
@@ -138,7 +139,7 @@
               </div>
             </div>
             <div class="nk-widget nk-widget-highlighted">
-              <a [routerLink]="route.snapshot.fragment" class="nk-btn nk-btn-rounded nk-btn-lg nk-btn-color-dark-3 w-100">
+              <a [routerLink]="activeRoute.snapshot.fragment" class="nk-btn nk-btn-rounded nk-btn-lg nk-btn-color-dark-3 w-100">
                 Clear All
               </a>
             </div>

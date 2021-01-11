@@ -1,17 +1,19 @@
 <div class="row vertical-gap">
   <div class="col-lg-4" *ngFor="let p of platforms">
+    <div [routerLink]="['/articles/store/games', p[0]]" queryParamsHandling="preserve" style="cursor: pointer">
     <div class="nk-feature-1" [style.border]="selected == p[0]? '1px solid #dd163b': ''">
       <div class="nk-feature-icon">
         <img src="assets/images/icon-platform-{{ p[0] }}.png" alt="{{ p[1] }}">
       </div>
       <div class="nk-feature-cont">
         <h3 class="nk-feature-title">
-          <a [routerLink]="['/articles/store/games', p[0]]" queryParamsHandling="preserve">{{ p[1] }}</a>
+          {{ p[1] }}
         </h3>
         <h3 class="nk-feature-title text-main-1">
-          <a [routerLink]="['/articles/store/games', p[0]]" queryParamsHandling="preserve">View Games</a>
+          View Games
         </h3>
       </div>
+    </div>
     </div>
   </div>
 </div>
