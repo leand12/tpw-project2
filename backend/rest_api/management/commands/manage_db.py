@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
-from rest_api.models import Tag, Article, Game, Console, Item
+from rest_api.models import Tag, Article, Game, Console, Item, Review
 
 
 class Command(BaseCommand):
@@ -43,7 +43,8 @@ class Command(BaseCommand):
         user = User.objects.get(id=1)
         a = Article(name='Artigo Teste4', seller=user, total_price=5.00)
         a.save()
-        i1 = Game(name="Game1", rating='Everyone', pertaining_article=a, price=2.50, release_year=2010, platform='Playstation').save()
+        i1 = Game(name="Game1", rating='Everyone', pertaining_article=a, price=2.50, release_year=2010,
+                  platform='Playstation').save()
         i2 = Console(name="Console1", pertaining_article=a, price=2.50, color='red', release_year=2009).save()
         a.save()
 
@@ -52,6 +53,17 @@ class Command(BaseCommand):
         Item.objects.all().delete()
         Game.objects.all().delete()
         Console.objects.all().delete()
+
+    @classmethod
+    def _add_reviews(cls):
+        user = User.objects.get(id=2)
+        user2 = User.objects.get(id=3)
+        r = Review(rate=3, description='good enough', reviewer=user, reviewed=user2)
+        r.save()
+
+    @classmethod
+    def _del_reviews(cls):
+        Review.objects.all().delete()
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -68,7 +80,9 @@ class Command(BaseCommand):
             self._del_tags()
             self._del_articles()
             self._del_items()
+            self._del_reviews()
         if options['add']:
             self._add_tags()
             self._add_articles()
             self._add_items()
+            self._add_reviews()

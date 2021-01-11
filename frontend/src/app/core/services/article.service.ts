@@ -25,32 +25,32 @@ export class ArticleService {
 
     if (num != null)
     {
-      url += 'num=' + num;
+      url += '&num=' + num;
     }
 
     if (maxPrice != null)
     {
-      url += 'max_price=' + maxPrice;
+      url += '&max_price=' + maxPrice;
     }
 
     if (minPrice != null)
     {
-      url += 'min_price=' + minPrice;
+      url += '&min_price=' + minPrice;
     }
 
     if (isSold != null)
     {
-      url += 'is_sold=' + isSold;
+      url += '&is_sold=' + isSold;
     }
 
     if (seller != null)
     {
-      url += 'seller=' + seller;
+      url += '&seller=' + seller;
     }
 
     if (buyer != null)
     {
-      url += 'buyer=' + buyer;
+      url += '&buyer=' + buyer;
     }
 
     if (tags != null)
@@ -59,12 +59,12 @@ export class ArticleService {
       tags.forEach((element) => {
         tagString += element + ',';
       });
-      url += 'tags=' + tagString;
+      url += '&tags=' + tagString;
     }
 
     if (console != null)
     {
-      url += 'console=' + console;
+      url += '&console=' + console;
     }
 
     url += '/';
@@ -72,7 +72,7 @@ export class ArticleService {
   }
 
   getArticle(id: number): Observable<ArticleModel> {
-    const url = this.baseURL + 'articles?id=' + id;
+    const url = this.baseURL + 'article?id=' + id;
     return this.http.get<ArticleModel>(url, httpOptions);
   }
 
