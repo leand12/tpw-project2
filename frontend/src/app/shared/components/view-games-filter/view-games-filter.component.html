@@ -5,8 +5,12 @@
         <img src="assets/images/icon-platform-{{ p[0] }}.png" alt="{{ p[1] }}">
       </div>
       <div class="nk-feature-cont">
-        <h3 class="nk-feature-title"><a routerLink="/articles/store/{{ p[0] }}">{{ p[1] }}</a></h3>
-        <h3 class="nk-feature-title text-main-1"><a routerLink="/articles/store/{{ p[0] }}">View Games</a></h3>
+        <h3 class="nk-feature-title">
+          <a [routerLink]="['/articles/store/games', p[0]]" queryParamsHandling="preserve">{{ p[1] }}</a>
+        </h3>
+        <h3 class="nk-feature-title text-main-1">
+          <a [routerLink]="['/articles/store/games', p[0]]" queryParamsHandling="preserve">View Games</a>
+        </h3>
       </div>
     </div>
   </div>

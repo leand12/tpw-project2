@@ -15,23 +15,27 @@ declare var $: any;
 export class StoreComponent implements OnInit, AfterViewInit {
   tags: TagModel[];
   error: any;
-  selectedPlatform: string;
   articles: any;
   type: string;
   platform: string;
+  tag: string;
 
 
   constructor(private tagService: TagService, private articleService: ArticleService,
-              private route: ActivatedRoute) { }
+              public route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.selectedPlatform = '';
     this.getArticles();
     this.getTags();
 
     this.type = this.route.snapshot.paramMap.get('type');
     this.platform = this.route.snapshot.paramMap.get('platform');
-    console.log(this.type); console.log(this.platform);
+    this.tag = this.route.snapshot.queryParamMap.get('tag');
+
+    console.log('type' + this.type);
+    console.log('platform' + this.platform);
+    console.log('tag' + this.tag);
+
   }
 
   getTags(): void {

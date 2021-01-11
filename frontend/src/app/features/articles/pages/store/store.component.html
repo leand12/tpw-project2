@@ -9,7 +9,7 @@
     <!--    {% endif %}-->
 
     <!-- START: Categories -->
-    <app-view-games-filter [selected]="selectedPlatform"></app-view-games-filter>
+    <app-view-games-filter [selected]="platform"></app-view-games-filter>
     <!-- END: Categories -->
 
     <div class="nk-gap-2"></div>
@@ -101,7 +101,9 @@
                 <input type="text" name="?" value="" hidden>
                 <ul class="nk-widget-categories">
                   <li *ngFor="let t of tags">
-                    <a [routerLink]="route.snapshot.fragment" [queryParams]="{tag: t.name}">{{ t.name }}</a>
+                    <a [routerLink]="route.snapshot.fragment" [queryParams]="{tag: t.name}" queryParamsHandling="merge">
+                      {{ t.name }}
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -136,7 +138,7 @@
               </div>
             </div>
             <div class="nk-widget nk-widget-highlighted">
-              <a routerLink="/articles/store" class="nk-btn nk-btn-rounded nk-btn-lg nk-btn-color-dark-3 w-100">
+              <a [routerLink]="route.snapshot.fragment" class="nk-btn nk-btn-rounded nk-btn-lg nk-btn-color-dark-3 w-100">
                 Clear All
               </a>
             </div>
