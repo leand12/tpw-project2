@@ -88,6 +88,7 @@ Object.defineProperty(exports, "__esModule", {
   Utility
 
 -------------------------------------------------------------------*/
+console.log('init utility');
 var $ = jQuery;
 var tween = window.TweenMax;
 var isIOs = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
@@ -354,6 +355,8 @@ exports.scrollTo = scrollTo;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+console.log('end utility');
+
 /*------------------------------------------------------------------
 
   Theme Options
@@ -481,8 +484,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 -------------------------------------------------------------------*/
 var GOODGAMES = function () {
-    function GOODGAMES() {
-        _classCallCheck(this, GOODGAMES);
+  console.log('goodgames');
+
+  function GOODGAMES() {
+    console.log('GOODGAMES');
+
+    _classCallCheck(this, GOODGAMES);
 
         this.options = _options.options;
     }
@@ -491,8 +498,9 @@ var GOODGAMES = function () {
         key: 'init',
         value: function init() {
             // prt:sc:dm
+          console.log('stuck?');
 
-            var self = this;
+          var self = this;
 
             // run sidebar first because of may occurs some troubles with other functions
             self.initPluginStickySidebar();
@@ -500,35 +508,36 @@ var GOODGAMES = function () {
             self.initNavbar();
             self.initNavbarSide();
             self.initNavbarDropEffect1();
-            // self.initStore();
-            // self.initBackgrounds();
-            // self.initCounters();
-            // self.initNewsBox();
-            // self.initAnchors();
-            // self.initVideoBlocks();
-            // self.initGIF();
-            // self.initInfoBoxes();
-            // self.initForms();
-            // self.initFormsMailChimp();
-            // self.initAudioPlayer();
-            // self.initImageSlider();
-            // self.initFacebook();
-            // self.initInstagram();
-            // self.initTwitter();
-            //
-            // // init plugins
-            // self.initPluginFastClick();
-            // self.initPluginNano();
-            // self.initPluginJarallax();
-            // self.initPluginFlickity();
-            // self.initPluginPhotoswipe();
-            // self.initPluginModal();
-            // self.initPluginTabs();
-            // self.initPluginAccordions();
-            // self.initPluginCountdown();
-            // self.initPluginSeiyriaBootstrapSlider();
-            // self.initPluginSummernote();
+            self.initStore();
+            self.initBackgrounds();
+            self.initCounters();
+            self.initNewsBox();
+            self.initAnchors();
+            self.initVideoBlocks();
+            self.initGIF();
+            self.initInfoBoxes();
+            self.initForms();
+            self.initFormsMailChimp();
+            self.initAudioPlayer();
+            self.initImageSlider();
+            self.initFacebook();
+            self.initInstagram();
+            self.initTwitter();
 
+            // init plugins
+            self.initPluginFastClick();
+            self.initPluginNano();
+            self.initPluginJarallax();
+            self.initPluginFlickity();
+            self.initPluginPhotoswipe();
+            self.initPluginModal();
+            self.initPluginTabs();
+            self.initPluginAccordions();
+            self.initPluginCountdown();
+            self.initPluginSeiyriaBootstrapSlider();
+            self.initPluginSummernote();
+
+            console.log('returning self');
             return self;
         }
     }, {
@@ -564,7 +573,9 @@ var GOODGAMES = function () {
     }, {
         key: 'initNavbar',
         value: function initNavbar() {
-            return _initNavbar2.initNavbar.call(this);
+          console.log('call this');
+
+          return _initNavbar2.initNavbar.call(this);
         }
     }, {
         key: 'initNavbarSide',
@@ -713,6 +724,8 @@ var GOODGAMES = function () {
         }
     }]);
 
+    console.log('ret goodgames')
+
     return GOODGAMES;
 }();
 
@@ -779,7 +792,9 @@ var _utility = __webpack_require__(0);
 
 -------------------------------------------------------------------*/
 function initNavbar() {
-    var self = this;
+  console.log('in function');
+
+  var self = this;
     var $navbarTop = (0, _utility.$)('.nk-navbar-top');
 
     // add mobile navbar
@@ -916,6 +931,7 @@ function initNavbar() {
     }
     var dropdownTimeout = void 0;
     $navbarTop.on('mouseenter', 'li.nk-drop-item', function () {
+        console.log('entrei');
         var $item = (0, _utility.$)(this);
         var $openedSiblings = $item.siblings('.open').add($item.siblings().find('.open')).add($item.parents('.nk-nav:eq(0)').siblings().find('.open')).add($item.parents('.nk-nav:eq(0)').siblings('.open')).add($item.parents('.nk-nav:eq(0)').parent().siblings().find('.open'));
 
@@ -923,14 +939,18 @@ function initNavbar() {
         closeSubmenu($openedSiblings);
         openSubmenu($item);
     }).on('mouseleave', 'li.nk-drop-item', function () {
-        var $item = (0, _utility.$)(this);
+      console.log('sai');
+
+      var $item = (0, _utility.$)(this);
         clearTimeout(dropdownTimeout);
         dropdownTimeout = setTimeout(function () {
             closeSubmenu($item);
         }, 200);
     });
     $navbarTop.on('mouseleave', function () {
-        clearTimeout(dropdownTimeout);
+      console.log('sai2');
+
+      clearTimeout(dropdownTimeout);
         dropdownTimeout = setTimeout(function () {
             closeSubmenu($navbarTop.find('.open'));
         }, 400);

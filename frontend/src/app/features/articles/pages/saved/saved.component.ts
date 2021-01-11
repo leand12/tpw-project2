@@ -37,9 +37,9 @@ export class SavedComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    $.getScript('assets/vendor/bootstrap-slider/dist/bootstrap-slider.min.js');
-    $.getScript('assets/js/goodgames2.js');
-    $.getScript('assets/js/goodgames-init.js');
-    $.getScript('assets/js/demo.js');
+    // $.getScript('assets/vendor/bootstrap-slider/dist/bootstrap-slider.min.js');
+    // $.getScript('assets/js/goodgames2.js');
+    // $.getScript('assets/js/goodgames-init.js');
+    // $.getScript('assets/js/demo.js');
   }
 }
