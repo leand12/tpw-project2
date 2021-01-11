@@ -8,7 +8,7 @@
     </h3>
     <div class="nk-gap-1"></div>
     <div>
-      <div class="nk-product-rating" [attr.data-rating]="articleRating"></div>
+      <div #rating class="nk-product-rating" [attr.data-rating]="userRating"></div>
       ({{ userReviewsNum }})
     </div>
     <div class="nk-gap-1"></div>
@@ -29,3 +29,18 @@
 <!--    </form>-->
   </div>
 </div>
+
+<!--<script>-->
+<!--  console.log('nao da');-->
+<!--  $('.nk-product-rating, .nk-review-rating').each(function() {-->
+<!--    let rate = $(this).attr('data-rating');-->
+<!--    for (let i = 1; i <= 5; i++) {-->
+<!--      if (rate < i - 0.5)-->
+<!--        $(this).append('<i class="far fa-star"></i>');-->
+<!--      else if (rate >= i)-->
+<!--        $(this).append('<i class="fa fa-star"></i>');-->
+<!--      else-->
+<!--        $(this).append('<i class="fas fa-star-half"></i>');-->
+<!--    }-->
+<!--  });-->
+<!--</script>-->

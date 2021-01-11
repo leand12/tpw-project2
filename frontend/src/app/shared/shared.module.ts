@@ -10,6 +10,7 @@ import {
   ArticlesWidgetComponent,
 } from './components/';
 import { ArticlesWidgetChildComponent } from './components/articles-widget-child/articles-widget-child.component';
+import { ArrayLengthPipe } from './pipes/array-length.pipe';
 
 /*
 * Contains all the commonly used directives, pipes, and components.
@@ -31,6 +32,8 @@ import { ArticlesWidgetChildComponent } from './components/articles-widget-child
     ViewGamesFilterComponent,
     ArticlesWidgetComponent,
     ArticlesWidgetChildComponent,
+
+    ArrayLengthPipe,
   ],
   exports: [
     CommonModule,
@@ -42,6 +45,8 @@ import { ArticlesWidgetChildComponent } from './components/articles-widget-child
     ErrorBoxComponent,
     ViewGamesFilterComponent,
     ArticlesWidgetComponent,
+
+    ArrayLengthPipe,
   ]
 })
 export class SharedModule { }

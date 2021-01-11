@@ -9,6 +9,7 @@ export class ArticlesWidgetComponent implements OnInit {
   @Input() redTitle?: string;
   @Input() title: string;
   @Input() articles: any;
+  @Input() viewMoreUrl?: string;
 
   constructor() { }
 
