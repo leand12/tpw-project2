@@ -33,10 +33,10 @@ export class StoreComponent implements OnInit, AfterViewInit {
   }
 
   getArticles(): void {
-    // this.articleService.getArticles().subscribe(
-    //   articles => this.articles = articles,
-    //   error => this.error = error,
-    // );
+    this.articleService.getArticles().subscribe(
+      articles => this.articles = articles,
+      error => this.error = error
+    );
   }
 
   ngAfterViewInit(): void {
