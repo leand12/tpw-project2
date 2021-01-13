@@ -19,41 +19,40 @@ export class ArticleService {
     return this.http.get<ArticleModel[]>(url, httpOptions);
   }
 
-  // tslint:disable-next-line:max-line-length
-  getArticlesFiltered(num = null, maxPrice = null, minPrice = null, isSold = null, seller = null, buyer = null, tags = null, console = null): Observable<ArticleModel[]> {
+  getArticlesFiltered(num?, maxPrice?, minPrice?, isSold?, seller?, buyer?, tags?: string[]): Observable<ArticleModel[]> {
     let url: string = baseURL + 'articles?';
 
-    if (num != null)
+    if (num !== undefined)
     {
       url += '&num=' + num;
     }
 
-    if (maxPrice != null)
+    if (maxPrice !== undefined)
     {
       url += '&max_price=' + maxPrice;
     }
 
-    if (minPrice != null)
+    if (minPrice !== undefined)
     {
       url += '&min_price=' + minPrice;
     }
 
-    if (isSold != null)
+    if (isSold !== undefined)
     {
       url += '&is_sold=' + isSold;
     }
 
-    if (seller != null)
+    if (seller !== undefined)
     {
       url += '&seller=' + seller;
     }
 
-    if (buyer != null)
+    if (buyer !== undefined)
     {
       url += '&buyer=' + buyer;
     }
 
-    if (tags != null)
+    if (tags !== undefined)
     {
       let tagString = '';
       tags.forEach((element) => {
@@ -62,12 +61,7 @@ export class ArticleService {
       url += '&tags=' + tagString;
     }
 
-    if (console != null)
-    {
-      url += '&console=' + console;
-    }
-
-    url += '/';
+    console.log(url);
     return this.http.get<ArticleModel[]>(url, httpOptions);
   }
 
