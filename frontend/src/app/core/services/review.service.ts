@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import {ReviewModel} from '@models/review.model';
-import {GameModel} from "@models/game.model";
+import {baseURL} from '../constants/consts';
 
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
   })
 };
-
 
 @Injectable()
 export class ReviewService {
@@ -54,7 +53,7 @@ export class ReviewService {
     return this.http.get<ReviewModel>(url, httpOptions);
   }
 
-  createReview(rev: GameModel): Observable<any> {
+  createReview(rev: ReviewModel): Observable<any> {
     const url = this.baseURL + 'create/review/';
     return this.http.post(url, rev, httpOptions);
   }

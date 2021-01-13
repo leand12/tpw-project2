@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import {Observable} from 'rxjs';
+import {baseURL} from '../constants/consts';
 import { tap, shareReplay } from 'rxjs/operators';
 
 import * as moment from 'moment';
@@ -10,14 +11,11 @@ import * as moment from 'moment';
 @Injectable()
 export class AuthService {
 
-  private baseURL = 'http://localhost:8000/auth/';
-
   constructor(private http: HttpClient) { }
 
   private setSession(authResult): void {
     const token = authResult.token;
 
-    console.log(token);
     // decode the token to read the username and expiration timestamp
     const tokenParts = token.split(/\./);
     const payload = JSON.parse(window.atob(tokenParts[1]));
@@ -33,7 +31,7 @@ export class AuthService {
 
   login(username: string, password: string): Observable<any> {
     return this.http.post(
-      this.baseURL.concat('login/'),
+      baseURL.concat('login/'),
       { username, password }
     ).pipe(
       tap(response => this.setSession(response)),
@@ -43,7 +41,7 @@ export class AuthService {
 
   signup(username: string, firstName: string, lastName: string, email: string, password1: string, password2: string): Observable<any> {
     return this.http.post(
-      this.baseURL.concat('signup/'),
+      baseURL.concat('signup/'),
       { username, first_name: firstName, last_name: lastName, email, password1, password2 }
     ).pipe(
       tap(response => this.setSession(response)),
@@ -60,7 +58,7 @@ export class AuthService {
   refreshToken() {
     if (moment().isBetween(this.getExpiration().subtract(1, 'days'), this.getExpiration())) {
       return this.http.post(
-        this.baseURL.concat('refresh-token/'),
+        baseURL.concat('refresh-token/'),
         { token: this.token }
       ).pipe(
         tap(response => this.setSession(response)),
