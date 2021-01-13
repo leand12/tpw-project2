@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import {ConsoleModel} from '@models/console.model';
+import {baseURL} from '../constants/consts';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -12,33 +13,32 @@ const httpOptions = {
 
 @Injectable()
 export class ConsoleService {
-  private baseURL = 'http://localhost:8000/ws/';
 
   constructor(private http: HttpClient) {
   }
 
   getConsoles(): Observable<ConsoleModel[]> {
-    const url = this.baseURL + 'consoles';
+    const url = baseURL + 'consoles';
     return this.http.get<ConsoleModel[]>(url, httpOptions);
   }
 
   getConsole(id: number): Observable<ConsoleModel> {
-    const url = this.baseURL + 'console?id=' + id;
+    const url = baseURL + 'console?id=' + id;
     return this.http.get<ConsoleModel>(url, httpOptions);
   }
 
   createConsole(console: ConsoleModel): Observable<any> {
-    const url = this.baseURL + 'create/console/';
+    const url = baseURL + 'create/console/';
     return this.http.post(url, console, httpOptions);
   }
 
   updateConsole(console: ConsoleModel): Observable<any> {
-    const url = this.baseURL + 'update/console/';
+    const url = baseURL + 'update/console/';
     return this.http.put(url, console, httpOptions);
   }
 
   deleteConsole(console: ConsoleModel): Observable<any> {
-    const url = this.baseURL + 'delete/console/' + console.id + '/';
+    const url = baseURL + 'delete/console/' + console.id + '/';
     return this.http.delete<ConsoleModel>(url, httpOptions);
   }
 }

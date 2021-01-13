@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import {GameModel} from '@models/game.model';
+import {baseURL} from '../constants/consts';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -12,33 +13,32 @@ const httpOptions = {
 
 @Injectable()
 export class GameService {
-  private baseURL = 'http://localhost:8000/ws/';
 
   constructor(private http: HttpClient) {
   }
 
   getGames(): Observable<GameModel[]> {
-    const url = this.baseURL + 'games';
+    const url = baseURL + 'games';
     return this.http.get<GameModel[]>(url, httpOptions);
   }
 
   getGame(id: number): Observable<GameModel> {
-    const url = this.baseURL + 'game?id=' + id;
+    const url = baseURL + 'game?id=' + id;
     return this.http.get<GameModel>(url, httpOptions);
   }
 
   createGame(game: GameModel): Observable<any> {
-    const url = this.baseURL + 'create/game/';
+    const url = baseURL + 'create/game/';
     return this.http.post(url, game, httpOptions);
   }
 
   updateGame(game: GameModel): Observable<any> {
-    const url = this.baseURL + 'update/game/';
+    const url = baseURL + 'update/game/';
     return this.http.put(url, game, httpOptions);
   }
 
   deleteGame(game: GameModel): Observable<any> {
-    const url = this.baseURL + 'delete/game/' + game.id + '/';
+    const url = baseURL + 'delete/game/' + game.id + '/';
     return this.http.delete<GameModel>(url, httpOptions);
   }
 }
