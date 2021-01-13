@@ -1,10 +1,10 @@
 <div class="nk-product-cat">
-  <a class="nk-product-image" href="/articles/details/{{ article.id }}">
+  <a class="nk-product-image" routerLink="/articles/details/{{ article.id }}">
     <img src="{{ articleImage }}" alt="{{ article.name }}">
   </a>
   <div class="nk-product-cont">
     <h3 class="nk-product-title h5">
-      <a href="/articles/details/{{ article.id }}">{{ article.name }}</a>
+      <a routerLink="/articles/details/{{ article.id }}">{{ article.name }}</a>
     </h3>
     <div class="nk-gap-1"></div>
     <div>

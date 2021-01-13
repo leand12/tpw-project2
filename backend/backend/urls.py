@@ -31,6 +31,7 @@ urlpatterns = [
     path('auth/refresh-token/', refresh_jwt_token),
 
     # web services
+    path('ws/tag/<int:id>/', views.get_tag),
     path('ws/tags/', views.get_tags),
     path('ws/article/', views.get_article),
     path('ws/articles/', views.get_articles),

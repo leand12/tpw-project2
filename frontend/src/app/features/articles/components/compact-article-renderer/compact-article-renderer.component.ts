@@ -1,10 +1,12 @@
 import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import { htmlRatingIcons } from '../../../../core/utils/html-rating-icons';
+import {TagService} from '../../../../core/services/tag.service';
+import {TagModel} from '@models/tag.model';
 
 @Component({
   selector: 'app-compact-article-renderer',
   templateUrl: './compact-article-renderer.component.html',
-  styleUrls: ['./compact-article-renderer.component.css']
+  styleUrls: ['./compact-article-renderer.component.css'],
 })
 export class CompactArticleRendererComponent implements OnInit, AfterViewInit {
   @Input() article: any;
@@ -25,5 +27,4 @@ export class CompactArticleRendererComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.ratingView.nativeElement.innerHTML = htmlRatingIcons(this.userRating);
   }
-
 }

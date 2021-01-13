@@ -16,8 +16,16 @@ const httpOptions = {
 export class TagService {
   constructor(private http: HttpClient) { }
 
-  getNTags(num: number): Observable<TagModel[]> {
-    const url = baseURL + 'tags?num=' + num;
+  getTags(num?: number): Observable<TagModel[]> {
+    const url = baseURL + 'tags?';
+    if (num !== undefined) {
+      url.concat('&num=' + num);
+    }
+    return this.http.get<TagModel[]>(url, httpOptions);
+  }
+
+  getTag(id: number): Observable<TagModel[]> {
+    const url = baseURL + 'tags/' + id;
     return this.http.get<TagModel[]>(url, httpOptions);
   }
 }
