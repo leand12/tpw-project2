@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import { TagModel } from '../../../../core/models/tag.model';
-import { TagService } from '../../../../core/services/tag.service';
-import { ArticleService } from '../../../../core/services/article.service';
+import { TagModel } from '@core/models/tag.model';
+import { TagService } from '@core/services/tag.service';
+import { ArticleService } from '@core/services/article.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 declare var $: any;
@@ -44,23 +44,6 @@ export class StoreComponent implements OnInit, AfterViewInit {
       this.price = routeQueryParams.price;
       this.getArticles();
     });
-    // this.activeRoute.params.subscribe((routeParams) => {
-    //     this.type = routeParams.type,
-    //     this.platform = routeParams.platform,
-    //     console.log('aewqu');
-    //   }, (err) => console.log(err),
-    //   () => {
-    //     console.log('feoihw');
-    //     this.activeRoute.queryParams.subscribe((routeQueryParams) => {
-    //       this.search = routeQueryParams.search,
-    //       this.tag = routeQueryParams.tag,
-    //       this.price = routeQueryParams.price,
-    //       console.log('aqu');
-    //     }, (err) => console.log(err),
-    //       () => this.getArticles()
-    //     );
-    // });
-    // console.log(this);
   }
 
   getTags(): void {
@@ -71,11 +54,12 @@ export class StoreComponent implements OnInit, AfterViewInit {
   }
 
   getArticles(): void {
-    // const [minPrice, maxPrice] = this.price.split(',');
+    const [minPrice, maxPrice] =  this.price ?
+      this.price.split(',') : [undefined, undefined];
     this.articleService.getArticlesFiltered(
       undefined,
-      undefined,
-      undefined,
+      maxPrice,
+      minPrice,
       undefined,
       undefined,
       undefined,
