@@ -51,7 +51,8 @@ def get_articles(request):
     if 'tags' in request.GET:
         tags = request.GET['tags'].split(',')  # Tag filter example: ws/articles?tags=New,Blizzard
         for tag in tags:
-            articles = articles.filter(tag__name=tag)
+            if tag!='':
+                articles = articles.filter(tag__name=tag)
     if 'seller' in request.GET:
         articles = articles.filter(seller_id=request.GET['seller'])
     if 'buyer' in request.GET:
