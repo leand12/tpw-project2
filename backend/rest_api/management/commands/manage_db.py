@@ -56,9 +56,11 @@ class Command(BaseCommand):
 
     @classmethod
     def _add_reviews(cls):
-        user = User.objects.get(id=2)
-        user2 = User.objects.get(id=3)
-        r = Review(rate=3, description='good enough', reviewer=user, reviewed=user2)
+        user1 = User.objects.get(id=1)
+        user2 = User.objects.get(id=2)
+        user3 = User.objects.get(id=3)
+        Review(rate=3, description='good enough', reviewer=user2, reviewed=user1).save()
+        r = Review(rate=3, description='great', reviewer=user2, reviewed=user3)
         r.save()
 
     @classmethod

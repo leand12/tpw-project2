@@ -19,6 +19,7 @@ export class SavedComponent implements OnInit, AfterViewInit {
   }
 
   getSavedArticles(): void {
+    // FIXME: calling wrong method for testing purposes
     this.articleService.getArticles().subscribe(
       articles => this.articles = articles,
       error => this.error = error,

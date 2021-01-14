@@ -1,0 +1,14 @@
+<div class="nk-comment">
+  <div class="nk-comment-meta">
+    <!-- TODO: change src to user image -->
+    <img src="#"
+         alt="{{ reviewReviewer.username }}"
+         class="rounded-circle" width="35">
+    by <a href="/profile/details/{{ review.reviewer.id }}">{{ reviewReviewer.username }}</a>
+    in {{ review.date_posted|date:'longDate' }}
+    <div #rating class="nk-review-rating" [attr.data-rating]="review.rate"></div>
+  </div>
+  <div class="nk-comment-text">
+    <p>{{ review.description }}</p>
+  </div>
+</div>
