@@ -28,7 +28,7 @@ export class DetailsComponent implements OnInit, AfterViewInit {
               private userService: UserService, private reviewService: ReviewService) { }
 
   ngOnInit(): void {
-    this.getURLState();
+    this.getURLParams();
 
     // TODO: call api
     this.articleImage = 'http://localhost:8000/media/user_1/item_2422e19c-707b-4aa4-899e-1d5bc248e06c';
@@ -48,7 +48,7 @@ export class DetailsComponent implements OnInit, AfterViewInit {
     ];
   }
 
-  getURLState(): void {
+  getURLParams(): void {
     this.activeRoute.params.subscribe(routeParams => {
       this.getArticle(routeParams.id);
     }, (err) => console.error(err));
@@ -67,6 +67,7 @@ export class DetailsComponent implements OnInit, AfterViewInit {
   }
 
   private getTags(): void {
+    console.log('debug');
     this.articleTags = [];
     for (const id of this.article.tag) {
       this.tagService.getTag(id).subscribe((tag) =>
