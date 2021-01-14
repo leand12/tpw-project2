@@ -11,6 +11,7 @@ import {
 } from './components/';
 import { ArticlesWidgetChildComponent } from './components/articles-widget-child/articles-widget-child.component';
 import { ArrayLengthPipe } from './pipes/array-length.pipe';
+import { ReviewCommentComponent } from './components/review-comment/review-comment.component';
 
 /*
 * Contains all the commonly used directives, pipes, and components.
@@ -34,19 +35,22 @@ import { ArrayLengthPipe } from './pipes/array-length.pipe';
     ArticlesWidgetChildComponent,
 
     ArrayLengthPipe,
+
+    ReviewCommentComponent,
   ],
-  exports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule,
+    exports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule,
 
-    NavbarComponent,
-    ErrorBoxComponent,
-    ViewGamesFilterComponent,
-    ArticlesWidgetComponent,
+        NavbarComponent,
+        ErrorBoxComponent,
+        ViewGamesFilterComponent,
+        ArticlesWidgetComponent,
 
-    ArrayLengthPipe,
-  ]
+        ArrayLengthPipe,
+        ReviewCommentComponent,
+    ]
 })
 export class SharedModule { }

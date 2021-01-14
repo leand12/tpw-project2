@@ -21,25 +21,25 @@ export class ReviewService {
     return this.http.get<ReviewModel[]>(url, httpOptions);
   }
 
-  getReviewsFiltered(num = null, rate = null, reviewer = null, reviewed = null): Observable<ReviewModel[]> {
+  getReviewsFiltered(num?, rate?, reviewer?, reviewed?): Observable<ReviewModel[]> {
     let url: string = baseURL + 'reviews?';
 
-    if (num != null)
+    if (num !== undefined)
     {
       url += '&num=' + num;
     }
 
-    if (rate != null)
+    if (rate !== undefined)
     {
       url += '&rate=' + rate;
     }
 
-    if (reviewer != null)
+    if (reviewer !== undefined)
     {
       url += '&reviewer=' + reviewer;
     }
 
-    if (reviewed != null)
+    if (reviewed !== undefined)
     {
       url += '&reviewed=' + reviewed;
     }

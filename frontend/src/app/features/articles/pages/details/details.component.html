@@ -227,22 +227,9 @@
                 <div class="nk-gap-2"></div>
                 <div class="nk-comments">
 
-                  <!-- START: Review -->
-<!--                  {% for r in reviews %}-->
-<!--                  <div class="nk-comment">-->
-<!--                    <div class="nk-comment-meta">-->
-<!--                      <img src="{% user_img_path r.reviewer.id %}"-->
-<!--                           alt="{{ r.reviewer.username }}"-->
-<!--                           class="rounded-circle" width="35"> by <a href="{% url 'profile' r.reviewer.id %}">{{ r.reviewer.username }}</a>-->
-<!--                      in {{ r.date_posted|date:"n F, Y" }}-->
-<!--                      <div class="nk-review-rating" data-rating="{{ r.rate }}"></div>-->
-<!--                    </div>-->
-<!--                    <div class="nk-comment-text">-->
-<!--                      <p>{{ r.description }}</p>-->
-<!--                    </div>-->
-<!--                  </div>-->
-<!--                  {% endfor %}-->
-                  <!-- END: Review -->
+                  <!-- START: Reviews -->
+                  <app-review-comment *ngFor="let r of userReviews" [review]="r"></app-review-comment>
+                  <!-- END: Reviews -->
 
                 </div>
               </div>

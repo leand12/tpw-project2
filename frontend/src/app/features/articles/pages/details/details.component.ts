@@ -28,19 +28,19 @@ export class DetailsComponent implements OnInit, AfterViewInit {
               private userService: UserService, private reviewService: ReviewService) { }
 
   ngOnInit(): void {
-    this.getURLState();
+    this.getURLParams();
 
     // TODO: call api
     this.articleImage = 'http://localhost:8000/media/user_1/item_2422e19c-707b-4aa4-899e-1d5bc248e06c';
     this.userReviews = [];
     this.userRating = 2;
     this.relatedArticles = [
-      {id: 1, name: 'Artigo Teste', total_price: '20.00', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting' +
+      {id: 1, name: 'HARDCODED', total_price: '20.00', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting' +
           'industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley' +
           ' of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into' +
           ' electronic typesetting, remaining essentially unchanged. ', shipping_fee: '0.00', date_posted: '2021-01-07', tag: [9, 11],
         is_sold: false, times_viewed: 0, shop_cart: [], saved: [], seller: 1, buyer: null},
-      {id: 2, name: 'Artigo Teste2', total_price: '15.00', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting' +
+      {id: 2, name: 'HARDCODED2', total_price: '15.00', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting' +
           'industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley' +
           ' of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into' +
           ' electronic typesetting, remaining essentially unchanged. ', shipping_fee: '0.00', date_posted: '2021-01-07', tag: [9],
@@ -48,7 +48,7 @@ export class DetailsComponent implements OnInit, AfterViewInit {
     ];
   }
 
-  getURLState(): void {
+  getURLParams(): void {
     this.activeRoute.params.subscribe(routeParams => {
       this.getArticle(routeParams.id);
     }, (err) => console.error(err));
@@ -67,6 +67,7 @@ export class DetailsComponent implements OnInit, AfterViewInit {
   }
 
   private getTags(): void {
+    console.log('debug');
     this.articleTags = [];
     for (const id of this.article.tag) {
       this.tagService.getTag(id).subscribe((tag) =>
@@ -80,7 +81,10 @@ export class DetailsComponent implements OnInit, AfterViewInit {
   }
 
   private getReviews(): void {
-    return;
+    this.reviewService.getReviewsFiltered(undefined, undefined, undefined, this.article.seller.id)
+      .subscribe((reviews) =>
+        this.userReviews = reviews
+    );
   }
 
   private getSeller(): void {

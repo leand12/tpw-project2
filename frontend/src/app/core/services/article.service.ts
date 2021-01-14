@@ -62,7 +62,6 @@ export class ArticleService {
       url += '&tags=' + tagString;
     }
 
-    console.log(url);
     return this.http.get<ArticleModel[]>(url, httpOptions);
   }
 
