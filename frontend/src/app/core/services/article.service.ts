@@ -66,7 +66,7 @@ export class ArticleService {
   }
 
   getArticle(id: number): Observable<ArticleModel> {
-    const url = baseURL + 'articles?id=' + id;
+    const url = baseURL + 'article?id=' + id;
     return this.http.get<ArticleModel>(url, httpOptions);
   }
 

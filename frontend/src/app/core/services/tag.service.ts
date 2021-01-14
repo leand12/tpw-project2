@@ -25,7 +25,7 @@ export class TagService {
   }
 
   getTag(id: number): Observable<TagModel[]> {
-    const url = baseURL + 'tags/' + id;
+    const url = baseURL + 'tag/' + id;
     return this.http.get<TagModel[]>(url, httpOptions);
   }
 }
