@@ -1,14 +1,17 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {htmlRatingIcons} from '../../../../core/utils/html-rating-icons';
-import {TagService} from '../../../../core/services/tag.service';
-import {ArticleService} from '../../../../core/services/article.service';
 import {ActivatedRoute} from '@angular/router';
+
+import {htmlRatingIcons} from '@core/utils/html-rating-icons';
+import {TagService} from '@core/services/tag.service';
+import {ArticleService} from '@core/services/article.service';
+import {UserService} from '@core/services/user.service';
+import {ReviewService} from '@core/services/review.service';
 
 @Component({
   selector: 'app-article-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css'],
-  providers: [TagService, ArticleService]
+  providers: [TagService, ArticleService, UserService, ReviewService]
 })
 export class DetailsComponent implements OnInit, AfterViewInit {
   @ViewChild('rating') ratingView: ElementRef;
@@ -20,8 +23,9 @@ export class DetailsComponent implements OnInit, AfterViewInit {
   userRating: number;
   userReviews: any;
 
-  constructor(private tagService: TagService, private articleService: ArticleService,
-              private activeRoute: ActivatedRoute) { }
+  constructor(private activeRoute: ActivatedRoute,
+              private tagService: TagService, private articleService: ArticleService,
+              private userService: UserService, private reviewService: ReviewService) { }
 
   ngOnInit(): void {
     this.getURLState();

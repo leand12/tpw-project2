@@ -1,7 +1,6 @@
 import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import { htmlRatingIcons } from '../../../../core/utils/html-rating-icons';
-import {TagService} from '../../../../core/services/tag.service';
-import {TagModel} from '@models/tag.model';
+import {TagModel} from '@core/models/tag.model';
 
 @Component({
   selector: 'app-compact-article-renderer',

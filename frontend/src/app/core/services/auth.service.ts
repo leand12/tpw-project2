@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import {Observable} from 'rxjs';
-import {authURL} from '../constants/consts';
 import { tap, shareReplay } from 'rxjs/operators';
+
+import {authURL} from '@core/constants/consts';
 
 import * as moment from 'moment';
 

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
-import {ItemModel} from '@models/item.model';
-import {baseURL} from '../constants/consts';
+
+import {baseURL} from '@core/constants/consts';
+import {ItemModel} from '@core/models/item.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
