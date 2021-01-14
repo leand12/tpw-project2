@@ -10,7 +10,7 @@
 <!--      <em>Article not Found: the requested article does not exist.</em>-->
 <!--    </div>-->
 <!--    {% else %}-->
-    <h3 class="nk-decorated-h-2"><span>{{ article.name }}</span></h3>
+    <h3 class="nk-decorated-h-2"><span>{{ article?.name }}</span></h3>
     <div class="nk-gap-1"></div>
 
 
@@ -26,13 +26,13 @@
                      data-size="1200x554">
                     <div class="nk-gallery-item-overlay"><span class="ion-eye"></span></div>
                     <img src="{{ articleImage }}"
-                         alt="{{ article.name }}">
+                         alt="{{ article?.name }}">
                   </a>
                 </div>
 
                 <div class="nk-gap-1"></div>
                 <div class="row vertical-gap sm-gap">
-<!--                  {% for item in article.items_in_article.all|slice:"1:" %}-->
+<!--                  {% for item in article?.items_in_article?.all|slice:"1:" %}-->
 <!--                  <div class="col-6 col-md-4">-->
 <!--                    <div class="nk-gallery-item-box">-->
 <!--                      <a href="{% item_img_path item.id %}"-->
@@ -53,11 +53,13 @@
             </div>
             <div class="col-md-6">
 
-              <h2 class="nk-product-title h3">{{ article.name }}</h2>
+              <h2 class="nk-product-title h3">{{ article?.name }}</h2>
 
               <div class="nk-post-share d-flex">
                 <span class="h5">Seller:  </span>
-<!--                <span class="h5" style="margin-left: auto"><a href="{% url 'profile' article.seller.id %}">{{ article.seller.username }}</a></span>-->
+                <span class="h5" style="margin-left: auto">
+                  <a routerLink="/profile/details/{{ article?.seller.id }}">{{ articleSeller?.name }}</a>
+                </span>
               </div>
 
               <!-- START: Add to -->
@@ -67,10 +69,10 @@
 <!--                {% csrf_token %}-->
 
 <!--                <div class="nk-gap-1"></div>-->
-<!--                <div class="nk-product-price">{{ article.total_price }} €</div>-->
+<!--                <div class="nk-product-price">{{ article?.total_price }} €</div>-->
 <!--                <div class="nk-gap-1"></div>-->
-<!--                <div class="text-white font-weight-bold">Shipping Fee:&emsp;&emsp;&emsp;{{ article.ShippingFee }} €</div>-->
-<!--                <div class="text-white font-weight-bold">Shipping Time:&emsp;&emsp;{{ article.ShippingTime }} days</div>-->
+<!--                <div class="text-white font-weight-bold">Shipping Fee:&emsp;&emsp;&emsp;{{ article?.ShippingFee }} €</div>-->
+<!--                <div class="text-white font-weight-bold">Shipping Time:&emsp;&emsp;{{ article?.ShippingTime }} days</div>-->
 <!--                <div class="nk-gap-3"></div>-->
 <!--                <div class="row justify-content-start">-->
 <!--                  <button type="submit" name="add_cart" class="nk-btn nk-btn-rounded nk-btn-color-main-1" style="margin-left: 20px">-->
@@ -91,9 +93,12 @@
                   <div class="nk-gap"></div>
                   <strong class="text-white">Tags:</strong>
                   <div class="nk-gap"></div>
-                  <span *ngFor="let t of articleTags">
-                    <a routerLink="/articles/store" [queryParams]="{ tag: t.name }">{{ t.name }}</a>,
-                  </span>
+                  <p *ngIf="!articleTags?.length; else elseBlock">None</p>
+                  <ng-template #elseBlock>
+                    <span *ngFor="let t of articleTags">
+                      <a routerLink="/articles/store" [queryParams]="{ tag: t.name }">{{ t.name }}</a>,
+                    </span>
+                  </ng-template>
                   <div class="nk-gap"></div>
                 </div>
                 <div class="col-md-6">
@@ -131,9 +136,9 @@
               <!-- START: Tab Description -->
               <div role="tabpanel" class="tab-pane fade active show" id="tab-description">
                 <div class="nk-gap"></div>
-                <strong class="text-white">Date Posted:&emsp;{{ article.date_posted|date:'longDate' }}</strong>
+                <strong class="text-white">Date Posted:&emsp;{{ article?.date_posted|date:'longDate' }}</strong>
                 <div class="nk-gap"></div>
-                <p>{{ article.description }}</p>
+                <p>{{ article?.description }}</p>
 
                 <!-- START: Table -->
                 <div class="nk-gap-1"></div>

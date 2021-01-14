@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
-import {ArticleModel} from '@models/article.model';
-import {baseURL} from '../constants/consts';
+
+import {baseURL} from '@core/constants/consts';
+import {ArticleModel} from '@core/models/article.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -66,7 +67,7 @@ export class ArticleService {
   }
 
   getArticle(id: number): Observable<ArticleModel> {
-    const url = baseURL + 'articles?id=' + id;
+    const url = baseURL + 'article?id=' + id;
     return this.http.get<ArticleModel>(url, httpOptions);
   }
 

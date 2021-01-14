@@ -14,8 +14,7 @@ declare var $: any;
   providers: [TagService, ArticleService]
 })
 export class StoreComponent implements OnInit, AfterViewInit {
-  filterForm: FormGroup;
-  tags: TagModel[];
+  popularTags: TagModel[];
   error: any;
   articles: any;
   // filters
@@ -29,10 +28,6 @@ export class StoreComponent implements OnInit, AfterViewInit {
               private router: Router, public activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.filterForm = new FormGroup({
-      search: new FormControl(''),
-      price: new FormControl('0,1200'),
-    });
     this.getURLState();
     // then apply filters somehow
     this.getTags();
@@ -53,8 +48,8 @@ export class StoreComponent implements OnInit, AfterViewInit {
   }
 
   getTags(): void {
-    this.tagService.getNTags(2).subscribe(
-      tags => this.tags = tags,
+    this.tagService.getTags(10).subscribe(
+      popularTags => this.popularTags = popularTags,
       error => this.error = error
     );
   }
@@ -74,13 +69,10 @@ export class StoreComponent implements OnInit, AfterViewInit {
     );
   }
 
-  filter(): void {
+  filter(params): void {
     this.router.navigate(
       [this.router.url.split('?')[0] ],
-      { queryParams: {
-          search: this.filterForm.value.search,
-          price: this.filterForm.value.price,
-        }, queryParamsHandling: 'merge' });
+      { queryParams: params, queryParamsHandling: 'merge' });
   }
 
   ngAfterViewInit(): void {

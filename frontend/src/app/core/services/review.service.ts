@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
-import {ReviewModel} from '@models/review.model';
-import {baseURL} from '../constants/consts';
+
+import {ReviewModel} from '@core/models/review.model';
+import {baseURL} from '@core/constants/consts';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -53,7 +54,7 @@ export class ReviewService {
   }
 
   createReview(rev: ReviewModel): Observable<any> {
-    const url = this.baseURL + 'create/review/';
+    const url = baseURL + 'create/review/';
     return this.http.post(url, rev, httpOptions);
   }
 }

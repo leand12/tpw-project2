@@ -11,6 +11,16 @@ from rest_api.models import Tag, Article, Item, Game, Console, Review
 # Create your views here.
 
 @api_view(['GET'])
+def get_tag(request, id):
+    try:
+        tag = Tag.objects.get(id=id)
+    except Tag.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = TagSerializer(tag)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
 def get_tags(request):
     tags = Tag.objects.filter(is_popular=True)
     if 'num' in request.GET:

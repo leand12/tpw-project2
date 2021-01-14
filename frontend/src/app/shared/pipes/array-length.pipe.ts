@@ -7,7 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ArrayLengthPipe implements PipeTransform {
 
   transform(value: any): number {
-    return value.length;
+    return (value) ? value.length : 0;
   }
 
 }

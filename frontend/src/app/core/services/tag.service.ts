@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 
-import { TagModel } from '../models/tag.model';
+import { TagModel } from '@core/models/tag.model';
 
-import { baseURL } from '../constants/consts';
+import { baseURL } from '@core/constants/consts';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,8 +16,16 @@ const httpOptions = {
 export class TagService {
   constructor(private http: HttpClient) { }
 
-  getNTags(num: number): Observable<TagModel[]> {
-    const url = baseURL + 'tags?num=' + num;
+  getTags(num?: number): Observable<TagModel[]> {
+    const url = baseURL + 'tags?';
+    if (num !== undefined) {
+      url.concat('&num=' + num);
+    }
+    return this.http.get<TagModel[]>(url, httpOptions);
+  }
+
+  getTag(id: number): Observable<TagModel[]> {
+    const url = baseURL + 'tag/' + id;
     return this.http.get<TagModel[]>(url, httpOptions);
   }
 }
