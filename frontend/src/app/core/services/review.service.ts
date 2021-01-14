@@ -52,4 +52,8 @@ export class ReviewService {
     return this.http.get<ReviewModel>(url, httpOptions);
   }
 
+  createReview(rev: ReviewModel): Observable<any> {
+    const url = this.baseURL + 'create/review/';
+    return this.http.post(url, rev, httpOptions);
+  }
 }

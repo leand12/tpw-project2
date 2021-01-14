@@ -163,6 +163,39 @@ def get_games(request):
     return Response(serializer.data)
 
 
+@api_view(['POST'])
+def create_game(request):
+    serializer = GameSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['PUT'])
+def update_game(request):
+    id = request.data['id']
+    try:
+        game = Game.objects.get(id=id)
+    except Game.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = GameSerializer(game, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['DELETE'])
+def delete_game(request, id):
+    try:
+        game = Game.objects.get(id=id)
+    except Game.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    game.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
+
+
 @api_view(['GET'])
 def get_console(request):
     id = int(request.GET['id'])
@@ -182,6 +215,39 @@ def get_consoles(request):
         consoles = consoles[:num]
     serializer = ConsoleSerializer(consoles, many=True)
     return Response(serializer.data)
+
+
+@api_view(['POST'])
+def create_console(request):
+    serializer = ConsoleSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['PUT'])
+def update_console(request):
+    id = request.data['id']
+    try:
+        console = Console.objects.get(id=id)
+    except Console.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = ConsoleSerializer(console, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['DELETE'])
+def delete_console(request, id):
+    try:
+        console = Console.objects.get(id=id)
+    except Console.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    console.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(['GET'])
@@ -209,3 +275,12 @@ def get_reviews(request):
         reviews = reviews[:num]
     serializer = ReviewSerializer(reviews, many=True)
     return Response(serializer.data)
+
+
+@api_view(['POST'])
+def create_review(request):
+    serializer = ReviewSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
