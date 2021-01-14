@@ -47,7 +47,7 @@ def get_articles(request):
     if 'max_price' in request.GET:
         articles = articles.filter(total_price__lte=request.GET['max_price'])
     if 'min_price' in request.GET:
-        articles = articles.filter(total_price__mte=request.GET['min_price'])
+        articles = articles.filter(total_price__gte=request.GET['min_price'])
     if 'tags' in request.GET:
         tags = request.GET['tags'].split(',')  # Tag filter example: ws/articles?tags=New,Blizzard
         for tag in tags:
