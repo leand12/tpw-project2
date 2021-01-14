@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import {Observable} from 'rxjs';
-import {baseURL} from '../constants/consts';
+import {authURL} from '../constants/consts';
 import { tap, shareReplay } from 'rxjs/operators';
 
 import * as moment from 'moment';
@@ -31,7 +31,7 @@ export class AuthService {
 
   login(username: string, password: string): Observable<any> {
     return this.http.post(
-      baseURL.concat('login/'),
+      authURL.concat('login/'),
       { username, password }
     ).pipe(
       tap(response => this.setSession(response)),
@@ -41,7 +41,7 @@ export class AuthService {
 
   signup(username: string, firstName: string, lastName: string, email: string, password1: string, password2: string): Observable<any> {
     return this.http.post(
-      baseURL.concat('signup/'),
+      authURL.concat('signup/'),
       { username, first_name: firstName, last_name: lastName, email, password1, password2 }
     ).pipe(
       tap(response => this.setSession(response)),
@@ -58,7 +58,7 @@ export class AuthService {
   refreshToken() {
     if (moment().isBetween(this.getExpiration().subtract(1, 'days'), this.getExpiration())) {
       return this.http.post(
-        baseURL.concat('refresh-token/'),
+        authURL.concat('refresh-token/'),
         { token: this.token }
       ).pipe(
         tap(response => this.setSession(response)),

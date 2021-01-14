@@ -12,17 +12,16 @@ const httpOptions = {
 
 @Injectable()
 export class ReviewService {
-  private baseURL = 'http://localhost:8000/ws/';
 
   constructor(private http: HttpClient) { }
 
   getReviews(): Observable<ReviewModel[]> {
-    const url = this.baseURL + 'reviews';
+    const url = baseURL + 'reviews';
     return this.http.get<ReviewModel[]>(url, httpOptions);
   }
 
   getReviewsFiltered(num = null, rate = null, reviewer = null, reviewed = null): Observable<ReviewModel[]> {
-    let url: string = this.baseURL + 'reviews?';
+    let url: string = baseURL + 'reviews?';
 
     if (num != null)
     {
@@ -49,7 +48,7 @@ export class ReviewService {
   }
 
   getReview(id: number): Observable<ReviewModel> {
-    const url = this.baseURL + 'review?id=' + id;
+    const url = baseURL + 'review?id=' + id;
     return this.http.get<ReviewModel>(url, httpOptions);
   }
 
