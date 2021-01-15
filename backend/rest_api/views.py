@@ -164,7 +164,7 @@ def create_profile(request):
 
 @api_view(['PUT'])
 def update_profile(request):
-    id = request.data['user']
+    id = request.data['userid']
     try:
         profile = UserProfile.objects.get(user_id=id)
     except UserProfile.DoesNotExist:
