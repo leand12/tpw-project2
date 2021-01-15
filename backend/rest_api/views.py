@@ -4,8 +4,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_api.serializers import TagSerializer, ArticleSerializer, UserSerializer, ItemSerializer, GameSerializer, \
-    ConsoleSerializer, ReviewSerializer
-from rest_api.models import Tag, Article, Item, Game, Console, Review
+    ConsoleSerializer, ReviewSerializer, UserProfileSerializer
+from rest_api.models import Tag, Article, Item, Game, Console, Review, UserProfile
 
 
 # Create your views here.
@@ -37,6 +37,8 @@ def get_article(request):
         article = Article.objects.get(id=id)
     except Article.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
+    article.times_viewed += 1
+    article.save()
     serializer = ArticleSerializer(article)
     return Response(serializer.data)
 
@@ -51,7 +53,7 @@ def get_articles(request):
     if 'tags' in request.GET:
         tags = request.GET['tags'].split(',')  # Tag filter example: ws/articles?tags=New,Blizzard
         for tag in tags:
-            if tag!='':
+            if tag != '':
                 articles = articles.filter(tag__name=tag)
     if 'seller' in request.GET:
         articles = articles.filter(seller_id=request.GET['seller'])
@@ -59,11 +61,19 @@ def get_articles(request):
         articles = articles.filter(buyer=request.GET['buyer'])
     if 'is_sold' in request.GET:
         articles = articles.filter(is_sold=request.GET['is_sold'])
+    if 'shop_cart' in request.GET:
+        articles = articles.filter(shop_cart__in=request.GET['shop_cart'])
+    if 'saved' in request.GET:
+        articles = articles.filter(saved__in=request.GET['saved'])
     if 'console' in request.GET:
         articles = [a for a in articles if Game.objects.filter(pertaining_article=a.id, platform=request.GET['console']).exists()]
+    if 'name' in request.GET:
+        articles = articles.filter(name__contains=request.GET['name'])
     if 'num' in request.GET:
         num = int(request.GET['num'])
         articles = articles[:num]
+    if 'times_viewed' in request.GET:
+        articles = articles.order_by('-times_viewed')
     serializer = ArticleSerializer(articles, many=True)
     return Response(serializer.data)
 
@@ -120,6 +130,50 @@ def get_users(request):
         users = users[:num]
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data)
+
+
+@api_view(['GET'])
+def get_profile(request):
+    userid = int(request.GET['userid'])
+    try:
+        profile = UserProfile.objects.get(user_id=userid)
+    except UserProfile.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = UserProfileSerializer(profile)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def get_profiles(request):
+    profiles = UserProfile.objects.all()
+    if 'num' in request.GET:
+        num = int(request.GET['num'])
+        profiles = profiles[:num]
+    serializer = UserProfileSerializer(profiles, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def create_profile(request):
+    serializer = UserProfileSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['PUT'])
+def update_profile(request):
+    id = request.data['user']
+    try:
+        profile = UserProfile.objects.get(user_id=id)
+    except UserProfile.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    serializer = UserProfileSerializer(profile, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])

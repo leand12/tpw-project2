@@ -6,7 +6,7 @@ from allauth.utils import email_address_exists
 from allauth.account.adapter import get_adapter
 from allauth.account.utils import setup_user_email
 
-from rest_api.models import Tag, Article, Item, Game, Console, Review
+from rest_api.models import Tag, Article, Item, Game, Console, Review, UserProfile
 from rest_framework import serializers
 
 
@@ -73,6 +73,12 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'first_name', 'last_name')
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ('user', 'biography', 'avatar')
 
 
 class ItemSerializer(serializers.ModelSerializer):
