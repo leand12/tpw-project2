@@ -20,7 +20,8 @@ export class ArticleService {
     return this.http.get<ArticleModel[]>(url, httpOptions);
   }
 
-  getArticlesFiltered(num?, maxPrice?, minPrice?, isSold?, seller?, buyer?, tags?: string[]): Observable<ArticleModel[]> {
+  // tslint:disable-next-line:max-line-length
+  getArticlesFiltered(num?, maxPrice?, minPrice?, isSold?, seller?, buyer?, tags?: string[], name?, shopCart?, saved?, timesViewed?): Observable<ArticleModel[]> {
     let url: string = baseURL + 'articles?';
 
     if (num !== undefined)
@@ -62,6 +63,26 @@ export class ArticleService {
       url += '&tags=' + tagString;
     }
 
+    if (name !== undefined)
+    {
+      url += '&name=' + name;
+    }
+
+    if (shopCart !== undefined)
+    {
+      url += '&shop_cart=' + shopCart;
+    }
+
+    if (saved !== undefined)
+    {
+      url += '&saved=' + saved;
+    }
+
+    if (timesViewed !== undefined)
+    {
+      url += '&times_viewed=' + timesViewed;
+    }
+
     return this.http.get<ArticleModel[]>(url, httpOptions);
   }
 
@@ -76,7 +97,7 @@ export class ArticleService {
   }
 
   updateArticle(art: ArticleModel): Observable<any> {
-    const url = baseURL + 'update/article/';
+    const url = baseURL + 'update/article?id=' + art.id;
     return this.http.put(url, art, httpOptions);
   }
 

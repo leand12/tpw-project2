@@ -34,7 +34,7 @@ export class ConsoleService {
   }
 
   updateConsole(console: ConsoleModel): Observable<any> {
-    const url = baseURL + 'update/console/';
+    const url = baseURL + 'update/console?id=' + console.id;
     return this.http.put(url, console, httpOptions);
   }
 

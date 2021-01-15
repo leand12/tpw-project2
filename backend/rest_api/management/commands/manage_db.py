@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
-from rest_api.models import Tag, Article, Game, Console, Item, Review
+from rest_api.models import Tag, Article, Game, Console, Item, Review, UserProfile
 
 
 class Command(BaseCommand):
@@ -28,7 +28,9 @@ class Command(BaseCommand):
         a2.save()
         a3.save()
         a1.tag.add(t1, t2)
+        a1.shop_cart.add(user)
         a2.tag.add(t1)
+        a2.saved.add(user)
         a3.tag.add(t2)
         a1.save()
         a2.save()
@@ -67,6 +69,16 @@ class Command(BaseCommand):
     def _del_reviews(cls):
         Review.objects.all().delete()
 
+    @classmethod
+    def _add_profiles(cls):
+        user = User.objects.get(id=1)
+        profile = UserProfile(user=user, biography='Very good at games')
+        profile.save()
+
+    @classmethod
+    def _del_profiles(cls):
+        UserProfile.objects.all().delete()
+
     def add_arguments(self, parser):
         parser.add_argument(
             '-a', '--add', action='store_true',
@@ -83,8 +95,10 @@ class Command(BaseCommand):
             self._del_articles()
             self._del_items()
             self._del_reviews()
+            self._del_profiles()
         if options['add']:
             self._add_tags()
             self._add_articles()
             self._add_items()
             self._add_reviews()
+            self._add_profiles()
