@@ -23,7 +23,7 @@ export class StoreComponent implements OnInit, AfterViewInit {
   platform: string;
   search: string;
   tags: string[];
-  price: string;
+  price: string[];
 
   constructor(private tagService: TagService, private articleService: ArticleService,
               private router: Router, public activeRoute: ActivatedRoute) { }
@@ -40,8 +40,10 @@ export class StoreComponent implements OnInit, AfterViewInit {
         this.type = results.params.type;
         this.platform = results.params.platform;
         this.search = results.query.search;
-        this.tags = results.query.tags.split(',').filter((t) => t !== '');
-        this.price = results.query.price;
+        this.tags = results.query.tags ?
+          results.query.tags.split(',').filter((t) => t !== '') : undefined;
+        this.price =  results.query.price ?
+          results.query.price.split(',') : [undefined, undefined];
         this.getArticles();
       });
   }
@@ -54,12 +56,10 @@ export class StoreComponent implements OnInit, AfterViewInit {
   }
 
   getArticles(): void {
-    const [minPrice, maxPrice] =  this.price ?
-      this.price.split(',') : [undefined, undefined];
     this.articleService.getArticlesFiltered(
       undefined,
-      maxPrice,
-      minPrice,
+      this.price[1],
+      this.price[0],
       undefined,
       undefined,
       undefined,
@@ -71,7 +71,7 @@ export class StoreComponent implements OnInit, AfterViewInit {
     ).subscribe(
       articles => this.articles = articles,
       error => this.error = error
-    ).add(() => console.log(this.articles, this.tags));
+    );
   }
 
   filter(params): void {
@@ -81,7 +81,9 @@ export class StoreComponent implements OnInit, AfterViewInit {
   }
 
   filterTags(tagName): void {
-    if (this.tags.includes(tagName)) {
+    if (!this.tags) {
+      this.filter( {tags: tagName} );
+    } else if (this.tags.includes(tagName)) {
       this.filter( {tags: this.tags.filter((t) => t !== tagName).toString()} );
     } else {
       this.filter( {tags: this.tags.concat(tagName).toString()} );

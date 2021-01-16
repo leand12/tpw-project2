@@ -11,10 +11,18 @@ declare var $: any;
 export class SavedComponent implements OnInit, AfterViewInit {
   articles: any;
   error: any;
+  conditions: Array<[string, string]>;
 
   constructor(private articleService: ArticleService) { }
 
   ngOnInit(): void {
+    this.conditions = [
+      ['B', 'Brand New'],
+      ['L', 'Like New'],
+      ['V', 'Very Good'],
+      ['G', 'Good'],
+      ['A', 'Acceptable'],
+    ];
     this.getSavedArticles();
   }
 

@@ -1,6 +1,8 @@
-.selected-tag {
+a.selected-tag {
   color: red;
   font-weight: bold;
-  text-decoration: double;
 }
 
+a.selected-tag::before {
+  content: '• ';
+}
