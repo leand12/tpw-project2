@@ -26,7 +26,7 @@ export class AuthService {
 
     global.setToken(authResult.token);
     global.setTokenExpiration(JSON.stringify(expiresAt.valueOf()));
-    localStorage.setItem('user_id', String(authResult.user.pk));
+    global.setUserId(String(authResult.user.pk));
   }
 
   get token(): string {
