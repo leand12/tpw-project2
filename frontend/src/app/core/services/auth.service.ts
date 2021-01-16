@@ -7,6 +7,7 @@ import { tap, shareReplay } from 'rxjs/operators';
 import {authURL} from '@core/constants/consts';
 
 import * as moment from 'moment';
+import {UserModel} from '@core/models/user.model';
 
 
 @Injectable()
@@ -24,6 +25,7 @@ export class AuthService {
 
     localStorage.setItem('token', authResult.token);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
+    localStorage.setItem('user_id', String(authResult.user.pk));
   }
 
   get token(): string {
