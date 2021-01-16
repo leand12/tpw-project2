@@ -100,11 +100,12 @@
                 <input type="text" name="?" value="" hidden>
                 <ul class="nk-widget-categories">
                   <li *ngFor="let t of popularTags">
-                    <a [routerLink]="activeRoute.snapshot.fragment" [queryParams]="{tag: t.name}"
-                       queryParamsHandling="merge" [class.selected-tag]="tag==t.name">
+                    <a [routerLink]="" (click)="filterTags(t.name)"
+                       [class.selected-tag]="tags?.includes(t.name)">
                       {{ t.name }}
                     </a>
                   </li>
+                    <span>{{ tags?.toString() }}</span>
                 </ul>
               </div>
             </div>
