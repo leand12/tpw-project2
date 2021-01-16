@@ -6,9 +6,9 @@
     <app-error-box>User not Found: the requested user does not exist.</app-error-box>
 <!--    {% else %}-->
 
-    <h2 class="nk-decorated-h-3 mb-0"><span>
-<!--                    {% if user.id == user2.id %}My{% else %}{{ user2.username }}{% endif %} -->
-      Articles</span></h2>
+    <h2 class="nk-decorated-h-3 mb-0">
+      <span>{{ myself ? 'My' : user?.username }} Articles</span>
+    </h2>
 
     <div id="onsale"></div>
     <div class="nk-gap-4"></div>
@@ -17,7 +17,6 @@
     <div class="nk-gap-1"></div>
 
     <!-- START: Articles On Sale -->
-
     <div class="row vertical-gap" *ngIf="articlesOnSale && articlesOnSale.length !== 0; else noneOnSale">
       <div class="col-lg-6" *ngFor="let a of articlesOnSale">
         <!--TODO: add input arguments that receives a boolean that decides whether the
@@ -28,11 +27,8 @@
     <ng-template #noneOnSale>
       <div style="height:150px; display:flex;">
         <div style="margin: auto; font-weight: bold;">
-  <!--        {% if user.id == user2.id %}-->
-  <!--        You have no articles on sale...-->
-  <!--        {% else %}-->
-          This user has no articles on sale...
-  <!--        {% endif %}-->
+          {{ myself ? 'You have no articles on sale...'
+          : 'This user has no articles on sale...' }}
         </div>
       </div>
     </ng-template>
@@ -53,40 +49,36 @@
     <ng-template #noneSold>
       <div style="height:150px; display:flex;">
         <div style="margin: auto; font-weight: bold;">
-  <!--        {% if user.id == user2.id %}-->
-  <!--        You have no articles sold out...-->
-  <!--        {% else %}-->
-          This user has no articles sold out...
-  <!--        {% endif %}-->
+          {{ myself ? 'You have no articles on sale...'
+          : 'This user has no articles on sale...' }}
         </div>
       </div>
     </ng-template>
     <!-- END: Articles Sold -->
 
-<!--    {% if user.id == user2.id %}-->
-    <div id="purchased"></div>
-    <div class="nk-gap-4"></div>
+    <div *ngIf="myself">
+      <div id="purchased"></div>
+      <div class="nk-gap-4"></div>
 
-    <h3 class="nk-decorated-h-2"><span>Purchased</span></h3>
-    <div class="nk-gap-1"></div>
+      <h3 class="nk-decorated-h-2"><span>Purchased</span></h3>
+      <div class="nk-gap-1"></div>
 
-    <!-- START: Articles Purchased -->
-    <div class="row vertical-gap" *ngIf="articlesPurchased && articlesPurchased.length !== 0; else nonePurchased">
-      <div class="col-lg-6" *ngFor="let a of articlesPurchased">
-        <app-rich-article-renderer [article]="a"></app-rich-article-renderer>
-      </div>
-    </div>
-    <ng-template #nonePurchased>
-      <div style="height:150px; display:flex;">
-        <div style="margin: auto; font-weight: bold;">
-          You have no articles purchased...
+      <!-- START: Articles Purchased -->
+      <div class="row vertical-gap" *ngIf="articlesPurchased && articlesPurchased.length !== 0; else nonePurchased">
+        <div class="col-lg-6" *ngFor="let a of articlesPurchased">
+          <app-rich-article-renderer [article]="a"></app-rich-article-renderer>
         </div>
       </div>
-    </ng-template>
-    <!-- END: Articles Purchased -->
+      <ng-template #nonePurchased>
+        <div style="height:150px; display:flex;">
+          <div style="margin: auto; font-weight: bold;">
+            You have no articles purchased...
+          </div>
+        </div>
+      </ng-template>
+      <!-- END: Articles Purchased -->
+    </div>
 
-
-<!--    {% endif %}-->
   </div>
 
   <div class="nk-gap-2"></div>

@@ -60,7 +60,8 @@ def get_articles(request):
     if 'buyer' in request.GET:
         articles = articles.filter(buyer=request.GET['buyer'])
     if 'is_sold' in request.GET:
-        articles = articles.filter(is_sold=request.GET['is_sold'])
+        is_sold = eval(request.GET['is_sold'].capitalize())
+        articles = articles.filter(is_sold=is_sold)
     if 'shop_cart' in request.GET:
         articles = articles.filter(shop_cart__in=request.GET['shop_cart'])
     if 'saved' in request.GET:

@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import { tap, shareReplay } from 'rxjs/operators';
 
 import {authURL} from '@core/constants/consts';
+import {global} from '@core/utils/global';
 
 import * as moment from 'moment';
 import {UserModel} from '@core/models/user.model';
@@ -23,13 +24,13 @@ export class AuthService {
     const payload = JSON.parse(window.atob(tokenParts[1]));
     const expiresAt = moment.unix(payload.exp);
 
-    localStorage.setItem('token', authResult.token);
-    localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
-    localStorage.setItem('user_id', String(authResult.user.pk));
+    global.setToken(authResult.token);
+    global.setTokenExpiration(JSON.stringify(expiresAt.valueOf()));
+    global.setUserId(String(authResult.user.pk));
   }
 
   get token(): string {
-    return localStorage.getItem('token');
+    return global.getToken();
   }
 
   login(username: string, password: string): Observable<any> {
@@ -53,8 +54,7 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
-    localStorage.removeItem('expires_at');
+    global.clear();
   }
 
   // tslint:disable-next-line:typedef
@@ -71,7 +71,7 @@ export class AuthService {
   }
 
   getExpiration(): moment.Moment {
-    const expiration = localStorage.getItem('expires_at');
+    const expiration = global.getTokenExpiration();
     const expiresAt = JSON.parse(expiration);
 
     return moment(expiresAt);

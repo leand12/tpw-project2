@@ -3,6 +3,8 @@ import { TagModel } from '@core/models/tag.model';
 import { TagService } from '@core/services/tag.service';
 import { ArticleService } from '@core/services/article.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import { combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 declare var $: any;
 
@@ -20,33 +22,33 @@ export class StoreComponent implements OnInit, AfterViewInit {
   type: string;
   platform: string;
   search: string;
-  tag: string;
-  price: string;
+  tags: string[];
+  price: string[];
 
   constructor(private tagService: TagService, private articleService: ArticleService,
               private router: Router, public activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getURLParams();
-    // then apply filters somehow
-    this.getTags();
+    this.getPopularTags();
   }
 
   getURLParams(): void {
-    this.activeRoute.params.subscribe(routeParams => {
-      this.type = routeParams.type;
-      this.platform = routeParams.platform;
-      this.getArticles();
-    });
-    this.activeRoute.queryParams.subscribe(routeQueryParams => {
-      this.search = routeQueryParams.search;
-      this.tag = routeQueryParams.tag;
-      this.price = routeQueryParams.price;
-      this.getArticles();
-    });
+    combineLatest(this.activeRoute.params, this.activeRoute.queryParams)
+      .pipe(map(results => ({params: results[0], query: results[1]})))
+      .subscribe(results => {
+        this.type = results.params.type;
+        this.platform = results.params.platform;
+        this.search = results.query.search;
+        this.tags = results.query.tags ?
+          results.query.tags.split(',').filter((t) => t !== '') : undefined;
+        this.price =  results.query.price ?
+          results.query.price.split(',') : [undefined, undefined];
+        this.getArticles();
+      });
   }
 
-  getTags(): void {
+  getPopularTags(): void {
     this.tagService.getTags(10).subscribe(
       popularTags => this.popularTags = popularTags,
       error => this.error = error
@@ -54,16 +56,18 @@ export class StoreComponent implements OnInit, AfterViewInit {
   }
 
   getArticles(): void {
-    const [minPrice, maxPrice] =  this.price ?
-      this.price.split(',') : [undefined, undefined];
     this.articleService.getArticlesFiltered(
       undefined,
-      maxPrice,
-      minPrice,
+      this.price[1],
+      this.price[0],
       undefined,
       undefined,
       undefined,
-      this.tag ? [this.tag] : undefined,
+      this.tags,
+      this.search,
+      undefined,
+      undefined,
+      undefined
     ).subscribe(
       articles => this.articles = articles,
       error => this.error = error
@@ -71,9 +75,19 @@ export class StoreComponent implements OnInit, AfterViewInit {
   }
 
   filter(params): void {
-    this.router.navigate(
+     this.router.navigate(
       [this.router.url.split('?')[0] ],
       { queryParams: params, queryParamsHandling: 'merge' });
+  }
+
+  filterTags(tagName): void {
+    if (!this.tags) {
+      this.filter( {tags: tagName} );
+    } else if (this.tags.includes(tagName)) {
+      this.filter( {tags: this.tags.filter((t) => t !== tagName).toString()} );
+    } else {
+      this.filter( {tags: this.tags.concat(tagName).toString()} );
+    }
   }
 
   ngAfterViewInit(): void {
