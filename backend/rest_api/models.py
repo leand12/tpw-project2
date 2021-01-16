@@ -53,7 +53,7 @@ class Article(models.Model):
         (TEN, '10 days'),
     ]
 
-    ShippingTime = models.IntegerField(
+    shipping_time = models.IntegerField(
         choices=SHIPPING_TIME_CHOICES,
         default=TEN,
     )

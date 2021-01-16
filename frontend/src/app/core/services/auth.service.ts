@@ -8,6 +8,7 @@ import {authURL} from '@core/constants/consts';
 import {global} from '@core/utils/global';
 
 import * as moment from 'moment';
+import {UserModel} from '@core/models/user.model';
 
 
 @Injectable()
@@ -25,6 +26,7 @@ export class AuthService {
 
     global.setToken(authResult.token);
     global.setTokenExpiration(JSON.stringify(expiresAt.valueOf()));
+    localStorage.setItem('user_id', String(authResult.user.pk));
   }
 
   get token(): string {
