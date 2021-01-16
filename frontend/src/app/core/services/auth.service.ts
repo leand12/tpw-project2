@@ -17,7 +17,6 @@ export class AuthService {
 
   private setSession(authResult): void {
     const token = authResult.token;
-    console.log(authResult);
 
     // decode the token to read the username and expiration timestamp
     const tokenParts = token.split(/\./);
@@ -26,10 +25,7 @@ export class AuthService {
 
     localStorage.setItem('token', authResult.token);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
-
-    this.http.get<UserModel>(authURL.concat('user/')).subscribe(
-      (user) => localStorage.setItem('user_id', String(user.id))
-    );
+    localStorage.setItem('user_id', String(authResult.user.pk));
   }
 
   get token(): string {
