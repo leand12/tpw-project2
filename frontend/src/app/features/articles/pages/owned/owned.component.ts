@@ -28,7 +28,6 @@ export class OwnedComponent implements OnInit {
   }
 
   getArticlesOnSale(userId: number): void {
-    console.log(userId)
     this.articleService.getArticlesFiltered(
       undefined,
       undefined,
