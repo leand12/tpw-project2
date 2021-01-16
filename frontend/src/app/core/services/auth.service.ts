@@ -7,6 +7,7 @@ import { tap, shareReplay } from 'rxjs/operators';
 import {authURL} from '@core/constants/consts';
 
 import * as moment from 'moment';
+import {UserModel} from '@core/models/user.model';
 
 
 @Injectable()
@@ -16,6 +17,7 @@ export class AuthService {
 
   private setSession(authResult): void {
     const token = authResult.token;
+    console.log(authResult);
 
     // decode the token to read the username and expiration timestamp
     const tokenParts = token.split(/\./);
@@ -24,6 +26,10 @@ export class AuthService {
 
     localStorage.setItem('token', authResult.token);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
+
+    this.http.get<UserModel>(authURL.concat('user/')).subscribe(
+      (user) => localStorage.setItem('user_id', String(user.id))
+    );
   }
 
   get token(): string {

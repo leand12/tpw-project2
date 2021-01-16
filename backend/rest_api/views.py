@@ -11,6 +11,12 @@ from rest_api.models import Tag, Article, Item, Game, Console, Review, UserProfi
 # Create your views here.
 
 @api_view(['GET'])
+def get_auth_user(request):
+    serializer = UserSerializer(request.user)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
 def get_tag(request, id):
     try:
         tag = Tag.objects.get(id=id)
