@@ -1,18 +1,20 @@
 import { TagModel } from './tag.model';
 import { UserModel } from './user.model';
+import {ItemModel} from '@core/models/item.model';
 
 export class ArticleModel {
   id: number;
   name: string;
-  totalPrice: number;
+  total_price: number;
   description: string;
-  shippingFee: number;
-  datePosted: string;
-  tags: TagModel[];
-  isSold: boolean;
-  timesViewed: number;
-  shopCart: UserModel[];
-  saved: UserModel[];
-  seller: UserModel;
-  buyer: UserModel;
+  shipping_fee: number;
+  date_posted: string;
+  tags: number[];
+  is_sold: boolean;
+  times_viewed: number;
+  shop_cart: number[];
+  saved: number[];
+  seller: number;
+  buyer: number;
+  items_in_article: ItemModel[];
 }

@@ -32,13 +32,19 @@ def get_tags(request):
 
 @api_view(['GET'])
 def get_article(request):
-    id = int(request.GET['id'])
+    print(request.GET)
     try:
-        article = Article.objects.get(id=id)
+        if 'id' in request.GET:
+            id = int(request.GET['id'])
+            article = Article.objects.get(id=id)
+            article.times_viewed += 1
+            article.save()
+        elif 'name' in request.GET:
+            article = Article.objects.get(name=request.GET['name'])
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
     except Article.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-    article.times_viewed += 1
-    article.save()
     serializer = ArticleSerializer(article)
     return Response(serializer.data)
 
@@ -81,7 +87,9 @@ def get_articles(request):
 
 @api_view(['POST'])
 def create_article(request):
+    print(request.data)
     serializer = ArticleSerializer(data=request.data)
+    print(serializer)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -212,6 +220,8 @@ def get_game(request):
 @api_view(['GET'])
 def get_games(request):
     games = Game.objects.all()
+    if 'pertaining_article' in request.GET:
+        games = games.filter(pertaining_article=request.GET['pertaining_article'])
     if 'num' in request.GET:
         num = int(request.GET['num'])
         games = games[:num]
@@ -266,6 +276,8 @@ def get_console(request):
 @api_view(['GET'])
 def get_consoles(request):
     consoles = Console.objects.all()
+    if 'pertaining_article' in request.GET:
+        consoles = consoles.filter(pertaining_article=request.GET['pertaining_article'])
     if 'num' in request.GET:
         num = int(request.GET['num'])
         consoles = consoles[:num]

@@ -1,12 +1,13 @@
-<div class="signup-padding">
+<div class="form-padding-1">
   <h3 class="mb-0"><span class="text-main-1">Create</span> Article</h3>
 
-  <div *ngIf="step1; else step2">
-    <app-article-form1 [(step)]="step1"></app-article-form1>
+  <div *ngIf="article">
+    <div *ngIf="step1; else step2">
+      <app-article-form1 [(step)]="step1" [article]="article"></app-article-form1>
+    </div>
+    <ng-template #step2>
+      <app-article-form2 [(step)]="step1" [article]="article"></app-article-form2>
+    </ng-template>
   </div>
-  <ng-template #step2>
-    <app-article-form2 [(step)]="step1"></app-article-form2>
-  </ng-template>
-
 
 </div>

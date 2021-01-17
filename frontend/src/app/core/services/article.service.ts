@@ -86,8 +86,15 @@ export class ArticleService {
     return this.http.get<ArticleModel[]>(url, httpOptions);
   }
 
-  getArticle(id: number): Observable<ArticleModel> {
-    const url = baseURL + 'article?id=' + id;
+  getArticle(id?: number, name?: string): Observable<ArticleModel> {
+    let url = baseURL + 'article?';
+    if (id !== undefined) {
+      url += 'id=' + id;
+    } else if (name !== undefined) {
+      url += 'name=' + name;
+    } else {
+      throw new Error('Provide one parameter.');
+    }
     return this.http.get<ArticleModel>(url, httpOptions);
   }
 

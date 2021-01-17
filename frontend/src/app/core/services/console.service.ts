@@ -18,8 +18,11 @@ export class ConsoleService {
   constructor(private http: HttpClient) {
   }
 
-  getConsoles(): Observable<ConsoleModel[]> {
-    const url = baseURL + 'consoles';
+  getConsoles(pertainingArticle: number): Observable<ConsoleModel[]> {
+    let url = baseURL + 'consoles?';
+    if (pertainingArticle !== undefined) {
+      url += 'pertaining_article=' + pertainingArticle;
+    }
     return this.http.get<ConsoleModel[]>(url, httpOptions);
   }
 

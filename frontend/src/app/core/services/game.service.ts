@@ -18,8 +18,11 @@ export class GameService {
   constructor(private http: HttpClient) {
   }
 
-  getGames(): Observable<GameModel[]> {
-    const url = baseURL + 'games';
+  getGames(pertainingArticle?: number): Observable<GameModel[]> {
+    let url = baseURL + 'games?';
+    if (pertainingArticle !== undefined) {
+      url += 'pertaining_article=' + pertainingArticle;
+    }
     return this.http.get<GameModel[]>(url, httpOptions);
   }
 

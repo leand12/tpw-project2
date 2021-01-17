@@ -1,8 +1,8 @@
 <div [ngSwitch]="active[0]">
   <app-game-form *ngSwitchCase="State.CREATE_GAME" [(state)]="active"></app-game-form>
   <app-console-form *ngSwitchCase="State.CREATE_CONSOLE" [(state)]="active"></app-console-form>
-  <app-game-form *ngSwitchCase="State.CREATE_GAME" [articleId]="active[1]" [(state)]="active"></app-game-form>
-  <app-console-form *ngSwitchCase="State.CREATE_CONSOLE" [articleId]="active[1]" [(state)]="active"></app-console-form>
+  <app-game-form *ngSwitchCase="State.EDIT_GAME" [articleId]="active[1]" [(state)]="active"></app-game-form>
+  <app-console-form *ngSwitchCase="State.EDIT_CONSOLE" [articleId]="active[1]" [(state)]="active"></app-console-form>
   <div *ngSwitchDefault>
 
     <h4 class="mb-0"><span class="text-main-1" style="padding-left: 0.95em">&nbsp;Step #1</span></h4>
@@ -12,17 +12,17 @@
         <div class="col-sm-2 col-form-label">Items</div>
         <div class="col-sm-10">
           <ul class="list-group">
-              <li class="list-group-item" *ngIf="(games && games.length > 0) || (consoles && consoles.length > 0)">
+              <li class="list-group-item" *ngIf="(!games || games.length == 0) && (!consoles || consoles.length == 0)">
                 Add an item...
               </li>
               <li class="list-group-item" *ngFor="let g of games">
-                {{ g }}
+                {{ g.name }}
                 <button type="button" class="btn btn-secondary mt-2" (click)="active = [State.EDIT_GAME, g.id]">
                   Edit Game</button>&nbsp;
                 <button type="submit" class="btn btn-secondary mt-2" name="del" value="{{g.id}}">Delete Game</button>
               </li>
               <li class="list-group-item" *ngFor="let c of consoles">
-                {{ c }}
+                {{ c.name }}
                 <button type="button" class="btn btn-secondary mt-2" (click)="active = [State.EDIT_CONSOLE, c.id]">
                   Edit Console</button>&nbsp;
                 <button type="submit" class="btn btn-secondary mt-2" name="del" value="{{c.id}}">Delete Console</button>
