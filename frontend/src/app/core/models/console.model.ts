@@ -1,8 +1,8 @@
 import { ItemModel } from './item.model';
 
 export class ConsoleModel extends ItemModel {
-  releaseYear: number;
+  release_year: number;
   brand: string;
-  storageCapacity: string;
+  storage_capacity: string;
   color: string;
 }

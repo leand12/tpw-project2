@@ -1,5 +1,3 @@
-import { TagModel } from './tag.model';
-import { UserModel } from './user.model';
 import {ItemModel} from '@core/models/item.model';
 
 export class ArticleModel {

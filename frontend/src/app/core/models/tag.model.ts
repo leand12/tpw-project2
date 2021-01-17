@@ -1,4 +1,4 @@
 export class TagModel {
   name: string;
-  isPopular: boolean;
+  is_popular: boolean;
 }

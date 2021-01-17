@@ -1,7 +1,7 @@
 import { ItemModel } from './item.model';
 
 export class GameModel extends ItemModel {
-  releaseYear: number;
+  release_year: number;
   publisher: string;
   genre: string;
   rating: string;

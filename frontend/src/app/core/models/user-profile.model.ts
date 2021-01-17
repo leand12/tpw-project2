@@ -1,7 +1,5 @@
-import { UserModel } from './user.model';
-
 export class UserProfileModel {
-  user: UserModel;
+  user: number;
   biography: string;
   avatar: string;
 }
