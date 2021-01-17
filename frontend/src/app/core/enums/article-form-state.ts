@@ -1,0 +1,7 @@
+export enum State {
+  NONE,
+  CREATE_GAME,
+  EDIT_GAME,
+  CREATE_CONSOLE,
+  EDIT_CONSOLE,
+};
