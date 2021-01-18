@@ -10,11 +10,12 @@ import {GameService} from '@core/services/game.service';
   providers: [GameService]
 })
 export class GameFormComponent implements OnInit {
-  @Input() articleId?: number;
+  @Input() articleId: number;
   @Input() gameId?: any;
   @Input() state: number;
   @Output() stateChange = new EventEmitter<number>();
   gameForm: FormGroup;
+  error: any;
   objectKeys = Object.keys;
   conditions = conditionChoices;
   platforms = platformChoices;
@@ -41,11 +42,25 @@ export class GameFormComponent implements OnInit {
       rating: new FormControl(game?.rating),
       image: new FormControl(game?.image),
       price: new FormControl(game?.price),
-    })
+    });
   }
 
   submit(): void {
-    this.stateChange.emit(0);
+    const game = this.gameForm.value;
+    game.pertaining_article = this.articleId;
+    if (this.gameId) {
+      this.gameService.updateGame(game).subscribe(
+        () => this.stateChange.emit(0),
+        error => {
+          this.error = error;
+        });
+    } else {
+      this.gameService.createGame(game).subscribe(
+        () => this.stateChange.emit(0),
+        error => {
+          this.error = error;
+        });
+    }
   }
 
 }

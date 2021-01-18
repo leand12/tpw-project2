@@ -1,4 +1,4 @@
-export class TagModel {
+export interface TagModel {
   name: string;
-  is_popular: boolean;
+  is_popular?: boolean;
 }

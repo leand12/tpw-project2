@@ -1,12 +1,12 @@
 import {UserModel} from '@core/models/user.model';
 
-export class UserProfileModel {
+export interface UserProfileModel {
   user: number;
-  biography: string;
-  avatar: string;
+  biography?: string;
+  avatar?: string;
 }
 
-export class UserProfileReadModel {
+export interface UserProfileReadModel {
   user: UserModel;
   biography: string;
   avatar: string;

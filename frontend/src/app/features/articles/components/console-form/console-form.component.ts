@@ -10,7 +10,7 @@ import {conditionChoices} from '@core/constants/choices';
   providers: [ConsoleService]
 })
 export class ConsoleFormComponent implements OnInit {
-  @Input() articleId?: number;
+  @Input() articleId: number;
   @Input() consoleId?: any;
   @Input() state: number;
   @Output() stateChange = new EventEmitter<number>();

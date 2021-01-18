@@ -1,15 +1,15 @@
 import {UserModel} from '@core/models/user.model';
 
-export class ReviewModel {
-  id: number;
+export interface ReviewModel {
+  id?: number;
   rate: number;
-  description: string;
-  date_posted: string;
-  reviewer: number;
+  description?: string;
+  date_posted?: string;
+  reviewer?: number;
   reviewed: number;
 }
 
-export class ReviewReadModel {
+export interface ReviewReadModel {
   id: number;
   rate: number;
   description: string;

@@ -23,7 +23,11 @@ export class ArticleForm1Component implements OnInit {
   constructor(private gameService: GameService, private consoleService: ConsoleService) { }
 
   ngOnInit(): void {
-    this.active = [State.NONE, undefined];
+    this.changeState(State.NONE);
+  }
+
+  changeState(state: number): void {
+    this.active = [state, undefined];
     this.totalPrice = 0;
     this.getGames(this.article.id);
     this.getConsoles(this.article.id);

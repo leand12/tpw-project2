@@ -38,11 +38,11 @@ export class CreateComponent implements OnInit {
   }
 
   createTempArticle(): void {
-      const a = new ArticleModel();
-      a.name = this.userId;
-      a.seller = parseInt(this.userId, 10);
-      a.items_in_article = [];
-      this.articleService.createArticle(a).subscribe(
+      this.articleService.createArticle({
+        name: this.userId,
+        seller: parseInt(this.userId, 10),
+        items_in_article: []
+      }).subscribe(
         (article) => {
           this.article = article;
         }
