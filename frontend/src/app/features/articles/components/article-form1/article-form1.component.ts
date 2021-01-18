@@ -8,7 +8,7 @@ import {ConsoleService} from '@core/services/console.service';
   selector: 'app-article-form1',
   templateUrl: './article-form1.component.html',
   styleUrls: ['./article-form1.component.css'],
-  providers: [GameService, GameService]
+  providers: [GameService, ConsoleService]
 })
 export class ArticleForm1Component implements OnInit {
   @Input() article: any;
