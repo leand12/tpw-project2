@@ -12,8 +12,7 @@ import {GameService} from '@core/services/game.service';
 export class GameFormComponent implements OnInit {
   @Input() articleId: number;
   @Input() gameId?: any;
-  @Input() state: number;
-  @Output() stateChange = new EventEmitter<number>();
+  @Output() stateChange = new EventEmitter();
   gameForm: FormGroup;
   error: any;
   objectKeys = Object.keys;

@@ -12,7 +12,6 @@ import {conditionChoices} from '@core/constants/choices';
 export class ConsoleFormComponent implements OnInit {
   @Input() articleId: number;
   @Input() consoleId?: any;
-  @Input() state: number;
   @Output() stateChange = new EventEmitter<number>();
   consoleForm: FormGroup;
   objectKeys = Object.keys;

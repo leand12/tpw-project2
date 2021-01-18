@@ -1,11 +1,11 @@
 <div [ngSwitch]="active[0]">
-  <app-game-form *ngSwitchCase="State.CREATE_GAME" [articleId]="article.id" [(state)]="active">
+  <app-game-form *ngSwitchCase="State.CREATE_GAME" [articleId]="article.id" (stateChange)="handleState($event)">
   </app-game-form>
-  <app-console-form *ngSwitchCase="State.CREATE_CONSOLE" [articleId]="article.id" [(state)]="active">
+  <app-console-form *ngSwitchCase="State.CREATE_CONSOLE" [articleId]="article.id" (stateChange)="handleState($event)">
   </app-console-form>
-  <app-game-form *ngSwitchCase="State.EDIT_GAME" [articleId]="article.id" [gameId]="active[1]" [(state)]="active">
+  <app-game-form *ngSwitchCase="State.EDIT_GAME" [articleId]="article.id" [gameId]="active[1]" (stateChange)="handleState($event)">
   </app-game-form>
-  <app-console-form *ngSwitchCase="State.EDIT_CONSOLE" [articleId]="article.id" [consoleId]="active[1]" [(state)]="active">
+  <app-console-form *ngSwitchCase="State.EDIT_CONSOLE" [articleId]="article.id" [consoleId]="active[1]" (stateChange)="handleState($event)">
   </app-console-form>
   <div *ngSwitchDefault>
 

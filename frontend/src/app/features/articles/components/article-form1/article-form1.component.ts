@@ -3,6 +3,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {State} from '@core/enums/article-form-state';
 import {GameService} from '@core/services/game.service';
 import {ConsoleService} from '@core/services/console.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-article-form1',
@@ -19,28 +20,35 @@ export class ArticleForm1Component implements OnInit {
   games: any[];
   consoles: any[];
   totalPrice: number;
+  gameSubscription: Subscription;
+  consoleSubscription: Subscription;
 
   constructor(private gameService: GameService, private consoleService: ConsoleService) { }
 
   ngOnInit(): void {
-    this.changeState(State.NONE);
+    this.handleState(State.NONE);
   }
 
-  changeState(state: number): void {
-    this.active = [state, undefined];
+  handleState(event: number): void {
+    console.log('yup');
+    // if (this.gameSubscription) {this.gameSubscription.unsubscribe(); }
+    // if (this.consoleSubscription) {this.consoleSubscription.unsubscribe(); }
+
+    this.active = [event, undefined];
     this.totalPrice = 0;
     this.getGames(this.article.id);
     this.getConsoles(this.article.id);
+    console.log('damn');
   }
 
   getGames(articleId: number): void {
-    this.gameService.getGames(articleId).subscribe(
-      (games) => this.games = games,
+    this.gameSubscription = this.gameService.getGames(articleId).subscribe(
+      (games) => {this.games = games; console.log(games); },
     );
   }
 
   getConsoles(articleId: number): void {
-    this.consoleService.getConsoles(articleId).subscribe(
+    this.consoleSubscription = this.consoleService.getConsoles(articleId).subscribe(
       (consoles) => this.consoles = consoles,
     );
   }
