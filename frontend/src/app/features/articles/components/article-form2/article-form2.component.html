@@ -1,0 +1,75 @@
+<h4 class="mb-0"><span class="text-main-1" style="padding-left: 0.95em">&nbsp;Step #2</span></h4>
+<div class="nk-gap-2"></div>
+<form>
+<!--  <div class="form-group row">-->
+<!--    {{ form.name.label_tag }}-->
+<!--    <div class="col-sm-10">-->
+<!--      {{ form.name }}-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div class="form-group row">-->
+<!--    <div class="col-sm-2 col-form-label">Items</div>-->
+<!--    <div class="col-sm-10">-->
+<!--      <ul class="list-group">-->
+<!--        {% ifequal items.count 0 %}-->
+<!--        <li class="list-group-item">Add an item...</li>-->
+<!--        {% else %}-->
+<!--        {% for item in items %}-->
+<!--        <li class="list-group-item">-->
+<!--          {{ item }}-->
+<!--        </li>-->
+<!--        {% endfor %}-->
+<!--        {% endifequal %}-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div class="form-group row">-->
+<!--    {{ form.description.label_tag }}-->
+<!--    <div class="col-sm-10">-->
+<!--      {{ form.description }}-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div class="form-group row">-->
+<!--    {{ form.ShippingTime.label_tag }}-->
+<!--    <div class="col-sm-10">-->
+<!--      {{ form.ShippingTime }}-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div class="form-group row">-->
+<!--    {{ form.ShippingFee.label_tag }}-->
+<!--    <div class="col-sm-10">-->
+<!--      {{ form.ShippingFee }}-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div class="form-group row">-->
+<!--    {{ form.tag.label_tag }}-->
+<!--    <div class="col-sm-10">-->
+<!--      {{ form.tag }}-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div class="form-group row">-->
+<!--    <label for="inputCost" class="col-sm-2 col-form-label">Cost</label>-->
+<!--    <div class="col-sm-10">-->
+<!--      <input type="number" class="form-control" id="inputCost" placeholder="{{ price }}" readonly>-->
+<!--    </div>-->
+<!--  </div>-->
+
+  <div class="nk-gap-1"></div>
+
+  <div class="form-group row">
+    <div class="offset-sm-7 col-sm-3 text-center">
+      <button class="nk-btn nk-btn-color-dark-3" (click)="stepChange.emit(!step)">Previous Step</button>
+    </div>
+    <div class="col-sm-2 text-center">
+      <button type="submit" class="nk-btn nk-btn-color-main-1">Sell Article</button>
+    </div>
+  </div>
+
+
+</form>

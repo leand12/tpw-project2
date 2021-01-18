@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 
-import {baseURL} from '@core/constants/consts';
+import {baseURL} from '@core/constants/url';
 import {ConsoleModel} from '@core/models/console.model';
 
 const httpOptions = {
@@ -18,8 +18,11 @@ export class ConsoleService {
   constructor(private http: HttpClient) {
   }
 
-  getConsoles(): Observable<ConsoleModel[]> {
-    const url = baseURL + 'consoles';
+  getConsoles(pertainingArticle: number): Observable<ConsoleModel[]> {
+    let url = baseURL + 'consoles?';
+    if (pertainingArticle !== undefined) {
+      url += 'pertaining_article=' + pertainingArticle;
+    }
     return this.http.get<ConsoleModel[]>(url, httpOptions);
   }
 
