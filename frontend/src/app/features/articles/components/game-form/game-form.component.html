@@ -4,74 +4,72 @@
 <!-- action="." method="post" enctype="multipart/form-data"-->
 <form [formGroup]="gameForm"  (ngSubmit)="submit()">
   <div class="form-group row">
-    <label for="name">name:</label>
+    <label class="col-sm-2" for="name">Name:</label>
     <div class="col-sm-10">
-      <input id="name" type="text" formControlName="name">
-<!--      {{ form.name }}-->
+      <input id="name" type="text" formControlName="name" class="form-control">
     </div>
   </div>
 
   <div class="form-group row">
-    <label for="publisher">publisher:</label>
+    <label class="col-sm-2" for="publisher">Publisher:</label>
     <div class="col-sm-10">
-      <input id="publisher" type="text" formControlName="publisher">
-<!--      {{ form.publisher }}-->
+      <input id="publisher" type="text" formControlName="publisher" class="form-control">
     </div>
   </div>
 
   <div class="form-group row">
-    <label for="release_year">release_year:</label>
+    <label class="col-sm-2" for="release_year">Release Year:</label>
     <div class="col-sm-10">
-      <input id="release_year" type="text" formControlName="release_year">
-<!--      {{ form.release_year }}-->
+      <input id="release_year" type="number" formControlName="release_year" class="form-control" max="2050" step="1">
     </div>
   </div>
 
   <div class="form-group row">
-    <label for="genre">genre:</label>
+    <label class="col-sm-2" for="genre">Genre:</label>
     <div class="col-sm-10">
-      <input id="genre" type="text" formControlName="genre">
-<!--      {{ form.genre }}-->
+      <input id="genre" type="text" formControlName="genre" class="form-control">
     </div>
   </div>
 
   <div class="form-group row">
-    <label for="condition">condition:</label>
+    <label class="col-sm-2" for="condition">Condition:</label>
     <div class="col-sm-10">
-      <input id="condition" type="text" formControlName="condition">
-<!--      {{ form.condition }}-->
+      <select id="condition" formControlName="condition" class="form-control">
+        <option *ngFor="let c of objectKeys(conditions)" [value]="c">{{ conditions[c] }}</option>
+      </select>
     </div>
   </div>
 
   <div class="form-group row">
-    <label for="platform">platform:</label>
+    <label class="col-sm-2" for="platform">Platform:</label>
     <div class="col-sm-10">
-      <input id="platform" type="text" formControlName="platform">
-<!--      {{ form.platform }}-->
+      <select id="platform" formControlName="condition" class="form-control">
+        <option *ngFor="let c of objectKeys(platforms)" [value]="c">{{ platforms[c] }}</option>
+      </select>
     </div>
   </div>
 
   <div class="form-group row">
-    <label for="rating">rating:</label>
+    <label class="col-sm-2" for="rating">Rating:</label>
     <div class="col-sm-10">
-      <input id="rating" type="text" formControlName="rating">
-<!--      {{ form.rating }}-->
+      <select id="rating" formControlName="condition" class="form-control">
+        <option *ngFor="let c of objectKeys(ratings)" [value]="c">{{ ratings[c] }}</option>
+      </select>
     </div>
   </div>
 
   <div class="form-group row">
-    <label for="image">image:</label>
+    <label class="col-sm-2" for="image">Image:</label>
     <div class="col-sm-10">
-      <input id="image" type="text" formControlName="image">
-<!--      {{ form.image }}-->
+      <!-- TODO: add accept="image/*" if necessary -->
+      <input id="image" type="file" formControlName="image" class="form-control">
     </div>
   </div>
 
   <div class="form-group row">
-    <label for="price">price:</label>
+    <label class="col-sm-2" for="price">Price:</label>
     <div class="col-sm-10">
-      <input id="price" type="text" formControlName="price">
-<!--      {{ form.price }}-->
+      <input id="price" type="number" formControlName="price" class="form-control" max="1000000000000" step="1">
     </div>
   </div>
 

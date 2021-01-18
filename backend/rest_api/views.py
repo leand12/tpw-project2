@@ -31,7 +31,6 @@ def get_tags(request):
 
 @api_view(['GET'])
 def get_article(request):
-    print(request.GET)
     try:
         if 'id' in request.GET:
             id = int(request.GET['id'])
@@ -234,6 +233,7 @@ def create_game(request):
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    print(serializer.errors)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 

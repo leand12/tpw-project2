@@ -13,6 +13,7 @@ import { ArticlesWidgetChildComponent } from './components/articles-widget-child
 import { ArrayLengthPipe } from './pipes/array-length.pipe';
 import { ReviewCommentComponent } from './components/review-comment/review-comment.component';
 import { IsGamePipe } from './pipes/is-game.pipe';
+import { MapToArrayPipe } from './pipes/map-to-array.pipe';
 
 /*
 * Contains all the commonly used directives, pipes, and components.
@@ -40,6 +41,8 @@ import { IsGamePipe } from './pipes/is-game.pipe';
     ReviewCommentComponent,
 
     IsGamePipe,
+
+    MapToArrayPipe,
   ],
     exports: [
         CommonModule,
@@ -54,6 +57,7 @@ import { IsGamePipe } from './pipes/is-game.pipe';
 
         ArrayLengthPipe,
         ReviewCommentComponent,
+        MapToArrayPipe,
     ]
 })
 export class SharedModule { }

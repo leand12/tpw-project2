@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
+import {conditionChoices, platformChoices, ratingChoices} from '@core/constants/choices';
 
 @Component({
   selector: 'app-game-form',
@@ -12,6 +13,10 @@ export class GameFormComponent implements OnInit {
   @Input() state: number;
   @Output() stateChange = new EventEmitter<number>();
   gameForm: FormGroup;
+  objectKeys = Object.keys;
+  conditions = conditionChoices;
+  platforms = platformChoices;
+  ratings = ratingChoices;
 
   constructor() { }
 
