@@ -1,15 +1,17 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {conditionChoices, platformChoices, ratingChoices} from '@core/constants/choices';
+import {GameService} from '@core/services/game.service';
 
 @Component({
   selector: 'app-game-form',
   templateUrl: './game-form.component.html',
-  styleUrls: ['./game-form.component.css']
+  styleUrls: ['./game-form.component.css'],
+  providers: [GameService]
 })
 export class GameFormComponent implements OnInit {
   @Input() articleId?: number;
-  @Input() game?: any;
+  @Input() gameId?: any;
   @Input() state: number;
   @Output() stateChange = new EventEmitter<number>();
   gameForm: FormGroup;
@@ -18,20 +20,28 @@ export class GameFormComponent implements OnInit {
   platforms = platformChoices;
   ratings = ratingChoices;
 
-  constructor() { }
+  constructor(private gameService: GameService) { }
 
   ngOnInit(): void {
+    if (this.gameId) {
+      this.gameService.getGame(this.gameId).subscribe((game) => this.initForm(game));
+    } else {
+      this.initForm();
+    }
+  }
+
+  initForm(game?: any): void {
     this.gameForm = new FormGroup({
-      name: new FormControl(undefined),
-      publisher: new FormControl(),
-      release_year: new FormControl(),
-      genre: new FormControl(),
-      condition: new FormControl(),
-      platform: new FormControl(),
-      rating: new FormControl(),
-      image: new FormControl(),
-      price: new FormControl(),
-    });
+      name: new FormControl(game?.name),
+      publisher: new FormControl(game?.publisher),
+      release_year: new FormControl(game?.release_year),
+      genre: new FormControl(game?.genre),
+      condition: new FormControl(game?.condition),
+      platform: new FormControl(game?.platform),
+      rating: new FormControl(game?.rating),
+      image: new FormControl(game?.image),
+      price: new FormControl(game?.price),
+    })
   }
 
   submit(): void {

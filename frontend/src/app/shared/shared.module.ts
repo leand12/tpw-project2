@@ -13,7 +13,6 @@ import { ArticlesWidgetChildComponent } from './components/articles-widget-child
 import { ArrayLengthPipe } from './pipes/array-length.pipe';
 import { ReviewCommentComponent } from './components/review-comment/review-comment.component';
 import { IsGamePipe } from './pipes/is-game.pipe';
-import { MapToArrayPipe } from './pipes/map-to-array.pipe';
 
 /*
 * Contains all the commonly used directives, pipes, and components.
@@ -35,14 +34,10 @@ import { MapToArrayPipe } from './pipes/map-to-array.pipe';
     ViewGamesFilterComponent,
     ArticlesWidgetComponent,
     ArticlesWidgetChildComponent,
-
-    ArrayLengthPipe,
-
     ReviewCommentComponent,
 
+    ArrayLengthPipe,
     IsGamePipe,
-
-    MapToArrayPipe,
   ],
     exports: [
         CommonModule,
@@ -54,10 +49,10 @@ import { MapToArrayPipe } from './pipes/map-to-array.pipe';
         ErrorBoxComponent,
         ViewGamesFilterComponent,
         ArticlesWidgetComponent,
+        ReviewCommentComponent,
 
         ArrayLengthPipe,
-        ReviewCommentComponent,
-        MapToArrayPipe,
+        IsGamePipe,
     ]
 })
 export class SharedModule { }

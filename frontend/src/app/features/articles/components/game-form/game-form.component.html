@@ -2,38 +2,38 @@
 <div class="nk-gap-2"></div>
 
 <!-- action="." method="post" enctype="multipart/form-data"-->
-<form [formGroup]="gameForm"  (ngSubmit)="submit()">
+<form [formGroup]="gameForm" (ngSubmit)="submit()">
   <div class="form-group row">
-    <label class="col-sm-2" for="name">Name:</label>
-    <div class="col-sm-10">
+    <label class="col-lg-2" for="name">Name:</label>
+    <div class="col-lg-10">
       <input id="name" type="text" formControlName="name" class="form-control">
     </div>
   </div>
 
   <div class="form-group row">
-    <label class="col-sm-2" for="publisher">Publisher:</label>
-    <div class="col-sm-10">
+    <label class="col-lg-2" for="publisher">Publisher:</label>
+    <div class="col-lg-10">
       <input id="publisher" type="text" formControlName="publisher" class="form-control">
     </div>
   </div>
 
   <div class="form-group row">
-    <label class="col-sm-2" for="release_year">Release Year:</label>
-    <div class="col-sm-10">
+    <label class="col-lg-2" for="release_year">Release Year:</label>
+    <div class="col-lg-10">
       <input id="release_year" type="number" formControlName="release_year" class="form-control" max="2050" step="1">
     </div>
   </div>
 
   <div class="form-group row">
-    <label class="col-sm-2" for="genre">Genre:</label>
-    <div class="col-sm-10">
+    <label class="col-lg-2" for="genre">Genre:</label>
+    <div class="col-lg-10">
       <input id="genre" type="text" formControlName="genre" class="form-control">
     </div>
   </div>
 
   <div class="form-group row">
-    <label class="col-sm-2" for="condition">Condition:</label>
-    <div class="col-sm-10">
+    <label class="col-lg-2" for="condition">Condition:</label>
+    <div class="col-lg-10">
       <select id="condition" formControlName="condition" class="form-control">
         <option *ngFor="let c of objectKeys(conditions)" [value]="c">{{ conditions[c] }}</option>
       </select>
@@ -41,41 +41,43 @@
   </div>
 
   <div class="form-group row">
-    <label class="col-sm-2" for="platform">Platform:</label>
-    <div class="col-sm-10">
-      <select id="platform" formControlName="condition" class="form-control">
+    <label class="col-lg-2" for="platform">Platform:</label>
+    <div class="col-lg-10">
+      <select id="platform" formControlName="platform" class="form-control">
         <option *ngFor="let c of objectKeys(platforms)" [value]="c">{{ platforms[c] }}</option>
       </select>
     </div>
   </div>
 
   <div class="form-group row">
-    <label class="col-sm-2" for="rating">Rating:</label>
-    <div class="col-sm-10">
-      <select id="rating" formControlName="condition" class="form-control">
+    <label class="col-lg-2" for="rating">Rating:</label>
+    <div class="col-lg-10">
+      <select id="rating" formControlName="rating" class="form-control">
         <option *ngFor="let c of objectKeys(ratings)" [value]="c">{{ ratings[c] }}</option>
       </select>
     </div>
   </div>
 
   <div class="form-group row">
-    <label class="col-sm-2" for="image">Image:</label>
-    <div class="col-sm-10">
+    <label class="col-lg-2" for="image">Image:</label>
+    <div class="col-lg-10">
       <!-- TODO: add accept="image/*" if necessary -->
       <input id="image" type="file" formControlName="image" class="form-control">
     </div>
   </div>
 
   <div class="form-group row">
-    <label class="col-sm-2" for="price">Price:</label>
-    <div class="col-sm-10">
+    <label class="col-lg-2" for="price">Price:</label>
+    <div class="col-lg-10">
       <input id="price" type="number" formControlName="price" class="form-control" max="1000000000000" step="1">
     </div>
   </div>
 
+  <div class="nk-gap-1"></div>
+
   <div class="form-group row">
-    <div class="col-sm-10">
-      <button type="submit" class="btn btn-primary">Confirm Game</button>
+    <div class="offset-lg-9 col-lg-3 text-center">
+      <button type="submit" class="nk-btn nk-btn-color-main-1">Confirm Game</button>
     </div>
   </div>
 
