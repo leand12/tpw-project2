@@ -48,17 +48,16 @@ export class GameFormComponent implements OnInit {
     const game = this.gameForm.value;
     game.pertaining_article = this.articleId;
     if (this.gameId) {
+      game.id = this.gameId;
       this.gameService.updateGame(game).subscribe(
         () => this.stateChange.emit(0),
-        error => {
-          this.error = error;
-        });
+        error => this.error = error
+      );
     } else {
       this.gameService.createGame(game).subscribe(
         () => this.stateChange.emit(0),
-        error => {
-          this.error = error;
-        });
+        error => this.error = error
+        );
     }
   }
 

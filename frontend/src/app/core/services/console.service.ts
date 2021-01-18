@@ -19,7 +19,7 @@ export class ConsoleService {
   }
 
   getConsoles(pertainingArticle: number): Observable<ConsoleModel[]> {
-    let url = baseURL + 'consoles?';
+    let url = baseURL + 'consoles/?';
     if (pertainingArticle !== undefined) {
       url += 'pertaining_article=' + pertainingArticle;
     }
@@ -27,7 +27,7 @@ export class ConsoleService {
   }
 
   getConsole(id: number): Observable<ConsoleModel> {
-    const url = baseURL + 'console?id=' + id;
+    const url = baseURL + 'console/?id=' + id;
     return this.http.get<ConsoleModel>(url, httpOptions);
   }
 
@@ -37,7 +37,7 @@ export class ConsoleService {
   }
 
   updateConsole(console: ConsoleModel): Observable<any> {
-    const url = baseURL + 'update/console?id=' + console.id;
+    const url = baseURL + 'update/console/?id=' + console.id;
     return this.http.put(url, console, httpOptions);
   }
 

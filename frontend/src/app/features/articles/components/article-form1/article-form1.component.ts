@@ -29,18 +29,18 @@ export class ArticleForm1Component implements OnInit {
   handleState(event: number): void {
     this.active = [event, undefined];
     this.totalPrice = 0; // TODO: change this
-    this.getGames(this.article.id);
-    this.getConsoles(this.article.id);
+    this.getGames();
+    this.getConsoles();
   }
 
-  getGames(articleId: number): void {
-    this.gameService.getGames(articleId).subscribe(
-      (games) => {this.games = games; console.log(games); },
+  getGames(): void {
+    this.gameService.getGames(this.article.id).subscribe(
+      (games) => this.games = games,
     );
   }
 
-  getConsoles(articleId: number): void {
-    this.consoleService.getConsoles(articleId).subscribe(
+  getConsoles(): void {
+    this.consoleService.getConsoles(this.article.id).subscribe(
       (consoles) => this.consoles = consoles,
     );
   }

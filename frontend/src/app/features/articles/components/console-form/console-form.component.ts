@@ -12,8 +12,9 @@ import {conditionChoices} from '@core/constants/choices';
 export class ConsoleFormComponent implements OnInit {
   @Input() articleId: number;
   @Input() consoleId?: any;
-  @Output() stateChange = new EventEmitter<number>();
+  @Output() stateChange = new EventEmitter();
   consoleForm: FormGroup;
+  error: any;
   objectKeys = Object.keys;
   conditions = conditionChoices;
 
@@ -41,6 +42,19 @@ export class ConsoleFormComponent implements OnInit {
   }
 
   submit(): void {
-    this.stateChange.emit(0);
+    const console = this.consoleForm.value;
+    console.pertaining_article = this.articleId;
+    if (this.consoleId) {
+      console.id = this.consoleId;
+      this.consoleService.updateConsole(console).subscribe(
+        () => this.stateChange.emit(0),
+        error => this.error = error
+        );
+    } else {
+      this.consoleService.createConsole(console).subscribe(
+        () => this.stateChange.emit(0),
+        error => this.error = error
+        );
+    }
   }
 }

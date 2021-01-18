@@ -17,12 +17,12 @@ export class ReviewService {
   constructor(private http: HttpClient) { }
 
   getReviews(): Observable<ReviewModel[]> {
-    const url = baseURL + 'reviews';
+    const url = baseURL + 'reviews/';
     return this.http.get<ReviewModel[]>(url, httpOptions);
   }
 
   getReviewsFiltered(num?, rate?, reviewer?, reviewed?): Observable<ReviewReadModel[]> {
-    let url: string = baseURL + 'reviews?';
+    let url: string = baseURL + 'reviews/?';
 
     if (num !== undefined)
     {
@@ -48,7 +48,7 @@ export class ReviewService {
   }
 
   getReview(id: number): Observable<ReviewReadModel> {
-    const url = baseURL + 'review?id=' + id;
+    const url = baseURL + 'review/?id=' + id;
     return this.http.get<ReviewReadModel>(url, httpOptions);
   }
 

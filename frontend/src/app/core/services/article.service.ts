@@ -16,13 +16,13 @@ export class ArticleService {
   constructor(private http: HttpClient) { }
 
   getArticles(): Observable<ArticleModel[]> {
-    const url = baseURL + 'articles';
+    const url = baseURL + 'articles/';
     return this.http.get<ArticleModel[]>(url, httpOptions);
   }
 
   // tslint:disable-next-line:max-line-length
   getArticlesFiltered(num?, maxPrice?, minPrice?, isSold?, seller?, buyer?, tags?: string[], name?, shopCart?, saved?, timesViewed?): Observable<ArticleReadModel[]> {
-    let url: string = baseURL + 'articles?';
+    let url: string = baseURL + 'articles/?';
 
     if (num !== undefined)
     {
@@ -87,7 +87,7 @@ export class ArticleService {
   }
 
   getArticle(id?: number, name?: string): Observable<ArticleReadModel> {
-    let url = baseURL + 'article?';
+    let url = baseURL + 'article/?';
     if (id !== undefined) {
       url += 'id=' + id;
     } else if (name !== undefined) {
@@ -104,7 +104,7 @@ export class ArticleService {
   }
 
   updateArticle(art: ArticleModel): Observable<any> {
-    const url = baseURL + 'update/article?id=' + art.id;
+    const url = baseURL + 'update/article/?id=' + art.id;
     return this.http.put(url, art, httpOptions);
   }
 
