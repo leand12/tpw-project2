@@ -197,6 +197,8 @@ def get_item(request):
 @api_view(['GET'])
 def get_items(request):
     items = Item.objects.all()
+    if 'pertaining_article' in request.GET:
+        items = items.filter(pertaining_article=request.GET['pertaining_article'])
     if 'num' in request.GET:
         num = int(request.GET['num'])
         items = items[:num]

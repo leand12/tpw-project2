@@ -1,75 +1,90 @@
 <h4 class="mb-0"><span class="text-main-1" style="padding-left: 0.95em">&nbsp;Step #2</span></h4>
 <div class="nk-gap-2"></div>
-<form>
-<!--  <div class="form-group row">-->
-<!--    {{ form.name.label_tag }}-->
-<!--    <div class="col-sm-10">-->
-<!--      {{ form.name }}-->
-<!--    </div>-->
-<!--  </div>-->
+<form *ngIf="articleForm" [formGroup]="articleForm" (ngSubmit)="submit()">
+  <div class="form-group row">
+    <label for="name" class="col-lg-2 col-form-label">Name:</label>
+    <div class="col-lg-10">
+      <input id="name" type="text" formControlName="name" class="form-control">
+      <div *ngFor="let e of error?.error.name">
+        <a href="#" class="error">{{ e }}</a>
+      </div>
+    </div>
+  </div>
 
-<!--  <div class="form-group row">-->
-<!--    <div class="col-sm-2 col-form-label">Items</div>-->
-<!--    <div class="col-sm-10">-->
-<!--      <ul class="list-group">-->
-<!--        {% ifequal items.count 0 %}-->
-<!--        <li class="list-group-item">Add an item...</li>-->
-<!--        {% else %}-->
-<!--        {% for item in items %}-->
-<!--        <li class="list-group-item">-->
-<!--          {{ item }}-->
-<!--        </li>-->
-<!--        {% endfor %}-->
-<!--        {% endifequal %}-->
-<!--      </ul>-->
-<!--    </div>-->
-<!--  </div>-->
+  <div class="form-group row">
+    <label for="items" class="col-lg-2 col-form-label">Items:</label>
+    <div class="col-lg-10">
+      <ul id="items" class="list-group">
+        <li class="list-group-item" *ngIf="!items || items.length == 0">
+          Add an item...
+        </li>
+        <li class="list-group-item" *ngFor="let i of items">
+          {{ i?.name }}
+        </li>
+      </ul>
+    </div>
+  </div>
 
-<!--  <div class="form-group row">-->
-<!--    {{ form.description.label_tag }}-->
-<!--    <div class="col-sm-10">-->
-<!--      {{ form.description }}-->
-<!--    </div>-->
-<!--  </div>-->
+  <div class="form-group row">
+    <label for="description" class="col-lg-2 col-form-label">Description:</label>
+    <div class="col-lg-10">
+      <input id="description" type="text" formControlName="description" class="form-control">
+      <div *ngFor="let e of error?.error.description">
+        <a href="#" class="error">{{ e }}</a>
+      </div>
+    </div>
+  </div>
 
-<!--  <div class="form-group row">-->
-<!--    {{ form.ShippingTime.label_tag }}-->
-<!--    <div class="col-sm-10">-->
-<!--      {{ form.ShippingTime }}-->
-<!--    </div>-->
-<!--  </div>-->
+  <div class="form-group row">
+    <label for="shipping_time" class="col-lg-2 col-form-label">Shipping Time:</label>
+    <div class="col-lg-10">
+      <input id="shipping_time" type="text" formControlName="shipping_time" class="form-control">
+      <div *ngFor="let e of error?.error.shipping_time">
+        <a href="#" class="error">{{ e }}</a>
+      </div>
+    </div>
+  </div>
 
-<!--  <div class="form-group row">-->
-<!--    {{ form.ShippingFee.label_tag }}-->
-<!--    <div class="col-sm-10">-->
-<!--      {{ form.ShippingFee }}-->
-<!--    </div>-->
-<!--  </div>-->
+  <div class="form-group row">
+    <label for="shipping_fee" class="col-lg-2 col-form-label">Shipping Fee:</label>
+    <div class="col-lg-10">
+      <input id="shipping_fee" type="text" formControlName="shipping_fee" class="form-control">
+      <div *ngFor="let e of error?.error.shipping_fee">
+        <a href="#" class="error">{{ e }}</a>
+      </div>
+    </div>
+  </div>
 
-<!--  <div class="form-group row">-->
-<!--    {{ form.tag.label_tag }}-->
-<!--    <div class="col-sm-10">-->
-<!--      {{ form.tag }}-->
-<!--    </div>-->
-<!--  </div>-->
+  <div class="form-group row">
+    <label for="tag" class="col-lg-2 col-form-label">Tag:</label>
+    <div class="col-lg-10">
+      <input id="tag" type="text" formControlName="tag" class="form-control">
+      <div *ngFor="let e of error?.error.tag">
+        <a href="#" class="error">{{ e }}</a>
+      </div>
+    </div>
+  </div>
 
-<!--  <div class="form-group row">-->
-<!--    <label for="inputCost" class="col-sm-2 col-form-label">Cost</label>-->
-<!--    <div class="col-sm-10">-->
-<!--      <input type="number" class="form-control" id="inputCost" placeholder="{{ price }}" readonly>-->
-<!--    </div>-->
-<!--  </div>-->
+  <div class="form-group row">
+    <label for="inputCost" class="col-lg-2 col-form-label">Cost:</label>
+    <div class="col-lg-10">
+      <input id="inputCost" type="text" class="form-control" placeholder="{{ totalPrice }}" readonly>
+    </div>
+  </div>
 
   <div class="nk-gap-1"></div>
 
   <div class="form-group row">
-    <div class="offset-sm-7 col-sm-3 text-center">
+    <div class="offset-lg-7 col-lg-3 text-center">
       <button class="nk-btn nk-btn-color-dark-3" (click)="stepChange.emit(!step)">Previous Step</button>
     </div>
-    <div class="col-sm-2 text-center">
+    <div class="col-lg-2 text-center">
       <button type="submit" class="nk-btn nk-btn-color-main-1">Sell Article</button>
     </div>
   </div>
 
+  <!-- TODO: remove debug lines -->
+  <p>{{ error?.message }}</p>
+  <p *ngIf="error">{{ error?.error | json }}</p>
 
 </form>

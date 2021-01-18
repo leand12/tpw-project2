@@ -75,7 +75,6 @@
     </div>
   </div>
 
-
   <div class="form-group row">
     <label for="price" class="col-lg-2">Price:</label>
     <div class="col-lg-10">
@@ -94,6 +93,9 @@
     </div>
   </div>
 
+  <!-- TODO: remove debug lines -->
+  <p>{{ error?.message }}</p>
+  <p *ngIf="error">{{ error?.error | json }}</p>
 
 </form>
 

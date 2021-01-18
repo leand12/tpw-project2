@@ -23,6 +23,14 @@ export class ItemService {
     return this.http.get<ItemModel[]>(url, httpOptions);
   }
 
+  getFilteredItems(pertainingArticle?: number): Observable<ItemModel[]> {
+    let url = baseURL + 'items/?';
+    if (pertainingArticle !== undefined) {
+      url += 'pertaining_article=' + pertainingArticle;
+    }
+    return this.http.get<ItemModel[]>(url, httpOptions);
+  }
+
   getItem(id: number): Observable<ItemModel> {
     const url = baseURL + 'item/?id=' + id;
     return this.http.get<ItemModel>(url, httpOptions);
