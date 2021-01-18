@@ -2,7 +2,7 @@
 <div class="nk-gap-2"></div>
 
 <!-- action="." method="post" enctype="multipart/form-data"-->
-<form [formGroup]="gameForm" (ngSubmit)="submit()">
+<form *ngIf="gameForm" [formGroup]="gameForm" (ngSubmit)="submit()">
   <div class="form-group row">
     <label class="col-lg-2" for="name">*Name:</label>
     <div class="col-lg-10">
@@ -83,7 +83,7 @@
     <label class="col-lg-2" for="image">*Image:</label>
     <div class="col-lg-10">
       <!-- TODO: add accept="image/*" if necessary -->
-      <input id="image" type="file" formControlName="image" class="form-control">
+      <input id="image" type="file" formControlName="image">
       <div *ngFor="let e of error?.error.image">
         <a href="#" class="error">{{ e }}</a>
       </div>

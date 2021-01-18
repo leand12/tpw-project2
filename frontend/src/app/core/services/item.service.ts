@@ -19,12 +19,12 @@ export class ItemService {
   }
 
   getItems(): Observable<ItemModel[]> {
-    const url = baseURL + 'items';
+    const url = baseURL + 'items/';
     return this.http.get<ItemModel[]>(url, httpOptions);
   }
 
   getItem(id: number): Observable<ItemModel> {
-    const url = baseURL + 'item?id=' + id;
+    const url = baseURL + 'item/?id=' + id;
     return this.http.get<ItemModel>(url, httpOptions);
   }
 }

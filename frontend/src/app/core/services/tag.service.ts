@@ -17,7 +17,7 @@ export class TagService {
   constructor(private http: HttpClient) { }
 
   getTags(num?: number): Observable<TagModel[]> {
-    const url = baseURL + 'tags?';
+    const url = baseURL + 'tags/?';
     if (num !== undefined) {
       url.concat('&num=' + num);
     }

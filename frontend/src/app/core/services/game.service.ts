@@ -19,7 +19,7 @@ export class GameService {
   }
 
   getGames(pertainingArticle?: number): Observable<GameModel[]> {
-    let url = baseURL + 'games?';
+    let url = baseURL + 'games/?';
     if (pertainingArticle !== undefined) {
       url += 'pertaining_article=' + pertainingArticle;
     }
@@ -27,7 +27,7 @@ export class GameService {
   }
 
   getGame(id: number): Observable<GameModel> {
-    const url = baseURL + 'game?id=' + id;
+    const url = baseURL + 'game/?id=' + id;
     return this.http.get<GameModel>(url, httpOptions);
   }
 
@@ -37,7 +37,7 @@ export class GameService {
   }
 
   updateGame(game: GameModel): Observable<any> {
-    const url = baseURL + 'update/game?id=' + game.id;
+    const url = baseURL + 'update/game/?id=' + game.id;
     return this.http.put(url, game, httpOptions);
   }
 
