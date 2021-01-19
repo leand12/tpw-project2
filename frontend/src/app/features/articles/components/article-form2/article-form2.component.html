@@ -77,6 +77,10 @@
 
   <div class="nk-gap-1"></div>
 
+  <div class="offset-lg-2 col-lg-10" *ngFor="let e of error?.error.global">
+    <a href="#" class="error">{{ e }}</a>
+  </div>
+
   <div class="clearfix">
     <button type="submit" class="nk-btn nk-btn-color-main-1 float-right ml-sm-4">Sell Article</button>
     <button class="nk-btn nk-btn-color-dark-3 float-right ml-sm-4" (click)="stepChange.emit(!step)">Previous Step</button>

@@ -110,6 +110,12 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 
 class ArticleSerializer(serializers.ModelSerializer):
+    def validate(self, attr):
+        if not attr['items_in_article'] and not attr['name'].isnumeric():
+            # there's no items in article and this article is not temporary
+            raise serializers.ValidationError("This article has no items.")
+        return attr
+
     class Meta:
         model = Article
         fields = (
