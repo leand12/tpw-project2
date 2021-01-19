@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {ArticleService} from '@core/services/article.service';
 import {ItemService} from '@core/services/item.service';
@@ -16,6 +16,7 @@ export class ArticleForm2Component implements OnInit {
   @Input() step: boolean;
   @Output() stepChange = new EventEmitter<boolean>();
   articleForm: FormGroup;
+  formName: FormControl;
   error: any;
   totalPrice: number;
   items: any[];
@@ -35,8 +36,9 @@ export class ArticleForm2Component implements OnInit {
   }
 
   initForm(article?: any): void {
+    this.formName = new FormControl(article?.name, [Validators.pattern('.*[a-zA-Z]+.*')]);
     this.articleForm = new FormGroup({
-      name: new FormControl(article?.name),
+      name: this.formName,
       description: new FormControl(article?.description),
       shipping_time: new FormControl(article?.shipping_time),
       shipping_fee: new FormControl(article?.shipping_fee),
@@ -54,6 +56,7 @@ export class ArticleForm2Component implements OnInit {
   }
 
   submit(): void {
+    if (this.formName.errors) { return; }
     const article = this.articleForm.value;
     article.id = this.article.id;
     article.tag = [];

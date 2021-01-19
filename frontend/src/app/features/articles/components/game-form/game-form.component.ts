@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {conditionChoices, platformChoices, ratingChoices} from '@core/constants/choices';
 import {GameService} from '@core/services/game.service';
 
@@ -14,6 +14,7 @@ export class GameFormComponent implements OnInit {
   @Input() gameId?: any;
   @Output() stateChange = new EventEmitter();
   gameForm: FormGroup;
+  formName: FormControl;
   error: any;
   objectKeys = Object.keys;
   conditions = conditionChoices;
@@ -31,8 +32,9 @@ export class GameFormComponent implements OnInit {
   }
 
   initForm(game?: any): void {
+    this.formName = new FormControl(game?.name, [Validators.pattern('.*[a-zA-Z]+.*')]);
     this.gameForm = new FormGroup({
-      name: new FormControl(game?.name),
+      name: this.formName,
       publisher: new FormControl(game?.publisher),
       release_year: new FormControl(game?.release_year),
       genre: new FormControl(game?.genre),
@@ -45,6 +47,7 @@ export class GameFormComponent implements OnInit {
   }
 
   submit(): void {
+    if (this.formName.errors) { return; }
     const game = this.gameForm.value;
     game.pertaining_article = this.articleId;
     if (this.gameId) {

@@ -8,6 +8,9 @@
       <div *ngFor="let e of error?.error.name">
         <a href="#" class="error">{{ e }}</a>
       </div>
+      <div class="form-control-feedback" *ngIf="formName.errors && (formName.dirty || formName.touched)">
+        <a href="#" class="error" *ngIf="formName.errors.pattern">Name must not be a number.</a>
+      </div>
     </div>
   </div>
 
