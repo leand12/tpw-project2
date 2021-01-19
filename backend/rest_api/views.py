@@ -72,17 +72,24 @@ def get_articles(request):
         articles = articles.filter(shop_cart__in=request.GET['shop_cart'])
     if 'saved' in request.GET:
         articles = articles.filter(saved__in=request.GET['saved'])
-    if 'console' in request.GET:
-        articles = [a for a in articles if Game.objects.filter(pertaining_article=a.id, platform=request.GET['console']).exists()]
     if 'name' in request.GET:
         articles = articles.filter(name__contains=request.GET['name'])
+    if 'times_viewed' in request.GET:
+        articles = articles.order_by('-times_viewed')
+    if 'type' in request.GET:
+        if request.GET['type'] == 'games':
+            articles = [a for a in articles if Game.objects.filter(pertaining_article=a.id).exists()]
+        elif request.GET['type'] == 'consoles':
+            articles = [a for a in articles if Console.objects.filter(pertaining_article=a.id).exists()]
+    if 'platform' in request.GET:
+        articles = [a for a in articles if Game.objects.filter(
+            pertaining_article=a.id, platform=request.GET['platform']).exists()]
     if 'condition' in request.GET:
-        articles = [a for a in articles if Item.objects.filter(pertaining_article=a.id, condition=request.GET['condition']).exists()]
+        articles = [a for a in articles if Item.objects.filter(
+            pertaining_article=a.id, condition=request.GET['condition']).exists()]
     if 'num' in request.GET:
         num = int(request.GET['num'])
         articles = articles[:num]
-    if 'times_viewed' in request.GET:
-        articles = articles.order_by('-times_viewed')
     serializer = ArticleReadSerializer(articles, many=True)
     return Response(serializer.data)
 

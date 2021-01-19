@@ -1,3 +1,12 @@
+export const platformsChoices = {
+  PS: 'Playstation',
+  XB: 'Xbox One',
+  SW: 'Nintendo',
+  PC: 'Computer',
+  WI: 'Wii',
+  RT: 'Retro',
+};
+
 export const conditionChoices = {
   B: 'Brand New',
   L: 'Like New',

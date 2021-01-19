@@ -14,7 +14,11 @@
     <div class="nk-gap-4"></div>
 
     <h3 class="nk-decorated-h-2"><span>On Sale</span></h3>
-    <div class="nk-gap-1"></div>
+    <div class="text-right">
+      <a href="#" routerLink="/articles/create" class="nk-btn nk-btn-x2 nk-btn-rounded nk-btn-color-white">
+        Sell Article</a>
+    </div>
+    <div class="nk-gap-2"></div>
 
     <!-- START: Articles On Sale -->
     <div class="row vertical-gap" *ngIf="articlesOnSale && articlesOnSale.length !== 0; else noneOnSale">

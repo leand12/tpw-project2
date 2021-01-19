@@ -110,11 +110,6 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 
 class ArticleSerializer(serializers.ModelSerializer):
-    def validate_items_in_article(self, items_in_article):
-        if not items_in_article:
-            raise serializers.ValidationError("This article has no items.")
-        return items_in_article
-
     class Meta:
         model = Article
         fields = (
