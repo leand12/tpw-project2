@@ -22,7 +22,6 @@ export class CreateComponent implements OnInit {
     this.step1 = true;
     this.userId = global.getUserId();
     this.getTempArticle();
-    console.log('novo artigo');
   }
 
   getTempArticle(): void {

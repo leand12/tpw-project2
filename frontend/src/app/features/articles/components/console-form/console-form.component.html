@@ -71,7 +71,7 @@
   <div class="form-group row">
     <label for="image" class="col-lg-2">Image:</label>
     <div class="col-lg-10">
-      <input id="image" type="file" formControlName="image">
+      <input id="image" type="file" formControlName="image" name="image" (change)="handleFileInput($event.target.files)">
       <div *ngFor="let e of error?.error.image">
         <a href="#" class="error">{{ e }}</a>
       </div>

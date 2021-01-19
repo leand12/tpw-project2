@@ -11,7 +11,6 @@ const httpOptions = {
   })
 };
 
-
 @Injectable()
 export class GameService {
 
@@ -31,14 +30,28 @@ export class GameService {
     return this.http.get<GameModel>(url, httpOptions);
   }
 
-  createGame(game: GameModel): Observable<any> {
+  createGame(game: GameModel, image?: File): Observable<any> {
+    const payload = new FormData();
+
+    payload.append('data', JSON.stringify(game));
+    if (image) {
+      payload.append('file', image, image.name);
+    }
+
     const url = serviceURL + 'create/game/';
-    return this.http.post(url, game, httpOptions);
+    return this.http.post(url, payload);
   }
 
-  updateGame(game: GameModel): Observable<any> {
+  updateGame(game: GameModel, image?: File): Observable<any> {
+    const payload = new FormData();
+
+    payload.append('data', JSON.stringify(game));
+    if (image) {
+      payload.append('file', image, image.name);
+    }
+
     const url = serviceURL + 'update/game/?id=' + game.id;
-    return this.http.put(url, game, httpOptions);
+    return this.http.put(url, payload);
   }
 
   deleteGame(id: number): Observable<any> {

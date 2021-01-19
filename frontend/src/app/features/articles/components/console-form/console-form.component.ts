@@ -18,6 +18,7 @@ export class ConsoleFormComponent implements OnInit {
   error: any;
   objectKeys = Object.keys;
   conditions = conditionChoices;
+  private fileToUpload: File;
 
   constructor(private consoleService: ConsoleService) { }
 
@@ -43,18 +44,23 @@ export class ConsoleFormComponent implements OnInit {
     });
   }
 
+  handleFileInput(files: FileList): void {
+    // image validation is on backend
+    this.fileToUpload = files.item(0);
+  }
+
   submit(): void {
     if (this.formName.errors) { return; }
     const console = this.consoleForm.value;
     console.pertaining_article = this.articleId;
     if (this.consoleId) {
       console.id = this.consoleId;
-      this.consoleService.updateConsole(console).subscribe(
+      this.consoleService.updateConsole(console, this.fileToUpload).subscribe(
         () => this.stateChange.emit(0),
         error => this.error = error
         );
     } else {
-      this.consoleService.createConsole(console).subscribe(
+      this.consoleService.createConsole(console, this.fileToUpload).subscribe(
         () => this.stateChange.emit(0),
         error => this.error = error
         );

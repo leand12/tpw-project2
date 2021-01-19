@@ -20,6 +20,7 @@ export class GameFormComponent implements OnInit {
   conditions = conditionChoices;
   platforms = platformChoices;
   ratings = ratingChoices;
+  private fileToUpload: File;
 
   constructor(private gameService: GameService) { }
 
@@ -41,9 +42,13 @@ export class GameFormComponent implements OnInit {
       condition: new FormControl(game?.condition),
       platform: new FormControl(game?.platform),
       rating: new FormControl(game?.rating),
-      image: new FormControl(game?.image),
       price: new FormControl(game?.price),
     });
+  }
+
+  handleFileInput(files: FileList): void {
+    // image validation is on backend
+    this.fileToUpload = files.item(0);
   }
 
   submit(): void {
@@ -52,12 +57,12 @@ export class GameFormComponent implements OnInit {
     game.pertaining_article = this.articleId;
     if (this.gameId) {
       game.id = this.gameId;
-      this.gameService.updateGame(game).subscribe(
+      this.gameService.updateGame(game, this.fileToUpload).subscribe(
         () => this.stateChange.emit(0),
         error => this.error = error
       );
     } else {
-      this.gameService.createGame(game).subscribe(
+      this.gameService.createGame(game, this.fileToUpload).subscribe(
         () => this.stateChange.emit(0),
         error => this.error = error
         );
