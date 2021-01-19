@@ -29,7 +29,7 @@
                 Subtotal
               </td>
               <td>
-<!--                {% if total == None %}—{% else %}{{ subtotal }} €{% endif %}-->
+                {{ subtotal }} €
               </td>
             </tr>
             <tr class="nk-store-cart-totals-shipping">
@@ -37,7 +37,7 @@
                 Shipping
               </td>
               <td>
-<!--                {% if total == None %}—{% else %}{{ fee_total }} €{% endif %}-->
+                {{ feeTotal }} €
               </td>
             </tr>
             <tr class="nk-store-cart-totals-total">
@@ -45,16 +45,15 @@
                 Total
               </td>
               <td>
-<!--                {% if total == None %}—{% else %}{{ total }} €{% endif %}-->
+                {{ total }} €
               </td>
             </tr>
             </tbody>
           </table>
           <div class="nk-gap-2"></div>
           <form method="post" action=".">
-            <button name="buy" type="submit"
+            <button [disabled]="total==0" name="buy" type="submit"
                     class="nk-btn nk-btn-rounded nk-btn-color-main-1 float-right">
-<!--                    {% if total == None %}disabled{% endif %}-->
               Place Order
             </button>
           </form>
@@ -70,45 +69,42 @@
         <!-- START: Products in Cart -->
         <table class="table nk-store-cart-products">
           <tbody>
-<!--          {% for ac in articles_on_cart %}-->
-<!--          <tr>-->
-<!--            <td class="nk-product-cart-thumb">-->
-<!--              <a href="{% url 'article_details' ac.id %}" class="nk-image-box-1 nk-post-image">-->
-<!--                <img src="{% item_img_path ac.items_in_article.all.0.id %}"-->
-<!--                     alt="{{ ac.name }}" width="115">-->
-<!--              </a>-->
-<!--            </td>-->
-<!--            <td class="nk-product-cart-title">-->
-<!--              <h5 class="h6">Article:</h5>-->
-<!--              <div class="nk-gap-1"></div>-->
+          <tr *ngFor="let a of articles">
+            <td class="nk-product-cart-thumb">
+              <a routerLink="/articles/details/{{ a.id }}" class="nk-image-box-1 nk-post-image">
+                <img src="{{ a.items_in_article[0].image }}" alt="{{ a.name }}" width="115">
+              </a>
+            </td>
+            <td class="nk-product-cart-title">
+              <h5 class="h6">Article:</h5>
+              <div class="nk-gap-1"></div>
 
-<!--              <h2 class="nk-post-title h4">-->
-<!--                <a href="{% url 'article_details' ac.id %}">{{ ac.name }}</a>-->
-<!--              </h2>-->
-<!--            </td>-->
-<!--            <td class="nk-product-cart-price">-->
-<!--              <h5 class="h6">Price:</h5>-->
-<!--              <div class="nk-gap-1"></div>-->
+              <h2 class="nk-post-title h4">
+                <a href="{% url 'article_details' ac.id %}">{{ ac.name }}</a>
+              </h2>
+            </td>
+            <td class="nk-product-cart-price">
+              <h5 class="h6">Price:</h5>
+              <div class="nk-gap-1"></div>
 
-<!--              <strong>{{ ac.total_price }} €</strong>-->
-<!--            </td>-->
-<!--            <td colspan="2" class="nk-product-cart-price">-->
-<!--              <h5 class="h6">Shipping Fee:</h5>-->
-<!--              <div class="nk-gap-1"></div>-->
+              <strong>{{ ac.total_price }} €</strong>
+            </td>
+            <td colspan="2" class="nk-product-cart-price">
+              <h5 class="h6">Shipping Fee:</h5>
+              <div class="nk-gap-1"></div>
 
-<!--              <strong>{{ ac.ShippingFee }} €</strong>-->
-<!--            </td>-->
-<!--            <form method="post" action="." id="remove-form-{{ forloop.counter }}">-->
-<!--              {% csrf_token %}-->
-<!--              <input name="remove_article" value="{{ ac.id }}" hidden>-->
-<!--              <td class="nk-product-cart-remove">-->
-<!--                <a href="javascript:document.getElementById('remove-form-{{ forloop.counter }}').submit()">-->
-<!--                  <span class="ion-android-close"></span>-->
-<!--                </a>-->
-<!--              </td>-->
-<!--            </form>-->
-<!--          </tr>-->
-<!--          {% endfor %}-->
+              <strong>{{ ac.ShippingFee }} €</strong>
+            </td>
+            <form method="post" action="." id="remove-form-{{ forloop.counter }}">
+              {% csrf_token %}
+              <input name="remove_article" value="{{ ac.id }}" hidden>
+              <td class="nk-product-cart-remove">
+                <a href="javascript:document.getElementById('remove-form-{{ forloop.counter }}').submit()">
+                  <span class="ion-android-close"></span>
+                </a>
+              </td>
+            </form>
+          </tr>
 
           </tbody>
         </table>

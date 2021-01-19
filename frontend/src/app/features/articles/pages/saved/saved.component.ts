@@ -35,8 +35,6 @@ export class SavedComponent implements OnInit, AfterViewInit {
     combineLatest(this.activeRoute.params, this.activeRoute.queryParams)
       .pipe(map(results => ({params: results[0], query: results[1]})))
       .subscribe(results => {
-        console.log(results.params);
-        console.log(results.query);
         this.search = results.query.search;
         this.condition = results.query.condition !== '' ? results.query.condition : undefined;
         this.price =  results.query.price ?
