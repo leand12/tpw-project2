@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import { htmlRatingIcons } from '../../../../core/utils/html-rating-icons';
+import {baseURL} from '@core/constants/url';
 
 @Component({
   selector: 'app-rich-article-renderer',
@@ -18,7 +19,9 @@ export class RichArticleRendererComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.articleImage = 'http://localhost:8000/media/user_1/item_2422e19c-707b-4aa4-899e-1d5bc248e06c';
+    if (this.article.items_in_article.length > 0) {
+      this.articleImage = baseURL + this.article.items_in_article[0].image;
+    }
     this.userRating = 4;
     this.userReviewsNum = 10;
   }

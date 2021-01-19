@@ -8,6 +8,7 @@ import {UserService} from '@core/services/user.service';
 import {ReviewService} from '@core/services/review.service';
 
 import {conditionChoices} from '@core/constants/choices';
+import {baseURL} from '@core/constants/url';
 
 @Component({
   selector: 'app-article-details',
@@ -25,6 +26,7 @@ export class DetailsComponent implements OnInit, AfterViewInit {
   userRating: number;
   userReviews: any;
   conditions = conditionChoices;
+  baseURL = baseURL;
 
   constructor(private activeRoute: ActivatedRoute,
               private tagService: TagService, private articleService: ArticleService,
@@ -34,7 +36,6 @@ export class DetailsComponent implements OnInit, AfterViewInit {
     this.getURLParams();
 
     // TODO: call api
-    this.articleImage = 'http://localhost:8000/media/user_1/item_2422e19c-707b-4aa4-899e-1d5bc248e06c';
     this.userReviews = [];
     this.userRating = 2;
     this.relatedArticles = [
@@ -62,6 +63,9 @@ export class DetailsComponent implements OnInit, AfterViewInit {
       this.article = article;
     }, (err) => console.error(err),
       () => {
+        if (this.article.items_in_article.length > 0) {
+          this.articleImage = baseURL + this.article.items_in_article[0].image;
+        }
         this.getTags();
         this.getReviews();
         this.getRelatedArticles();
