@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 
-import {baseURL} from '@core/constants/consts';
-import {ArticleModel} from '@core/models/article.model';
+import {baseURL} from '@core/constants/url';
+import {ArticleModel, ArticleReadModel} from '@core/models/article.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -16,13 +16,13 @@ export class ArticleService {
   constructor(private http: HttpClient) { }
 
   getArticles(): Observable<ArticleModel[]> {
-    const url = baseURL + 'articles';
+    const url = baseURL + 'articles/';
     return this.http.get<ArticleModel[]>(url, httpOptions);
   }
 
   // tslint:disable-next-line:max-line-length
-  getArticlesFiltered(num?, maxPrice?, minPrice?, isSold?, seller?, buyer?, tags?: string[], name?, shopCart?, saved?, timesViewed?): Observable<ArticleModel[]> {
-    let url: string = baseURL + 'articles?';
+  getArticlesFiltered(num?, maxPrice?, minPrice?, isSold?, seller?, buyer?, tags?: string[], name?, shopCart?, saved?, timesViewed?): Observable<ArticleReadModel[]> {
+    let url: string = baseURL + 'articles/?';
 
     if (num !== undefined)
     {
@@ -83,12 +83,19 @@ export class ArticleService {
       url += '&times_viewed=' + timesViewed;
     }
 
-    return this.http.get<ArticleModel[]>(url, httpOptions);
+    return this.http.get<ArticleReadModel[]>(url, httpOptions);
   }
 
-  getArticle(id: number): Observable<ArticleModel> {
-    const url = baseURL + 'article?id=' + id;
-    return this.http.get<ArticleModel>(url, httpOptions);
+  getArticle(id?: number, name?: string): Observable<ArticleReadModel> {
+    let url = baseURL + 'article/?';
+    if (id !== undefined) {
+      url += 'id=' + id;
+    } else if (name !== undefined) {
+      url += 'name=' + name;
+    } else {
+      throw new Error('Provide one parameter.');
+    }
+    return this.http.get<ArticleReadModel>(url, httpOptions);
   }
 
   createArticle(art: ArticleModel): Observable<any> {
@@ -97,7 +104,7 @@ export class ArticleService {
   }
 
   updateArticle(art: ArticleModel): Observable<any> {
-    const url = baseURL + 'update/article?id=' + art.id;
+    const url = baseURL + 'update/article/?id=' + art.id;
     return this.http.put(url, art, httpOptions);
   }
 

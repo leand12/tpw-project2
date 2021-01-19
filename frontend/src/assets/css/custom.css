@@ -4,18 +4,22 @@ a.error {
   text-decoration: none;
 }
 
-.signup-padding {
+.form-padding-1 {
+  padding: 0 10% 0 10%;
+}
+
+.form-padding-2 {
    padding: 0 20% 0 20%;
 }
 
 @media (max-width: 991px) {
-   .signup-padding {
+   .form-padding-2 {
       padding: 0 10% 0 10%;
    }
 }
 
 @media (max-width: 575px) {
-   .signup-padding {
+   .form-padding-2 {
       padding: 0;
    }
 }

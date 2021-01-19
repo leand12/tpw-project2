@@ -14,6 +14,10 @@ import { EditComponent } from './pages/edit/edit.component';
 
 import { RichArticleRendererComponent } from './components/rich-article-renderer/rich-article-renderer.component';
 import { CompactArticleRendererComponent } from './components/compact-article-renderer/compact-article-renderer.component';
+import { ArticleForm1Component } from './components/article-form1/article-form1.component';
+import { ArticleForm2Component } from './components/article-form2/article-form2.component';
+import { GameFormComponent } from './components/game-form/game-form.component';
+import { ConsoleFormComponent } from './components/console-form/console-form.component';
 
 
 @NgModule({
@@ -33,6 +37,10 @@ import { CompactArticleRendererComponent } from './components/compact-article-re
 
     RichArticleRendererComponent,
     CompactArticleRendererComponent,
+    ArticleForm1Component,
+    ArticleForm2Component,
+    GameFormComponent,
+    ConsoleFormComponent,
   ],
   exports: [
   ],

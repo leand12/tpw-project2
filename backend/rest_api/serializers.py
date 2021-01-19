@@ -9,7 +9,6 @@ from allauth.account.utils import setup_user_email
 from rest_api.models import Tag, Article, Item, Game, Console, Review, UserProfile
 from rest_framework import serializers
 
-
 class RegisterSerializer(serializers.Serializer):
     username = serializers.CharField(required=True, write_only=True)
     email = serializers.EmailField(required=allauth_settings.EMAIL_REQUIRED)
@@ -60,15 +59,6 @@ class TagSerializer(serializers.ModelSerializer):
         fields = ('name', 'is_popular')
 
 
-class ArticleSerializer(serializers.ModelSerializer):
-    # user = serializers.StringRelatedField(many=False)
-    class Meta:
-        model = Article
-        fields = (
-            'id', 'name', 'total_price', 'description', 'shipping_fee', 'date_posted', 'tag', 'is_sold', 'times_viewed',
-            'shop_cart', 'saved', 'seller', 'buyer', 'items_in_article')
-
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -105,3 +95,25 @@ class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
         fields = ('id', 'rate', 'description', 'date_posted', 'reviewer', 'reviewed')
+
+
+class ArticleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Article
+        fields = (
+            'id', 'name', 'total_price', 'description', 'shipping_fee', 'date_posted', 'tag', 'is_sold', 'times_viewed',
+            'shop_cart', 'saved', 'seller', 'buyer', 'items_in_article')
+
+
+class UserProfileReadSerializer(UserProfileSerializer):
+    user = UserSerializer(read_only=True)
+
+
+class ReviewReadSerializer(ReviewSerializer):
+    reviewer = UserSerializer(read_only=True)
+    reviewed = UserSerializer(read_only=True)
+
+
+class ArticleReadSerializer(ArticleSerializer):
+    seller = UserSerializer(read_only=True)
+    items_in_article = ItemSerializer(read_only=True, many=True)

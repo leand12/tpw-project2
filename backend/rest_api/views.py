@@ -3,9 +3,8 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_api.serializers import TagSerializer, ArticleSerializer, UserSerializer, ItemSerializer, GameSerializer, \
-    ConsoleSerializer, ReviewSerializer, UserProfileSerializer
-from rest_api.models import Tag, Article, Item, Game, Console, Review, UserProfile
+from rest_api.serializers import *
+from rest_api.models import *
 
 
 # Create your views here.
@@ -32,14 +31,19 @@ def get_tags(request):
 
 @api_view(['GET'])
 def get_article(request):
-    id = int(request.GET['id'])
     try:
-        article = Article.objects.get(id=id)
+        if 'id' in request.GET:
+            id = int(request.GET['id'])
+            article = Article.objects.get(id=id)
+            article.times_viewed += 1
+            article.save()
+        elif 'name' in request.GET:
+            article = Article.objects.get(name=request.GET['name'])
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
     except Article.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-    article.times_viewed += 1
-    article.save()
-    serializer = ArticleSerializer(article)
+    serializer = ArticleReadSerializer(article)
     return Response(serializer.data)
 
 
@@ -75,13 +79,15 @@ def get_articles(request):
         articles = articles[:num]
     if 'times_viewed' in request.GET:
         articles = articles.order_by('-times_viewed')
-    serializer = ArticleSerializer(articles, many=True)
+    serializer = ArticleReadSerializer(articles, many=True)
     return Response(serializer.data)
 
 
 @api_view(['POST'])
 def create_article(request):
+    print(request.data)
     serializer = ArticleSerializer(data=request.data)
+    print(serializer)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -140,7 +146,7 @@ def get_profile(request):
         profile = UserProfile.objects.get(user_id=userid)
     except UserProfile.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-    serializer = UserProfileSerializer(profile)
+    serializer = UserProfileReadSerializer(profile)
     return Response(serializer.data)
 
 
@@ -150,7 +156,7 @@ def get_profiles(request):
     if 'num' in request.GET:
         num = int(request.GET['num'])
         profiles = profiles[:num]
-    serializer = UserProfileSerializer(profiles, many=True)
+    serializer = UserProfileReadSerializer(profiles, many=True)
     return Response(serializer.data)
 
 
@@ -191,6 +197,8 @@ def get_item(request):
 @api_view(['GET'])
 def get_items(request):
     items = Item.objects.all()
+    if 'pertaining_article' in request.GET:
+        items = items.filter(pertaining_article=request.GET['pertaining_article'])
     if 'num' in request.GET:
         num = int(request.GET['num'])
         items = items[:num]
@@ -212,6 +220,8 @@ def get_game(request):
 @api_view(['GET'])
 def get_games(request):
     games = Game.objects.all()
+    if 'pertaining_article' in request.GET:
+        games = games.filter(pertaining_article=request.GET['pertaining_article'])
     if 'num' in request.GET:
         num = int(request.GET['num'])
         games = games[:num]
@@ -225,6 +235,7 @@ def create_game(request):
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    print(serializer.errors)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -266,6 +277,8 @@ def get_console(request):
 @api_view(['GET'])
 def get_consoles(request):
     consoles = Console.objects.all()
+    if 'pertaining_article' in request.GET:
+        consoles = consoles.filter(pertaining_article=request.GET['pertaining_article'])
     if 'num' in request.GET:
         num = int(request.GET['num'])
         consoles = consoles[:num]
@@ -313,7 +326,7 @@ def get_review(request):
         review = Review.objects.get(id=id)
     except Review.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-    serializer = ReviewSerializer(review)
+    serializer = ReviewReadSerializer(review)
     return Response(serializer.data)
 
 
@@ -329,7 +342,7 @@ def get_reviews(request):
     if 'num' in request.GET:
         num = int(request.GET['num'])
         reviews = reviews[:num]
-    serializer = ReviewSerializer(reviews, many=True)
+    serializer = ReviewReadSerializer(reviews, many=True)
     return Response(serializer.data)
 
 

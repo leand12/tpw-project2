@@ -58,7 +58,7 @@
               <div class="nk-post-share d-flex">
                 <span class="h5">Seller:  </span>
                 <span class="h5" style="margin-left: auto">
-                  <a routerLink="/profile/details/{{ article?.seller.id }}">{{ articleSeller?.name }}</a>
+                  <a routerLink="/profile/details/{{ article?.seller.id }}">{{ article?.seller.username }}</a>
                 </span>
               </div>
 
@@ -154,15 +154,11 @@
                     <th>Condition</th>
                     <th class="text-center">Price</th>
                   </tr>
-<!--                  {% for i in items %}-->
-<!--                  <tr>-->
-<!--                    <td>{{ i.name }}</td>-->
-<!--                    <td>{% for cc in i.CONDITION_CHOICES %}{% if cc.0 == i.condition %}-->
-<!--                      {{ cc.1 }}-->
-<!--                      {% endif %}{% endfor %}</td>-->
-<!--                    <td class="text-center"><strong>{{ i.price }} €</strong></td>-->
-<!--                  </tr>-->
-<!--                  {% endfor %}-->
+                  <tr *ngFor="let i of article?.items_in_article">
+                    <td>{{ i.name }}</td>
+                    <td>{{ conditions[i.condition] }}</td>
+                    <td class="text-center"><strong>{{ i.price }} €</strong></td>
+                  </tr>
 
                   </tbody>
                 </table>
