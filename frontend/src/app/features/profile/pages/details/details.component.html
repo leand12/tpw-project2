@@ -129,7 +129,7 @@
         <div class="nk-gap-3"></div>
         <aside class="nk-sidebar nk-sidebar-right nk-sidebar-sticky">
           <!-- TODO: change redTitle -->
-          <app-article-widget [redTitle]="myself ? 'User' : 'My'" [title]="'Articles'"
+          <app-article-widget [redTitle]="myself ? 'My' : user?.username" [title]="'Articles'"
                               [articles]="articlesOnSale" [viewMoreUrl]="'/articles/owned/' + user?.id">
           </app-article-widget>
 

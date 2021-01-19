@@ -4,7 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {UserService} from '@core/services';
 import {ArticleService} from '@core/services/article.service';
 import {ReviewService} from '@core/services/review.service';
-import {ReviewModel} from '@core/models/review.model';
+import {ReviewModel, ReviewReadModel} from '@core/models/review.model';
 import {UserModel} from '@core/models/user.model';
 import {UserProfileModel} from "@core/models/user-profile.model";
 
@@ -94,22 +94,22 @@ export class DetailsComponent implements OnInit {
       (err) => console.error(err));
   }
 
-  processReviews(reviews: ReviewModel[]): void {
+  processReviews(reviews: ReviewReadModel[]): void {
     this.reviews = reviews;
     let count = 0;
     this.reviews.forEach((r, index) => {
       count += r.rate;
-      this.getRevUser(r.reviewer, index);
+      // this.getRevUser(r.reviewer, index);
     });
     if (count > 0) {
       this.avgRating = count / this.reviews.length;
     }
   }
 
-  getRevUser(userId: any, idx: any): void {
-    this.userService.getUser(userId).subscribe(
-      (user) => this.reviews[idx].reviewer = user,
-      (err) => console.error(err));
-  }
+  // getRevUser(userId: any, idx: any): void {
+  //   this.userService.getUser(userId).subscribe(
+  //     (user) => this.reviews[idx].reviewer = user,
+  //     (err) => console.error(err));
+  // }
 
 }
