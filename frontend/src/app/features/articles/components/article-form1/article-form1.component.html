@@ -1,12 +1,16 @@
 <div [ngSwitch]="active[0]">
-  <app-game-form *ngSwitchCase="State.CREATE_GAME" [articleId]="article.id" (stateChange)="handleState($event)">
-  </app-game-form>
-  <app-console-form *ngSwitchCase="State.CREATE_CONSOLE" [articleId]="article.id" (stateChange)="handleState($event)">
-  </app-console-form>
-  <app-game-form *ngSwitchCase="State.EDIT_GAME" [articleId]="article.id" [gameId]="active[1]" (stateChange)="handleState($event)">
-  </app-game-form>
-  <app-console-form *ngSwitchCase="State.EDIT_CONSOLE" [articleId]="article.id" [consoleId]="active[1]" (stateChange)="handleState($event)">
-  </app-console-form>
+  <app-game-form *ngSwitchCase="State.CREATE_GAME" [articleId]="article.id"
+    (stateChange)="handleState($event)"></app-game-form>
+
+  <app-console-form *ngSwitchCase="State.CREATE_CONSOLE" [articleId]="article.id"
+    (stateChange)="handleState($event)"></app-console-form>
+
+  <app-game-form *ngSwitchCase="State.EDIT_GAME" [articleId]="article.id" [gameId]="active[1]"
+    (stateChange)="handleState($event)"></app-game-form>
+
+  <app-console-form *ngSwitchCase="State.EDIT_CONSOLE" [articleId]="article.id" [consoleId]="active[1]"
+    (stateChange)="handleState($event)"></app-console-form>
+
   <div *ngSwitchDefault>
 
     <h4 class="mb-0"><span class="text-main-1" style="padding-left: 0.95em">&nbsp;Step #1</span></h4>
@@ -21,12 +25,13 @@
               </li>
               <li class="list-group-item" *ngFor="let g of games">
                 {{ g?.name }}
-                <button type="button" class="btn btn-secondary mt-2" (click)="active = [State.EDIT_GAME, g?.id]">
+                <button class="btn btn-secondary mt-2" (click)="active = [State.EDIT_GAME, g?.id]">
                   Edit Game</button>&nbsp;
-                <button type="submit" class="btn btn-secondary mt-2" name="del" value="{{ g?.id }}">Delete Game</button>
+                <button class="btn btn-secondary mt-2" name="del" value="{{ g?.id }}" (click)="deleteGame(g?.id)">
+                  Delete Game</button>
               </li>
           </ul>
-          <button type="button" class="btn btn-secondary mt-2" (click)="active = [State.CREATE_GAME, undefined]">
+          <button class="btn btn-secondary mt-2" (click)="active = [State.CREATE_GAME, undefined]">
             Add Game</button>
         </div>
       </div>
@@ -41,12 +46,13 @@
             </li>
             <li class="list-group-item" *ngFor="let c of consoles">
               {{ c?.name }}
-              <button type="button" class="btn btn-secondary mt-2" (click)="active = [State.EDIT_CONSOLE, c?.id]">
+              <button class="btn btn-secondary mt-2" (click)="active = [State.EDIT_CONSOLE, c?.id]">
                 Edit Console</button>&nbsp;
-              <button type="submit" class="btn btn-secondary mt-2" name="del" value="{{ c?.id }}">Delete Console</button>
+              <button class="btn btn-secondary mt-2" name="del" value="{{ c?.id }}" (click)="deleteConsole(c?.id)">
+                Delete Console</button>
             </li>
           </ul>
-          <button type="button" class="btn btn-secondary mt-2" (click)="active = [State.CREATE_CONSOLE, undefined]">
+          <button class="btn btn-secondary mt-2" (click)="active = [State.CREATE_CONSOLE, undefined]">
             Add Console</button>
         </div>
       </div>
@@ -60,10 +66,8 @@
 
       <div class="nk-gap-1"></div>
 
-      <div class="form-group row">
-        <div class="offset-lg-10 col-lg-2 text-center">
-          <button class="nk-btn nk-btn-color-dark-3" (click)="stepChange.emit(!step)">Next Step</button>
-        </div>
+      <div class="clearfix">
+        <button class="nk-btn nk-btn-color-dark-3 float-right ml-sm-4" (click)="stepChange.emit(!step)">Next Step</button>
       </div>
     </form>
 

@@ -41,8 +41,8 @@ export class GameService {
     return this.http.put(url, game, httpOptions);
   }
 
-  deleteGame(game: GameModel): Observable<any> {
-    const url = baseURL + 'delete/game/' + game.id + '/';
-    return this.http.delete<GameModel>(url, httpOptions);
+  deleteGame(id: number): Observable<any> {
+    const url = baseURL + 'delete/game/' + id + '/';
+    return this.http.delete(url, httpOptions);
   }
 }
