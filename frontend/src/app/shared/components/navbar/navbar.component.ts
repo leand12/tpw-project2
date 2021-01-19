@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../core/services/auth.service';
+import {global} from '@core/utils/global';
 import { Router } from '@angular/router';
 declare var $: any;
 
@@ -10,10 +11,12 @@ declare var $: any;
   // providers: [AuthService]
 })
 export class NavbarComponent implements OnInit, AfterViewInit {
+  id: any;
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    this.id = global.getUserId();
   }
 
   logout(): void {

@@ -44,7 +44,6 @@ export class ReviewService {
       url += '&reviewed=' + reviewed;
     }
 
-    url += '/';
     return this.http.get<ReviewModel[]>(url, httpOptions);
   }
 
