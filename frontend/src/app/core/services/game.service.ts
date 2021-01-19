@@ -31,14 +31,32 @@ export class GameService {
     return this.http.get<GameModel>(url, httpOptions);
   }
 
-  createGame(game: GameModel): Observable<any> {
+  createGame(game: GameModel, image?: File): Observable<any> {
+    const payload = new FormData();
+
+    payload.append('data', JSON.stringify(game));
+    console.log(image);
+    if (image) {
+      payload.append('file', image, image.name);
+    }
+    console.log(payload);
+    console.log(payload.get('file'));
+    console.log(payload.get('data'));
+
     const url = baseURL + 'create/game/';
-    return this.http.post(url, game, httpOptions);
+    return this.http.post(url, payload, httpOptions);
   }
 
-  updateGame(game: GameModel): Observable<any> {
+  updateGame(game: GameModel, image?: File): Observable<any> {
+    const payload = new FormData();
+
+    payload.append('data', JSON.stringify(game));
+    if (image) {
+      payload.append('file', image, image.name);
+    }
+
     const url = baseURL + 'update/game/?id=' + game.id;
-    return this.http.put(url, game, httpOptions);
+    return this.http.put(url, payload, httpOptions);
   }
 
   deleteGame(id: number): Observable<any> {

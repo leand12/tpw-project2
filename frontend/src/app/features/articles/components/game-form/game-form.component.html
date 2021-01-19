@@ -83,7 +83,7 @@
     <label class="col-lg-2" for="image">*Image:</label>
     <div class="col-lg-10">
       <!-- TODO: add accept="image/*" if necessary -->
-      <input id="image" type="file" formControlName="image">
+      <input id="image" type="file" name="image" (change)="handleFileInput($event.target.files)">
       <div *ngFor="let e of error?.error.image">
         <a href="#" class="error">{{ e }}</a>
       </div>
