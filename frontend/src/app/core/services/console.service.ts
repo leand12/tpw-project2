@@ -31,14 +31,28 @@ export class ConsoleService {
     return this.http.get<ConsoleModel>(url, httpOptions);
   }
 
-  createConsole(console: ConsoleModel): Observable<any> {
+  createConsole(console: ConsoleModel, image?: File): Observable<any> {
+    const payload = new FormData();
+
+    payload.append('data', JSON.stringify(console));
+    if (image) {
+      payload.append('file', image, image.name);
+    }
+
     const url = serviceURL + 'create/console/';
-    return this.http.post(url, console, httpOptions);
+    return this.http.post(url, payload);
   }
 
-  updateConsole(console: ConsoleModel): Observable<any> {
+  updateConsole(console: ConsoleModel, image?: File): Observable<any> {
+    const payload = new FormData();
+
+    payload.append('data', JSON.stringify(console));
+    if (image) {
+      payload.append('file', image, image.name);
+    }
+
     const url = serviceURL + 'update/console/?id=' + console.id;
-    return this.http.put(url, console, httpOptions);
+    return this.http.put(url, payload);
   }
 
   deleteConsole(id: number): Observable<any> {

@@ -1,3 +1,5 @@
+import json
+
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from rest_framework import status
@@ -231,22 +233,32 @@ def get_games(request):
 
 @api_view(['POST'])
 def create_game(request):
-    serializer = GameSerializer(data=request.data)
+    data = json.loads(request.data['data'])
+    if 'file' not in request.data:
+        serializer = GameSerializer(data=data)
+        serializer.is_valid()
+        errors = {'image': ["This field may not be null!"]}
+        errors.update(serializer.errors)
+        return Response(errors, status=status.HTTP_400_BAD_REQUEST)
+    data['image'] = request.data['file']
+    serializer = GameSerializer(data=data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    print(serializer.errors)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['PUT'])
 def update_game(request):
-    id = request.data['id']
+    data = json.loads(request.data['data'])
+    id = data['id']
     try:
         game = Game.objects.get(id=id)
     except Game.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-    serializer = GameSerializer(game, data=request.data)
+    if 'file' in request.data:
+        data['image'] = request.data['file']
+    serializer = GameSerializer(game, data=data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)
@@ -288,7 +300,15 @@ def get_consoles(request):
 
 @api_view(['POST'])
 def create_console(request):
-    serializer = ConsoleSerializer(data=request.data)
+    data = json.loads(request.data['data'])
+    if 'file' not in request.data:
+        serializer = ConsoleSerializer(data=data)
+        serializer.is_valid()
+        errors = {'image': ["This field may not be null!"]}
+        errors.update(serializer.errors)
+        return Response(errors, status=status.HTTP_400_BAD_REQUEST)
+    data['image'] = request.data['file']
+    serializer = ConsoleSerializer(data=data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -297,12 +317,15 @@ def create_console(request):
 
 @api_view(['PUT'])
 def update_console(request):
-    id = request.data['id']
+    data = json.loads(request.data['data'])
+    id = data['id']
     try:
         console = Console.objects.get(id=id)
     except Console.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-    serializer = ConsoleSerializer(console, data=request.data)
+    if 'file' in request.data:
+        data['image'] = request.data['file']
+    serializer = ConsoleSerializer(console, data=data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)

@@ -45,17 +45,8 @@ export class GameFormComponent implements OnInit {
   }
 
   handleFileInput(files: FileList): void {
-    const fileItem = files.item(0);
-    const fileNameArr = fileItem.name.split('.');
-
-    if (fileNameArr[1] === 'jpg' || fileNameArr[1] === 'JPG' || fileNameArr[1] === 'png' || fileNameArr[1] === 'PNG') {
-      // this.error.image = '';
-      this.fileToUpload = fileItem;
-
-    } else {
-      // this.error.image = 'logo should be in jpg or png format';
-      this.fileToUpload = null;
-    }
+    // image validation is on backend
+    this.fileToUpload = files.item(0);
   }
 
   submit(): void {
