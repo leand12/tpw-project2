@@ -48,7 +48,7 @@
   <div class="form-group row">
     <label for="shipping_fee" class="col-lg-2 col-form-label">Shipping Fee:</label>
     <div class="col-lg-10">
-      <input id="shipping_fee" type="text" formControlName="shipping_fee" class="form-control">
+      <input id="shipping_fee" type="number" formControlName="shipping_fee" class="form-control" max="1000000000000" step="1">
       <div *ngFor="let e of error?.error.shipping_fee">
         <a href="#" class="error">{{ e }}</a>
       </div>
