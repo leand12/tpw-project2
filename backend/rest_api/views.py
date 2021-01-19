@@ -74,6 +74,8 @@ def get_articles(request):
         articles = [a for a in articles if Game.objects.filter(pertaining_article=a.id, platform=request.GET['console']).exists()]
     if 'name' in request.GET:
         articles = articles.filter(name__contains=request.GET['name'])
+    if 'condition' in request.GET:
+        articles = [a for a in articles if Item.objects.filter(pertaining_article=a.id, condition=request.GET['condition']).exists()]
     if 'num' in request.GET:
         num = int(request.GET['num'])
         articles = articles[:num]

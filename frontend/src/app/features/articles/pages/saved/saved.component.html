@@ -10,20 +10,19 @@
       <div class="row vertical-gap">
         <div class="col-lg-4">
           <div class="input-group">
-            <input name="search" type="text" class="form-control" placeholder="Type something...">
-            <button type="submit" class="nk-btn nk-btn-color-main-1"><span class="ion-search"></span>
+            <input #search type="text" name="search" class="form-control"
+                   placeholder="Type something..." value="">
+            <button type="submit" class="nk-btn nk-btn-color-main-1" (click)="filter({search: search.value})">
+              <span class="ion-search"></span>
             </button>
           </div>
         </div>
         <div class="col-lg-8">
           <div class="row vertical-gap">
             <div class="col-md-4">
-              <select name="condition" class="form-control">
-                <option value="" disabled="" selected="">Select Condition</option>
-<!--                {% for c in conditions %}-->
-<!--                <option value="{{ c.0 }}"-->
-<!--                        {% if form.condition == c.0 %}selected{% endif %}>{{ c.1 }}</option>-->
-<!--                {% endfor %}-->
+              <select #condition name="condition" id="condition" class="form-control">
+                <option value="">Choose condition...</option>
+                <option *ngFor="let c of objectKeys(conditions)" [value]="c">{{ conditions[c] }}</option>
               </select>
             </div>
             <div class="col-md-8">
@@ -38,7 +37,7 @@
                       class="nk-input-slider-value-1">1200</span> €</strong>
                   </div>
                   <div class="nk-input-slider-input">
-                    <input type="text" name="price" data-slider-min="0"
+                    <input #price type="text" name="price" data-slider-min="0"
                            data-slider-max="1800" data-slider-step="1"
                            data-slider-tooltip="hide"
                            data-slider-value="[0, 500]"
@@ -51,10 +50,10 @@
             </div>
           </div>
           <div class="float-right my-3">
-            <button type="submit" class="mx-2 d-inline nk-btn nk-btn-rounded nk-btn-color-white">Apply
+            <button type="submit" (click)="filter({price: price.value, condition: condition.value, search: search.value})"
+                    class="nk-btn nk-btn-rounded nk-btn-color-white float-right">Apply
             </button>
-            <a href="#"
-               class="mx-2 d-inline nk-btn nk-btn-rounded nk-btn-lg nk-btn-color-dark-3 w-100">
+            <a [routerLink]="activeRoute.snapshot.fragment" class="nk-btn nk-btn-rounded nk-btn-lg nk-btn-color-dark-3 w-100">
               Clear
             </a>
           </div>
