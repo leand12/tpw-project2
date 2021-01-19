@@ -44,7 +44,7 @@ export class ReviewService {
       url += '&reviewed=' + reviewed;
     }
 
-    return this.http.get<ReviewModel[]>(url, httpOptions);
+    return this.http.get<ReviewReadModel[]>(url, httpOptions);
   }
 
   getReview(id: number): Observable<ReviewModel> {
