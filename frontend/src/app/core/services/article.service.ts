@@ -21,7 +21,7 @@ export class ArticleService {
   }
 
   // tslint:disable-next-line:max-line-length
-  getArticlesFiltered(num?, maxPrice?, minPrice?, isSold?, seller?, buyer?, tags?: string[], name?, shopCart?, saved?, timesViewed?): Observable<ArticleReadModel[]> {
+  getArticlesFiltered(num?, maxPrice?, minPrice?, isSold?, seller?, buyer?, tags?: string[], name?, shopCart?, saved?, timesViewed?, condition?): Observable<ArticleReadModel[]> {
     let url: string = serviceURL + 'articles/?';
 
     if (num !== undefined)
@@ -81,6 +81,11 @@ export class ArticleService {
     if (timesViewed !== undefined)
     {
       url += '&times_viewed=' + timesViewed;
+    }
+
+    if (condition !== undefined)
+    {
+      url += '&condition=' + condition;
     }
 
     return this.http.get<ArticleReadModel[]>(url, httpOptions);
