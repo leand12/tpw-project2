@@ -7,11 +7,13 @@ import {ArticleService} from '@core/services/article.service';
 import {UserService} from '@core/services/user.service';
 import {ReviewService} from '@core/services/review.service';
 
+import {conditionChoices} from '@core/constants/choices';
+
 @Component({
   selector: 'app-article-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css'],
-  providers: [TagService, ArticleService, UserService, ReviewService]
+  providers: [TagService, ArticleService, ReviewService]
 })
 export class DetailsComponent implements OnInit, AfterViewInit {
   @ViewChild('rating') ratingView: ElementRef;
@@ -22,10 +24,11 @@ export class DetailsComponent implements OnInit, AfterViewInit {
   relatedArticles: any;
   userRating: number;
   userReviews: any;
+  conditions = conditionChoices;
 
   constructor(private activeRoute: ActivatedRoute,
               private tagService: TagService, private articleService: ArticleService,
-              private userService: UserService, private reviewService: ReviewService) { }
+              private reviewService: ReviewService) { }
 
   ngOnInit(): void {
     this.getURLParams();
@@ -60,14 +63,12 @@ export class DetailsComponent implements OnInit, AfterViewInit {
     }, (err) => console.error(err),
       () => {
         this.getTags();
-        this.getItems();
         this.getReviews();
         this.getRelatedArticles();
     });
   }
 
   private getTags(): void {
-    console.log('debug');
     this.articleTags = [];
     for (const id of this.article.tag) {
       this.tagService.getTag(id).subscribe((tag) =>
@@ -76,19 +77,11 @@ export class DetailsComponent implements OnInit, AfterViewInit {
     }
   }
 
-  private getItems(): void {
-    return;
-  }
-
   private getReviews(): void {
     this.reviewService.getReviewsFiltered(undefined, undefined, undefined, this.article.seller.id)
       .subscribe((reviews) =>
         this.userReviews = reviews
     );
-  }
-
-  private getSeller(): void {
-    return;
   }
 
   private getRelatedArticles(): void {

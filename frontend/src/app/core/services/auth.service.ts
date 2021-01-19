@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { tap, shareReplay } from 'rxjs/operators';
 
-import {authURL} from '@core/constants/consts';
+import {authURL} from '@core/constants/url';
 import {global} from '@core/utils/global';
 
 import * as moment from 'moment';

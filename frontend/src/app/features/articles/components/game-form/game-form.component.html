@@ -1,0 +1,114 @@
+<h4 class="mb-0"><span class="text-main-1" style="padding-left: 0.95em">&nbsp;Step #1</span>&ensp;Game Form</h4>
+<div class="nk-gap-2"></div>
+
+<!-- action="." method="post" enctype="multipart/form-data"-->
+<form *ngIf="gameForm" [formGroup]="gameForm" (ngSubmit)="submit()">
+  <div class="form-group row">
+    <label class="col-lg-2" for="name">*Name:</label>
+    <div class="col-lg-10">
+      <input id="name" type="text" formControlName="name" class="form-control">
+      <div *ngFor="let e of error?.error.name">
+        <a href="#" class="error">{{ e }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-lg-2" for="publisher">*Publisher:</label>
+    <div class="col-lg-10">
+      <input id="publisher" type="text" formControlName="publisher" class="form-control">
+      <div *ngFor="let e of error?.error.publisher">
+        <a href="#" class="error">{{ e }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-lg-2" for="release_year">*Release Year:</label>
+    <div class="col-lg-10">
+      <input id="release_year" type="number" formControlName="release_year" class="form-control" max="2050" step="1">
+      <div *ngFor="let e of error?.error.release_year">
+        <a href="#" class="error">{{ e }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-lg-2" for="genre">*Genre:</label>
+    <div class="col-lg-10">
+      <input id="genre" type="text" formControlName="genre" class="form-control">
+      <div *ngFor="let e of error?.error.genre">
+        <a href="#" class="error">{{ e }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-lg-2" for="condition">*Condition:</label>
+    <div class="col-lg-10">
+      <select id="condition" formControlName="condition" class="form-control">
+        <option *ngFor="let c of objectKeys(conditions)" [value]="c">{{ conditions[c] }}</option>
+      </select>
+      <div *ngFor="let e of error?.error.condition">
+        <a href="#" class="error">{{ e }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-lg-2" for="platform">*Platform:</label>
+    <div class="col-lg-10">
+      <select id="platform" formControlName="platform" class="form-control">
+        <option *ngFor="let c of objectKeys(platforms)" [value]="c">{{ platforms[c] }}</option>
+      </select>
+      <div *ngFor="let e of error?.error.platform">
+        <a href="#" class="error">{{ e }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-lg-2" for="rating">*Rating:</label>
+    <div class="col-lg-10">
+      <select id="rating" formControlName="rating" class="form-control">
+        <option *ngFor="let c of objectKeys(ratings)" [value]="c">{{ ratings[c] }}</option>
+      </select>
+      <div *ngFor="let e of error?.error.rating">
+        <a href="#" class="error">{{ e }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-lg-2" for="image">*Image:</label>
+    <div class="col-lg-10">
+      <!-- TODO: add accept="image/*" if necessary -->
+      <input id="image" type="file" formControlName="image">
+      <div *ngFor="let e of error?.error.image">
+        <a href="#" class="error">{{ e }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-lg-2" for="price">*Price:</label>
+    <div class="col-lg-10">
+      <input id="price" type="number" formControlName="price" class="form-control" max="1000000000000" step="1">
+      <div *ngFor="let e of error?.error.price">
+        <a href="#" class="error">{{ e }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="nk-gap-1"></div>
+
+  <div class="clearfix">
+    <button type="submit" class="nk-btn nk-btn-color-main-1 float-right ml-sm-4">Confirm Game</button>
+    <button class="nk-btn nk-btn-color-dark-3 float-right ml-sm-4" (click)="stateChange.emit(0)">Cancel</button>
+  </div>
+
+  <!-- TODO: remove debug lines -->
+  <p>{{ error?.message }}</p>
+  <p *ngIf="error">{{ error?.error | json }}</p>
+
+</form>

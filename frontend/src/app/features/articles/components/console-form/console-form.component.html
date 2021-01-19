@@ -1,0 +1,100 @@
+<h4 class="mb-0"><span class="text-main-1" style="padding-left: 0.95em">&nbsp;Step #1</span>&ensp;Console Form</h4>
+<div class="nk-gap-2"></div>
+
+<!--<form action="." method="post" enctype="multipart/form-data" (ngSubmit)="submit()">-->
+<form *ngIf="consoleForm" [formGroup]="consoleForm" (ngSubmit)="submit()">
+  <div class="form-group row">
+    <label for="name" class="col-lg-2">Name:</label>
+    <div class="col-lg-10">
+      <input id="name" type="text" formControlName="name" class="form-control">
+      <div *ngFor="let e of error?.error.name">
+        <a href="#" class="error">{{ e }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="brand" class="col-lg-2">Brand:</label>
+    <div class="col-lg-10">
+      <input id="brand" type="text" formControlName="brand" class="form-control">
+      <div *ngFor="let e of error?.error.brand">
+        <a href="#" class="error">{{ e }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="release_year" class="col-lg-2">Release Year:</label>
+    <div class="col-lg-10">
+      <input id="release_year" type="number" formControlName="release_year" class="form-control" max="2050" step="1">
+      <div *ngFor="let e of error?.error.release_year">
+        <a href="#" class="error">{{ e }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="storage_capacity" class="col-lg-2">Storage Capacity:</label>
+    <div class="col-lg-10">
+      <input id="storage_capacity" type="text" formControlName="storage_capacity" class="form-control">
+      <div *ngFor="let e of error?.error.storage_capacity">
+        <a href="#" class="error">{{ e }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="color" class="col-lg-2">Color:</label>
+    <div class="col-lg-10">
+      <input id="color" type="text" formControlName="color" class="form-control">
+      <div *ngFor="let e of error?.error.color">
+        <a href="#" class="error">{{ e }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="condition" class="col-lg-2">Condition:</label>
+    <div class="col-lg-10">
+      <select id="condition" formControlName="condition" class="form-control">
+        <option *ngFor="let c of objectKeys(conditions)" [value]="c">{{ conditions[c] }}</option>
+      </select>
+      <div *ngFor="let e of error?.error.condition">
+        <a href="#" class="error">{{ e }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="image" class="col-lg-2">Image:</label>
+    <div class="col-lg-10">
+      <input id="image" type="file" formControlName="image">
+      <div *ngFor="let e of error?.error.image">
+        <a href="#" class="error">{{ e }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="price" class="col-lg-2">Price:</label>
+    <div class="col-lg-10">
+      <input id="price" type="number" formControlName="price" class="form-control" max="1000000000000" step="1">
+      <div *ngFor="let e of error?.error.price">
+        <a href="#" class="error">{{ e }}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="nk-gap-1"></div>
+
+  <div class="clearfix">
+      <button type="submit" class="nk-btn nk-btn-color-main-1 float-right ml-sm-4">Confirm Console</button>
+      <button class="nk-btn nk-btn-color-dark-3 float-right ml-sm-4" (click)="stateChange.emit(0)">Cancel</button>
+  </div>
+
+  <!-- TODO: remove debug lines -->
+  <p>{{ error?.message }}</p>
+  <p *ngIf="error">{{ error?.error | json }}</p>
+
+</form>
+

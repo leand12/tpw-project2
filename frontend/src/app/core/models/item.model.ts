@@ -1,10 +1,9 @@
-import { ArticleModel } from './article.model';
-
-export class ItemModel {
-  id: number;
+export interface ItemModel {
+  id?: number;
+  id2?: number;
   price: number;
   name: string;
-  image: string;
-  condition: string;
-  pertainingArticle: ArticleModel;
+  image?: string;
+  condition?: string;
+  pertaining_article: number;
 }

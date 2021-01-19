@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/internal/Observable';
 
 import { TagModel } from '@core/models/tag.model';
 
-import { baseURL } from '@core/constants/consts';
+import { baseURL } from '@core/constants/url';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,7 +17,7 @@ export class TagService {
   constructor(private http: HttpClient) { }
 
   getTags(num?: number): Observable<TagModel[]> {
-    const url = baseURL + 'tags?';
+    const url = baseURL + 'tags/?';
     if (num !== undefined) {
       url.concat('&num=' + num);
     }

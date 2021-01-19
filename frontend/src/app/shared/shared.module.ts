@@ -33,10 +33,9 @@ import { ReviewCommentComponent } from './components/review-comment/review-comme
     ViewGamesFilterComponent,
     ArticlesWidgetComponent,
     ArticlesWidgetChildComponent,
+    ReviewCommentComponent,
 
     ArrayLengthPipe,
-
-    ReviewCommentComponent,
   ],
     exports: [
         CommonModule,
@@ -48,9 +47,9 @@ import { ReviewCommentComponent } from './components/review-comment/review-comme
         ErrorBoxComponent,
         ViewGamesFilterComponent,
         ArticlesWidgetComponent,
+        ReviewCommentComponent,
 
         ArrayLengthPipe,
-        ReviewCommentComponent,
     ]
 })
 export class SharedModule { }
