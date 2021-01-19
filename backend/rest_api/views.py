@@ -49,7 +49,7 @@ def get_article(request):
 
 @api_view(['GET'])
 def get_articles(request):
-    articles = Article.objects.all()
+    articles = Article.objects.filter(name__iregex=r'\b.*[a-zA-Z]+.*\b')
     if 'max_price' in request.GET:
         articles = articles.filter(total_price__lte=request.GET['max_price'])
     if 'min_price' in request.GET:
