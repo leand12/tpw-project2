@@ -30,8 +30,8 @@ export class ArticleForm2Component implements OnInit {
     } else {
       this.initForm(this.article);
     }
-    this.getItems();
     this.totalPrice = 0;
+    this.getItems();
   }
 
   initForm(article?: any): void {
@@ -46,7 +46,10 @@ export class ArticleForm2Component implements OnInit {
 
   getItems(): void {
     this.itemService.getFilteredItems(this.article.id).subscribe(
-      (items) => this.items = items,
+      (items) => {
+        this.items = items;
+        items.map((i) => this.totalPrice += i.price);
+      },
     );
   }
 

@@ -41,8 +41,8 @@ export class ConsoleService {
     return this.http.put(url, console, httpOptions);
   }
 
-  deleteConsole(console: ConsoleModel): Observable<any> {
-    const url = baseURL + 'delete/console/' + console.id + '/';
+  deleteConsole(id: number): Observable<any> {
+    const url = baseURL + 'delete/console/' + id + '/';
     return this.http.delete<ConsoleModel>(url, httpOptions);
   }
 }

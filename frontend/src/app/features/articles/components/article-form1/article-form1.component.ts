@@ -35,14 +35,33 @@ export class ArticleForm1Component implements OnInit {
 
   getGames(): void {
     this.gameService.getGames(this.article.id).subscribe(
-      (games) => this.games = games,
+      (games) => {
+        this.games = games;
+        games.map((g) => this.totalPrice += g.price);
+      },
     );
   }
 
   getConsoles(): void {
     this.consoleService.getConsoles(this.article.id).subscribe(
-      (consoles) => this.consoles = consoles,
+      (consoles) => {
+        this.consoles = consoles;
+        consoles.map((c) => this.totalPrice += c.price);
+      },
     );
   }
 
+  deleteGame(id: number): void {
+    // remove on template
+    this.games = this.games.filter((g) => g.id !== id);
+    // remove on api
+    this.gameService.deleteGame(id).subscribe();
+  }
+
+  deleteConsole(id: number): void {
+    // remove on template
+    this.consoles = this.consoles.filter((g) => g.id !== id);
+    // remote on api
+    this.consoleService.deleteConsole(id).subscribe();
+  }
 }
