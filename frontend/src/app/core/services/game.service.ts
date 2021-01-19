@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 
-import {baseURL} from '../constants/url';
+import {serviceURL} from '../constants/url';
 import {GameModel} from '@core/models/game.model';
 
 const httpOptions = {
@@ -19,7 +19,7 @@ export class GameService {
   }
 
   getGames(pertainingArticle?: number): Observable<GameModel[]> {
-    let url = baseURL + 'games/?';
+    let url = serviceURL + 'games/?';
     if (pertainingArticle !== undefined) {
       url += 'pertaining_article=' + pertainingArticle;
     }
@@ -27,7 +27,7 @@ export class GameService {
   }
 
   getGame(id: number): Observable<GameModel> {
-    const url = baseURL + 'game/?id=' + id;
+    const url = serviceURL + 'game/?id=' + id;
     return this.http.get<GameModel>(url, httpOptions);
   }
 
@@ -60,7 +60,7 @@ export class GameService {
   }
 
   deleteGame(id: number): Observable<any> {
-    const url = baseURL + 'delete/game/' + id + '/';
+    const url = serviceURL + 'delete/game/' + id + '/';
     return this.http.delete(url, httpOptions);
   }
 }

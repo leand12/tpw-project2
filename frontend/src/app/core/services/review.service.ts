@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 
 import {ReviewModel, ReviewReadModel} from '@core/models/review.model';
-import {baseURL} from '@core/constants/url';
+import {serviceURL} from '@core/constants/url';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,12 +17,12 @@ export class ReviewService {
   constructor(private http: HttpClient) { }
 
   getReviews(): Observable<ReviewModel[]> {
-    const url = baseURL + 'reviews/';
+    const url = serviceURL + 'reviews/';
     return this.http.get<ReviewModel[]>(url, httpOptions);
   }
 
   getReviewsFiltered(num?, rate?, reviewer?, reviewed?): Observable<ReviewReadModel[]> {
-    let url: string = baseURL + 'reviews/?';
+    let url: string = serviceURL + 'reviews/?';
 
     if (num !== undefined)
     {
@@ -48,12 +48,12 @@ export class ReviewService {
   }
 
   getReview(id: number): Observable<ReviewReadModel> {
-    const url = baseURL + 'review/?id=' + id;
+    const url = serviceURL + 'review/?id=' + id;
     return this.http.get<ReviewReadModel>(url, httpOptions);
   }
 
   createReview(rev: ReviewModel): Observable<any> {
-    const url = baseURL + 'create/review/';
+    const url = serviceURL + 'create/review/';
     return this.http.post(url, rev, httpOptions);
   }
 }

@@ -62,7 +62,7 @@ class Command(BaseCommand):
         user2 = User.objects.get(id=2)
         user3 = User.objects.get(id=3)
         Review(rate=3, description='good enough', reviewer=user2, reviewed=user1).save()
-        r = Review(rate=3, description='great', reviewer=user2, reviewed=user3)
+        r = Review(rate=3, description='great', reviewer=user1, reviewed=user3)
         r.save()
 
     @classmethod
