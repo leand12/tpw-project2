@@ -87,9 +87,7 @@ def get_articles(request):
 
 @api_view(['POST'])
 def create_article(request):
-    print(request.data)
     serializer = ArticleSerializer(data=request.data)
-    print(serializer)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -371,8 +369,13 @@ def get_reviews(request):
 
 @api_view(['POST'])
 def create_review(request):
+    print(request.data)
     serializer = ReviewSerializer(data=request.data)
+    print(serializer)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    print(
+        serializer.errors
+    )
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

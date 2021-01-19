@@ -173,47 +173,7 @@
                 <!-- START: Reply -->
                 <h3 class="h4">Add a Review to this User</h3>
                 <div class="nk-reply">
-                  <form action="." method="post" class="nk-form" novalidate="novalidate">
-<!--                    {% csrf_token %}-->
-                    <textarea class="form-control required" name="message" rows="5"
-                              placeholder="Your Review *" aria-required="true"></textarea>
-                    <div class="nk-gap-1"></div>
-                    <div class="nk-rating">
-                      <input type="radio" id="review-rate-5" name="rate" value="5">
-                      <label for="review-rate-5">
-                        <span><i class="far fa-star"></i></span>
-                        <span><i class="fa fa-star"></i></span>
-                      </label>
-
-                      <input type="radio" id="review-rate-4" name="rate" value="4">
-                      <label for="review-rate-4">
-                        <span><i class="far fa-star"></i></span>
-                        <span><i class="fa fa-star"></i></span>
-                      </label>
-
-                      <input type="radio" id="review-rate-3" name="rate" value="3">
-                      <label for="review-rate-3">
-                        <span><i class="far fa-star"></i></span>
-                        <span><i class="fa fa-star"></i></span>
-                      </label>
-
-                      <input type="radio" id="review-rate-2" name="rate" value="2">
-                      <label for="review-rate-2">
-                        <span><i class="far fa-star"></i></span>
-                        <span><i class="fa fa-star"></i></span>
-                      </label>
-
-                      <input type="radio" id="review-rate-1" name="rate" value="1">
-                      <label for="review-rate-1">
-                        <span><i class="far fa-star"></i></span>
-                        <span><i class="fa fa-star"></i></span>
-                      </label>
-                    </div>
-                    <button type="submit" name="review"
-                            class="nk-btn nk-btn-rounded nk-btn-color-dark-3 float-right">
-                      Submit
-                    </button>
-                  </form>
+                  <app-review-form *ngIf="article" [reviewedId]="article.seller.id" (newReview)="handleNewReview($event)"></app-review-form>
                 </div>
                 <!-- END: Reply -->
 

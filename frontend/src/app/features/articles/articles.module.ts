@@ -18,6 +18,7 @@ import { ArticleForm1Component } from './components/article-form1/article-form1.
 import { ArticleForm2Component } from './components/article-form2/article-form2.component';
 import { GameFormComponent } from './components/game-form/game-form.component';
 import { ConsoleFormComponent } from './components/console-form/console-form.component';
+import { ReviewFormComponent } from './components/review-form/review-form.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { ConsoleFormComponent } from './components/console-form/console-form.com
     ArticleForm2Component,
     GameFormComponent,
     ConsoleFormComponent,
+    ReviewFormComponent,
   ],
   exports: [
   ],

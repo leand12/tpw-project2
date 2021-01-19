@@ -52,6 +52,10 @@ export class DetailsComponent implements OnInit, AfterViewInit {
     ];
   }
 
+  handleNewReview(review: any): void {
+    this.userReviews.push(review);
+  }
+
   getURLParams(): void {
     this.activeRoute.params.subscribe(routeParams => {
       this.getArticle(routeParams.id);
