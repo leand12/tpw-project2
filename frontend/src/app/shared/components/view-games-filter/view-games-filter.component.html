@@ -1,13 +1,13 @@
 <div class="row vertical-gap">
-  <div class="col-lg-4" *ngFor="let p of platforms">
-    <div [routerLink]="['/articles/store/games', p[0]]" queryParamsHandling="preserve" style="cursor: pointer">
-    <div class="nk-feature-1" [style.border]="selected == p[0]? '1px solid #dd163b': ''">
+  <div class="col-lg-4" *ngFor="let p of objectKeys(platforms)">
+    <div (click)="filterPlatform(p)" style="cursor: pointer">
+    <div class="nk-feature-1" [style.border]="selected == p? '1px solid #dd163b': ''">
       <div class="nk-feature-icon">
-        <img src="assets/images/icon-platform-{{ p[0] }}.png" alt="{{ p[1] }}">
+        <img src="assets/images/icon-platform-{{ p }}.png" alt="{{ platforms[p] }}">
       </div>
       <div class="nk-feature-cont">
         <h3 class="nk-feature-title">
-          {{ p[1] }}
+          {{ platforms[p] }}
         </h3>
         <h3 class="nk-feature-title text-main-1">
           View Games

@@ -48,8 +48,6 @@ export class OwnedComponent implements OnInit {
       undefined,
       false,
       userId,
-      undefined,
-      undefined
     ).subscribe((articles) =>
       this.articlesOnSale = articles,
       (err) => console.error(err));
@@ -62,8 +60,6 @@ export class OwnedComponent implements OnInit {
       undefined,
       true,
       userId,
-      undefined,
-      undefined
     ).subscribe((articles) =>
         this.articlesSold = articles,
       (err) => console.error(err));
@@ -77,7 +73,6 @@ export class OwnedComponent implements OnInit {
       undefined,
       undefined,
       userId,
-      undefined
     ).subscribe((articles) =>
         this.articlesPurchased = articles,
       (err) => console.error(err));
