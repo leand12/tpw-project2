@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 
-import {baseURL} from '../constants/url';
+import {serviceURL} from '../constants/url';
 import {GameModel} from '@core/models/game.model';
 
 const httpOptions = {
@@ -19,7 +19,7 @@ export class GameService {
   }
 
   getGames(pertainingArticle?: number): Observable<GameModel[]> {
-    let url = baseURL + 'games/?';
+    let url = serviceURL + 'games/?';
     if (pertainingArticle !== undefined) {
       url += 'pertaining_article=' + pertainingArticle;
     }
@@ -27,22 +27,22 @@ export class GameService {
   }
 
   getGame(id: number): Observable<GameModel> {
-    const url = baseURL + 'game/?id=' + id;
+    const url = serviceURL + 'game/?id=' + id;
     return this.http.get<GameModel>(url, httpOptions);
   }
 
   createGame(game: GameModel): Observable<any> {
-    const url = baseURL + 'create/game/';
+    const url = serviceURL + 'create/game/';
     return this.http.post(url, game, httpOptions);
   }
 
   updateGame(game: GameModel): Observable<any> {
-    const url = baseURL + 'update/game/?id=' + game.id;
+    const url = serviceURL + 'update/game/?id=' + game.id;
     return this.http.put(url, game, httpOptions);
   }
 
   deleteGame(id: number): Observable<any> {
-    const url = baseURL + 'delete/game/' + id + '/';
+    const url = serviceURL + 'delete/game/' + id + '/';
     return this.http.delete(url, httpOptions);
   }
 }

@@ -6,7 +6,8 @@ import {ArticleService} from '@core/services/article.service';
 import {ReviewService} from '@core/services/review.service';
 import {ReviewModel, ReviewReadModel} from '@core/models/review.model';
 import {UserModel} from '@core/models/user.model';
-import {UserProfileModel} from "@core/models/user-profile.model";
+import {UserProfileModel} from '@core/models/user-profile.model';
+import {baseURL} from '@core/constants/url';
 
 @Component({
   selector: 'app-details',
@@ -23,6 +24,7 @@ export class DetailsComponent implements OnInit {
   reviews: any;
   revProfiles: UserProfileModel[];
   avgRating = 0;
+  baseURL = baseURL;
 
   constructor(private activeRoute: ActivatedRoute, private articleService: ArticleService,
               private reviewService: ReviewService, private userService: UserService) {

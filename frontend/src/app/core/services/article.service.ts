@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 
-import {baseURL} from '@core/constants/url';
+import {serviceURL} from '@core/constants/url';
 import {ArticleModel, ArticleReadModel} from '@core/models/article.model';
 
 const httpOptions = {
@@ -16,13 +16,13 @@ export class ArticleService {
   constructor(private http: HttpClient) { }
 
   getArticles(): Observable<ArticleModel[]> {
-    const url = baseURL + 'articles/';
+    const url = serviceURL + 'articles/';
     return this.http.get<ArticleModel[]>(url, httpOptions);
   }
 
   // tslint:disable-next-line:max-line-length
   getArticlesFiltered(num?, maxPrice?, minPrice?, isSold?, seller?, buyer?, tags?: string[], name?, shopCart?, saved?, timesViewed?): Observable<ArticleReadModel[]> {
-    let url: string = baseURL + 'articles/?';
+    let url: string = serviceURL + 'articles/?';
 
     if (num !== undefined)
     {
@@ -87,7 +87,7 @@ export class ArticleService {
   }
 
   getArticle(id?: number, name?: string): Observable<ArticleReadModel> {
-    let url = baseURL + 'article/?';
+    let url = serviceURL + 'article/?';
     if (id !== undefined) {
       url += 'id=' + id;
     } else if (name !== undefined) {
@@ -99,17 +99,17 @@ export class ArticleService {
   }
 
   createArticle(art: ArticleModel): Observable<any> {
-    const url = baseURL + 'create/article/';
+    const url = serviceURL + 'create/article/';
     return this.http.post(url, art, httpOptions);
   }
 
   updateArticle(art: ArticleModel): Observable<any> {
-    const url = baseURL + 'update/article/?id=' + art.id;
+    const url = serviceURL + 'update/article/?id=' + art.id;
     return this.http.put(url, art, httpOptions);
   }
 
   deleteArticle(art: ArticleModel): Observable<any> {
-    const url = baseURL + 'delete/article/' + art.id + '/';
+    const url = serviceURL + 'delete/article/' + art.id + '/';
     return this.http.delete<ArticleModel>(url, httpOptions);
   }
 }
