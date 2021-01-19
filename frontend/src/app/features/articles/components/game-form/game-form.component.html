@@ -10,6 +10,9 @@
       <div *ngFor="let e of error?.error.name">
         <a href="#" class="error">{{ e }}</a>
       </div>
+      <div class="form-control-feedback" *ngIf="formName.errors && (formName.dirty || formName.touched)">
+        <a href="#" class="error" *ngIf="formName.errors.pattern">Name must not be a number.</a>
+      </div>
     </div>
   </div>
 
@@ -83,7 +86,7 @@
     <label class="col-lg-2" for="image">*Image:</label>
     <div class="col-lg-10">
       <!-- TODO: add accept="image/*" if necessary -->
-      <input id="image" type="file" formControlName="image">
+      <input id="image" type="file" name="image" (change)="handleFileInput($event.target.files)">
       <div *ngFor="let e of error?.error.image">
         <a href="#" class="error">{{ e }}</a>
       </div>

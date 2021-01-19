@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ConsoleService} from '@core/services/console.service';
 import {conditionChoices} from '@core/constants/choices';
 
@@ -14,9 +14,11 @@ export class ConsoleFormComponent implements OnInit {
   @Input() consoleId?: any;
   @Output() stateChange = new EventEmitter();
   consoleForm: FormGroup;
+  formName: FormControl;
   error: any;
   objectKeys = Object.keys;
   conditions = conditionChoices;
+  private fileToUpload: File;
 
   constructor(private consoleService: ConsoleService) { }
 
@@ -29,8 +31,9 @@ export class ConsoleFormComponent implements OnInit {
   }
 
   initForm(console?: any): void {
+    this.formName = new FormControl(console?.name, [Validators.pattern('.*[a-zA-Z]+.*')]);
     this.consoleForm = new FormGroup({
-      name: new FormControl(console?.name),
+      name: this.formName,
       brand: new FormControl(console?.brand),
       release_year: new FormControl(console?.release_year),
       storage_capacity: new FormControl(console?.storage_capacity),
@@ -41,17 +44,23 @@ export class ConsoleFormComponent implements OnInit {
     });
   }
 
+  handleFileInput(files: FileList): void {
+    // image validation is on backend
+    this.fileToUpload = files.item(0);
+  }
+
   submit(): void {
+    if (this.formName.errors) { return; }
     const console = this.consoleForm.value;
     console.pertaining_article = this.articleId;
     if (this.consoleId) {
       console.id = this.consoleId;
-      this.consoleService.updateConsole(console).subscribe(
+      this.consoleService.updateConsole(console, this.fileToUpload).subscribe(
         () => this.stateChange.emit(0),
         error => this.error = error
         );
     } else {
-      this.consoleService.createConsole(console).subscribe(
+      this.consoleService.createConsole(console, this.fileToUpload).subscribe(
         () => this.stateChange.emit(0),
         error => this.error = error
         );

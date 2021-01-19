@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {conditionChoices, platformChoices, ratingChoices} from '@core/constants/choices';
 import {GameService} from '@core/services/game.service';
 
@@ -14,11 +14,13 @@ export class GameFormComponent implements OnInit {
   @Input() gameId?: any;
   @Output() stateChange = new EventEmitter();
   gameForm: FormGroup;
+  formName: FormControl;
   error: any;
   objectKeys = Object.keys;
   conditions = conditionChoices;
   platforms = platformChoices;
   ratings = ratingChoices;
+  private fileToUpload: File;
 
   constructor(private gameService: GameService) { }
 
@@ -31,30 +33,36 @@ export class GameFormComponent implements OnInit {
   }
 
   initForm(game?: any): void {
+    this.formName = new FormControl(game?.name, [Validators.pattern('.*[a-zA-Z]+.*')]);
     this.gameForm = new FormGroup({
-      name: new FormControl(game?.name),
+      name: this.formName,
       publisher: new FormControl(game?.publisher),
       release_year: new FormControl(game?.release_year),
       genre: new FormControl(game?.genre),
       condition: new FormControl(game?.condition),
       platform: new FormControl(game?.platform),
       rating: new FormControl(game?.rating),
-      image: new FormControl(game?.image),
       price: new FormControl(game?.price),
     });
   }
 
+  handleFileInput(files: FileList): void {
+    // image validation is on backend
+    this.fileToUpload = files.item(0);
+  }
+
   submit(): void {
+    if (this.formName.errors) { return; }
     const game = this.gameForm.value;
     game.pertaining_article = this.articleId;
     if (this.gameId) {
       game.id = this.gameId;
-      this.gameService.updateGame(game).subscribe(
+      this.gameService.updateGame(game, this.fileToUpload).subscribe(
         () => this.stateChange.emit(0),
         error => this.error = error
       );
     } else {
-      this.gameService.createGame(game).subscribe(
+      this.gameService.createGame(game, this.fileToUpload).subscribe(
         () => this.stateChange.emit(0),
         error => this.error = error
         );

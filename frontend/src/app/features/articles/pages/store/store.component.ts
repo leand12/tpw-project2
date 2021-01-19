@@ -60,14 +60,17 @@ export class StoreComponent implements OnInit, AfterViewInit {
       undefined,
       this.price[1],
       this.price[0],
-      undefined,
+      false,
       undefined,
       undefined,
       this.tags,
       this.search,
       undefined,
       undefined,
-      undefined
+      undefined,
+      undefined,
+      this.type,
+      this.platform
     ).subscribe(
       articles => this.articles = articles,
       error => this.error = error

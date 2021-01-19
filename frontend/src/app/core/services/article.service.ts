@@ -20,72 +20,29 @@ export class ArticleService {
     return this.http.get<ArticleModel[]>(url, httpOptions);
   }
 
-  // tslint:disable-next-line:max-line-length
-  getArticlesFiltered(num?, maxPrice?, minPrice?, isSold?, seller?, buyer?, tags?: string[], name?, shopCart?, saved?, timesViewed?, condition?): Observable<ArticleReadModel[]> {
+  getArticlesFiltered(num?, maxPrice?, minPrice?, isSold?, seller?, buyer?, tags?: string[], name?, shopCart?, saved?,
+                      timesViewed?, condition?, type?, platform?): Observable<ArticleReadModel[]> {
     let url: string = serviceURL + 'articles/?';
 
-    if (num !== undefined)
-    {
-      url += '&num=' + num;
-    }
-
-    if (maxPrice !== undefined)
-    {
-      url += '&max_price=' + maxPrice;
-    }
-
-    if (minPrice !== undefined)
-    {
-      url += '&min_price=' + minPrice;
-    }
-
-    if (isSold !== undefined)
-    {
-      url += '&is_sold=' + isSold;
-    }
-
-    if (seller !== undefined)
-    {
-      url += '&seller=' + seller;
-    }
-
-    if (buyer !== undefined)
-    {
-      url += '&buyer=' + buyer;
-    }
-
-    if (tags !== undefined)
-    {
+    if (num !== undefined) {url += '&num=' + num; }
+    if (maxPrice !== undefined) {url += '&max_price=' + maxPrice; }
+    if (minPrice !== undefined) {url += '&min_price=' + minPrice; }
+    if (isSold !== undefined) {url += '&is_sold=' + isSold; }
+    if (seller !== undefined) {url += '&seller=' + seller; }
+    if (buyer !== undefined) {url += '&buyer=' + buyer; }
+    if (name !== undefined) {url += '&name=' + name; }
+    if (shopCart !== undefined) {url += '&shop_cart=' + shopCart; }
+    if (saved !== undefined) {url += '&saved=' + saved; }
+    if (timesViewed !== undefined) {url += '&times_viewed=' + timesViewed; }
+    if (condition !== undefined) {url += '&condition=' + condition; }
+    if (type !== undefined) {url += '&type=' + type; }
+    if (platform !== undefined) {url += '&platform=' + platform; }
+    if (tags !== undefined) {
       let tagString = '';
       tags.forEach((element) => {
         tagString += element + ',';
       });
       url += '&tags=' + tagString;
-    }
-
-    if (name !== undefined)
-    {
-      url += '&name=' + name;
-    }
-
-    if (shopCart !== undefined)
-    {
-      url += '&shop_cart=' + shopCart;
-    }
-
-    if (saved !== undefined)
-    {
-      url += '&saved=' + saved;
-    }
-
-    if (timesViewed !== undefined)
-    {
-      url += '&times_viewed=' + timesViewed;
-    }
-
-    if (condition !== undefined)
-    {
-      url += '&condition=' + condition;
     }
 
     return this.http.get<ArticleReadModel[]>(url, httpOptions);

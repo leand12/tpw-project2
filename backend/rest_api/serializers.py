@@ -72,23 +72,35 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 
 class ItemSerializer(serializers.ModelSerializer):
+    def validate_image(self, image):
+        try:
+            # validate file size
+            if image.size > 20000000:  # 20MB
+                print(image.size)
+                raise serializers.ValidationError("Image size may not exceed 20MB.")
+            # validate content type
+            main, sub = image.content_type.split('/')
+            if not (main == 'image' and sub in ['jpeg', 'pjpeg', 'gif', 'png']):
+                raise serializers.ValidationError("Please use a JPEG, GIF or PNG image.""")
+        except Exception:
+            raise serializers.ValidationError("Invalid file.")
+        return image
+
     class Meta:
         model = Item
         fields = ('id', 'id2', 'price', 'name', 'image', 'condition', 'pertaining_article')
 
 
-class GameSerializer(serializers.ModelSerializer):
+class GameSerializer(ItemSerializer):
     class Meta:
         model = Game
-        fields = ('id', 'id2', 'price', 'name', 'image', 'condition', 'pertaining_article', 'release_year', 'publisher',
-                  'genre', 'rating', 'platform')
+        fields = ItemSerializer.Meta.fields + ('release_year', 'publisher', 'genre', 'rating', 'platform')
 
 
-class ConsoleSerializer(serializers.ModelSerializer):
+class ConsoleSerializer(ItemSerializer):
     class Meta:
         model = Console
-        fields = ('id', 'id2', 'price', 'name', 'image', 'condition', 'pertaining_article', 'release_year', 'brand',
-                  'storage_capacity', 'color')
+        fields = ItemSerializer.Meta.fields + ('release_year', 'brand', 'storage_capacity', 'color')
 
 
 class ReviewSerializer(serializers.ModelSerializer):

@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {platformChoices} from '@core/constants/choices';
 
 @Component({
   selector: 'app-view-games-filter',
@@ -7,19 +9,24 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ViewGamesFilterComponent implements OnInit {
   @Input() selected: string;
-  platforms: Array<[string, string]>;
+  objectKeys = Object.keys;
+  platforms = platformChoices;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.platforms = [
-      ['PS', 'Playstation'],
-      ['XB', 'Xbox One'],
-      ['SW', 'Nintendo'],
-      ['PC', 'Computer'],
-      ['WI', 'Wii'],
-      ['RT', 'Retro'],
-    ];
+  }
+
+  filterPlatform(platform: string): void {
+    if (this.selected === platform) {
+      this.router.navigate(
+        ['/articles/store/games'],
+        { queryParamsHandling: 'preserve' });
+    } else {
+      this.router.navigate(
+        ['/articles/store/games', platform],
+        { queryParamsHandling: 'preserve' });
+    }
   }
 
 }
