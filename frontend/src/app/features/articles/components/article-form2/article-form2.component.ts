@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {ArticleService} from '@core/services/article.service';
 import {ItemService} from '@core/services/item.service';
 import { global } from '@core/utils/global';
+import {fixDecimals} from '@core/utils/utils';
 
 @Component({
   selector: 'app-article-form2',
@@ -40,7 +41,6 @@ export class ArticleForm2Component implements OnInit {
     this.articleForm = new FormGroup({
       name: this.formName,
       description: new FormControl(article?.description),
-      shipping_time: new FormControl(article?.shipping_time),
       shipping_fee: new FormControl(article?.shipping_fee),
       tag: new FormControl(article?.tag),
     });
@@ -50,7 +50,7 @@ export class ArticleForm2Component implements OnInit {
     this.itemService.getFilteredItems(this.article.id).subscribe(
       (items) => {
         this.items = items;
-        items.map((i) => this.totalPrice += i.price);
+        items.map((i) => this.totalPrice = fixDecimals(i.price + this.totalPrice));
       },
     );
   }
@@ -62,6 +62,7 @@ export class ArticleForm2Component implements OnInit {
     article.tag = [];
     article.seller = global.getUserId();
     article.items_in_article = this.items.map((i) => i.id);
+    article.total_price = this.totalPrice;
     this.articleService.updateArticle(article).subscribe(
       () => this.router.navigate(['/articles/owned', global.getUserId()], {fragment: 'onsale'}),
       error => this.error = error
