@@ -24,6 +24,9 @@ def get_tag(request, id):
 @api_view(['GET'])
 def get_tags(request):
     tags = Tag.objects.filter(is_popular=True)
+    if 'is_popular' in request.GET:
+        is_popular = eval(request.GET['is_popular'].capitalize())
+        tags = tags.filter(is_popular=is_popular)
     if 'num' in request.GET:
         num = int(request.GET['num'])
         tags = tags[:num]

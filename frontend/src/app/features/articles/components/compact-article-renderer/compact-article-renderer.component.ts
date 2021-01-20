@@ -34,11 +34,9 @@ export class CompactArticleRendererComponent implements OnInit, AfterViewInit {
           for (const r of reviews ){
             sum += r.rate;
           }
-          console.log(reviews);
           this.userReviewsNum = reviews.length;
           this.userRating = reviews.length ? Math.floor(sum / reviews.length) : 0;
           this.ratingView.nativeElement.innerHTML = htmlRatingIcons(this.userRating);
-
         }
       );
   }

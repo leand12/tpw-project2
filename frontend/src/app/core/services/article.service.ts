@@ -33,7 +33,7 @@ export class ArticleService {
     if (name !== undefined)        {url += '&name=' + name; }
     if (shopCart !== undefined)    {url += '&shop_cart=' + shopCart; }
     if (saved !== undefined)       {url += '&saved=' + saved; }
-    if (timesViewed !== undefined) {url += '&times_viewed=' + timesViewed; }
+    if (timesViewed !== undefined) {url += '&times_viewed='; }
     if (condition !== undefined)   {url += '&condition=' + condition; }
     if (type !== undefined)        {url += '&type=' + type; }
     if (platform !== undefined)    {url += '&platform=' + platform; }

@@ -59,7 +59,7 @@ class RegisterSerializer(serializers.Serializer):
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
-        fields = ('name', 'is_popular')
+        fields = ('id', 'name', 'is_popular')
 
 
 class UserSerializer(serializers.ModelSerializer):
