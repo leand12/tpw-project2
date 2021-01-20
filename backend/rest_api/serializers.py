@@ -136,5 +136,6 @@ class ReviewReadSerializer(ReviewSerializer):
 
 
 class ArticleReadSerializer(ArticleSerializer):
+    tag = TagSerializer(read_only=True, many=True)
     seller = UserSerializer(read_only=True)
     items_in_article = ItemSerializer(read_only=True, many=True)

@@ -57,19 +57,9 @@ export class DetailsComponent implements OnInit, AfterViewInit {
         if (this.article.items_in_article.length > 0) {
           this.articleImage = baseURL + this.article.items_in_article[0].image;
         }
-        this.getTags();
         this.getReviews();
         this.getRelatedArticles();
     });
-  }
-
-  private getTags(): void {
-    this.articleTags = [];
-    for (const id of this.article.tag) {
-      this.tagService.getTag(id).subscribe((tag) =>
-        this.articleTags.push(tag)
-      );
-    }
   }
 
   private getReviews(): void {
@@ -88,13 +78,6 @@ export class DetailsComponent implements OnInit, AfterViewInit {
   }
 
   private getRelatedArticles(): void {
-    const s = [];
-    console.log(this.articleTags);
-    for (let t of this.articleTags) {
-      console.log(t);
-      s.push(t.name);
-    }
-    console.log(s);
     this.articleService.getArticlesFiltered(
       4,
       undefined,
@@ -102,7 +85,7 @@ export class DetailsComponent implements OnInit, AfterViewInit {
       false,
       undefined,
       undefined,
-      s,
+      this.article.tag.map((t) => t.name),
       undefined,
       undefined,
       undefined,

@@ -16,9 +16,9 @@
     <div class="row vertical-gap">
       <div class="col-lg-8">
         <div class="row">
-          <div class="col align-left">Found {{ articles|arrayLength }} results</div>
-          <div class="col align-right">Showing X—X
-            results
+          <div class="col align-left">Found {{ allArticles|arrayLength }} results</div>
+          <div class="col align-right">
+            Showing {{ showing[0] }}—{{ showing[1] }} results
           </div>
         </div>
         <div class="nk-gap-2"></div>
@@ -32,41 +32,38 @@
         <!-- END: Products -->
 
         <!-- START: Pagination -->
-        <!--        {% if page_obj.paginator.num_pages > 1 %}-->
-        <!--        <div class="nk-gap-3"></div>-->
-        <!--        <div class="nk-pagination nk-pagination-center">-->
-        <!--          {% if page_obj.has_previous %}-->
-        <!--          <a href="?{% param_replace page=page_obj.previous_page_number %}"-->
-        <!--             class="nk-pagination-prev">-->
-        <!--            <span class="ion-ios-arrow-back"></span>-->
-        <!--          </a>-->
-        <!--          {% endif %}-->
-        <!--          <nav>-->
-        <!--            {% if page_obj.has_previous %}-->
-        <!--            <a href="?{% param_replace page=1 %}">1</a>-->
-        <!--            {% if page_obj.previous_page_number > 1 %}-->
-        <!--            <span>...</span>-->
-        <!--            <a href="?{% param_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>-->
-        <!--            {% endif %}-->
-        <!--            {% endif %}-->
-        <!--            <a class="nk-pagination-current"-->
-        <!--               href="{{ request.get_full_path }}">{{ page_obj.number }}</a>-->
-        <!--            {% if page_obj.has_next %}-->
-        <!--            {% if page_obj.next_page_number < page_obj.paginator.num_pages %}-->
-        <!--            <a href="?{% param_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>-->
-        <!--            <span>...</span>-->
-        <!--            {% endif %}-->
-        <!--            <a href="?{% param_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>-->
-        <!--            {% endif %}-->
-        <!--          </nav>-->
-        <!--          {% if page_obj.has_next %}-->
-        <!--          <a href="?{% param_replace page=page_obj.next_page_number %}"-->
-        <!--             class="nk-pagination-next">-->
-        <!--            <span class="ion-ios-arrow-forward"></span>-->
-        <!--          </a>-->
-        <!--          {% endif %}-->
-        <!--        </div>-->
-        <!--        {% endif %}-->
+        <div class="nk-gap-3"></div>
+        <div *ngIf="totalPages" class="nk-pagination nk-pagination-center">
+
+          <a (click)="pagination.first()" [hidden]="pagination.isFirst"
+             class="nk-pagination-prev pt-4">
+            <span class="ion-ios-arrow-back"></span>
+            <span class="ion-ios-arrow-back"></span>
+          </a>
+          <a (click)="pagination.prev()" [hidden]="pagination.isFirst"
+             class="nk-pagination-prev pt-4" style="margin-right: 30px">
+            <span class="ion-ios-arrow-back"></span>
+          </a>
+
+          <input class="form-control" style="width: 50px"
+            appPagination
+            #pagination="appPagination"
+            [totalPages]="totalPages"
+            (pageChange)="onPageChange($event)"
+          />
+          <span class="pt-4"> / {{ pagination.totalPages }}</span>
+
+          <a (click)="pagination.next()" [hidden]="pagination.isLast"
+             class="nk-pagination-next pt-4" style="margin-left: 30px">
+            <span class="ion-ios-arrow-forward"></span>
+          </a>
+          <a (click)="pagination.last()" [hidden]="pagination.isLast"
+             class="nk-pagination-next pt-4">
+            <span class="ion-ios-arrow-forward"></span>
+            <span class="ion-ios-arrow-forward"></span>
+          </a>
+
+        </div>
         <!-- END: Pagination -->
       </div>
 

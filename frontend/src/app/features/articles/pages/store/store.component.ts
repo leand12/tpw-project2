@@ -18,12 +18,17 @@ export class StoreComponent implements OnInit, AfterViewInit {
   popularTags: TagModel[];
   error: any;
   articles: any;
+  allArticles: any;
   // filters
   type: string;
   platform: string;
   search: string;
   tags: string[];
   price: string[];
+  showing = [0, 0];
+  totalPages;
+  itemsPerPage = 10;
+  curPage = 1;
 
   constructor(private tagService: TagService, private articleService: ArticleService,
               private router: Router, public activeRoute: ActivatedRoute) { }
@@ -31,6 +36,13 @@ export class StoreComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.getURLParams();
     this.getPopularTags();
+  }
+
+  onPageChange(pageNo: number): void {
+    this.curPage = pageNo;
+    this.articles = this.allArticles.slice(
+      (this.curPage - 1) * this.itemsPerPage, (this.curPage - 1) * this.itemsPerPage + this.itemsPerPage);
+    this.showing = [(this.curPage - 1) * this.itemsPerPage + 1, (this.curPage - 1) * this.itemsPerPage + this.articles.length];
   }
 
   getURLParams(): void {
@@ -72,7 +84,11 @@ export class StoreComponent implements OnInit, AfterViewInit {
       this.type,
       this.platform
     ).subscribe(
-      articles => this.articles = articles,
+      articles => {
+        this.allArticles = articles;
+        this.totalPages = Math.ceil(articles.length / this.itemsPerPage);
+        this.onPageChange(1);
+      },
       error => this.error = error
     );
   }

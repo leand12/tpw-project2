@@ -87,10 +87,10 @@
                   <div class="nk-gap"></div>
                   <strong class="text-white">Tags:</strong>
                   <div class="nk-gap"></div>
-                  <p *ngIf="!articleTags?.length; else elseBlock">None</p>
+                  <p *ngIf="!article?.tag.length; else elseBlock">None</p>
                   <ng-template #elseBlock>
-                    <span *ngFor="let t of articleTags">
-                      <a routerLink="/articles/store" [queryParams]="{ tag: t.name }">{{ t.name }}</a>,
+                    <span *ngFor="let t of article.tag">
+                      <a routerLink="/articles/store" [queryParams]="{ tags: t.name }">{{ t.name }}</a>,
                     </span>
                   </ng-template>
                   <div class="nk-gap"></div>

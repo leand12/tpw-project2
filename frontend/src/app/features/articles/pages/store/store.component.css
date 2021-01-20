@@ -6,3 +6,7 @@ a.selected-tag {
 a.selected-tag::before {
   content: '• ';
 }
+
+.nk-pagination > a:hover {
+  color: #dd163b;
+}
