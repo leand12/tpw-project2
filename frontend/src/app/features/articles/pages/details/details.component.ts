@@ -104,9 +104,10 @@ export class DetailsComponent implements OnInit, AfterViewInit {
     art.shop_cart.push(+global.getUserId());
     art.seller = art.seller.id;
     art.items_in_article = art.items_in_article.map((a) => a.id);
+    art.tag = art.tag.map((t) => t.id);
 
-    this.articleService.updateArticle(art).subscribe();
-    location.replace('/articles/shopcart');
+    this.articleService.updateArticle(art).subscribe(() =>
+      location.replace('/articles/shopcart'));
   }
 
   AddSaved(): void{
@@ -114,8 +115,9 @@ export class DetailsComponent implements OnInit, AfterViewInit {
     art.saved.push(+global.getUserId());
     art.seller = art.seller.id;
     art.items_in_article = art.items_in_article.map((a) => a.id);
+    art.tag = art.tag.map((t) => t.id);
 
-    this.articleService.updateArticle(art).subscribe();
-    location.replace('/articles/saved');
+    this.articleService.updateArticle(art).subscribe(() =>
+      location.replace('/articles/saved'));
   }
 }

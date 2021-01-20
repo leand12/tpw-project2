@@ -88,18 +88,19 @@ export class ShopCartComponent implements OnInit, AfterViewInit {
   removeFromCart(articleread: any): void{
     articleread.seller = articleread.seller.id;
     articleread.items_in_article = articleread.items_in_article.map((a) => a.id);
+    articleread.tag = articleread.tag.map((t) => t.id);
     const index: number = articleread.shop_cart.indexOf(+global.getUserId());
     if (index !== -1) {
       articleread.shop_cart.splice(index, 1);
     }
-    this.articleService.updateArticle(articleread).subscribe();
-
-    // tslint:disable-next-line:only-arrow-functions typedef
-    this.router.routeReuseStrategy.shouldReuseRoute = function() {
-      return false;
-    };
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigateByUrl('/articles/shopcart');
+    this.articleService.updateArticle(articleread).subscribe(() => {
+      // tslint:disable-next-line:only-arrow-functions typedef
+      this.router.routeReuseStrategy.shouldReuseRoute = function() {
+        return false;
+      };
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigateByUrl('/articles/shopcart');
+    });
   }
 
   buy(): void{
@@ -113,6 +114,7 @@ export class ShopCartComponent implements OnInit, AfterViewInit {
       for (const art of this.articles) {
         art.seller = art.seller.id;
         art.items_in_article = art.items_in_article.map((a) => a.id);
+        art.tag = art.tag.map((t) => t.id);
         const index: number = art.shop_cart.indexOf(+global.getUserId());
         if (index !== -1) {
           art.shop_cart.splice(index, 1);
