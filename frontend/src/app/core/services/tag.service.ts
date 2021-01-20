@@ -16,10 +16,13 @@ const httpOptions = {
 export class TagService {
   constructor(private http: HttpClient) { }
 
-  getTags(num?: number): Observable<TagModel[]> {
+  getTags(num?: number, isPopular?): Observable<TagModel[]> {
     const url = serviceURL + 'tags/?';
     if (num !== undefined) {
       url.concat('&num=' + num);
+    }
+    if (isPopular !== undefined) {
+      url.concat('&is_popular=' + isPopular);
     }
     return this.http.get<TagModel[]>(url, httpOptions);
   }

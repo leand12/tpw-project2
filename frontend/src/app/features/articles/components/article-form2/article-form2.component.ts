@@ -5,12 +5,13 @@ import {ArticleService} from '@core/services/article.service';
 import {ItemService} from '@core/services/item.service';
 import { global } from '@core/utils/global';
 import {fixDecimals} from '@core/utils/utils';
+import {TagService} from '@core/services/tag.service';
 
 @Component({
   selector: 'app-article-form2',
   templateUrl: './article-form2.component.html',
   styleUrls: ['./article-form2.component.css'],
-  providers: [ArticleService, ItemService]
+  providers: [ArticleService, ItemService, TagService]
 })
 export class ArticleForm2Component implements OnInit {
   @Input() article: any;
@@ -21,8 +22,11 @@ export class ArticleForm2Component implements OnInit {
   error: any;
   totalPrice: number;
   items: any[];
+  tags: any[];
+  selectedTags: any[];
 
-  constructor(private router: Router, private articleService: ArticleService, private itemService: ItemService) {
+  constructor(private router: Router, private articleService: ArticleService,
+              private itemService: ItemService, private tagService: TagService) {
   }
 
   ngOnInit(): void {
@@ -34,6 +38,8 @@ export class ArticleForm2Component implements OnInit {
     }
     this.totalPrice = 0;
     this.getItems();
+    this.getTags();
+    this.selectedTags = [];
   }
 
   initForm(article?: any): void {
@@ -42,7 +48,6 @@ export class ArticleForm2Component implements OnInit {
       name: this.formName,
       description: new FormControl(article?.description),
       shipping_fee: new FormControl(article?.shipping_fee),
-      tag: new FormControl(article?.tag),
     });
   }
 
@@ -55,6 +60,13 @@ export class ArticleForm2Component implements OnInit {
     );
   }
 
+  getTags(): void {
+    this.tagService.getTags(10, true).subscribe(
+      tags => this.tags = tags,
+      error => this.error = error
+    );
+  }
+
   submit(): void {
     if (this.formName.errors) { return; }
     const article = this.articleForm.value;
@@ -63,6 +75,7 @@ export class ArticleForm2Component implements OnInit {
     article.seller = global.getUserId();
     article.items_in_article = this.items.map((i) => i.id);
     article.total_price = this.totalPrice;
+    article.tag = this.selectedTags;
     this.articleService.updateArticle(article).subscribe(
       () => this.router.navigate(['/articles/owned', global.getUserId()], {fragment: 'onsale'}),
       error => this.error = error

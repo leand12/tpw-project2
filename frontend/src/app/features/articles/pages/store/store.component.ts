@@ -61,7 +61,7 @@ export class StoreComponent implements OnInit, AfterViewInit {
   }
 
   getPopularTags(): void {
-    this.tagService.getTags(10).subscribe(
+    this.tagService.getTags(10, true).subscribe(
       popularTags => this.popularTags = popularTags,
       error => this.error = error
     );
