@@ -104,7 +104,7 @@ export class DetailsComponent implements OnInit {
       // this.getRevUser(r.reviewer, index);
     });
     if (count > 0) {
-      this.avgRating = count / this.reviews.length;
+      this.avgRating = parseFloat((count / this.reviews.length).toFixed(2));
     }
   }
 
