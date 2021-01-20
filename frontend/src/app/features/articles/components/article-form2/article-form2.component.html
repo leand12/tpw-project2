@@ -86,8 +86,4 @@
     <button class="nk-btn nk-btn-color-dark-3 float-right ml-sm-4" (click)="stepChange.emit(!step)">Previous Step</button>
   </div>
 
-  <!-- TODO: remove debug lines -->
-  <p>{{ error?.message }}</p>
-  <p *ngIf="error">{{ error?.error | json }}</p>
-
 </form>
