@@ -27,6 +27,7 @@ export class ReviewCommentComponent implements OnInit, AfterViewInit {
       (profile) => {
         this.reviewReviewer = profile;
         this.reviewReviewerImage = baseURL + profile.avatar;
+        console.error(this.reviewReviewerImage);
       },
     );
   }

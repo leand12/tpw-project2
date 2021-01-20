@@ -1,9 +1,9 @@
 <div class="nk-comment">
   <div class="nk-comment-meta">
     <img src="{{ reviewReviewerImage }}"
-         alt="{{ reviewReviewer?.username }}"
+         alt="{{ reviewReviewer?.user.username }}"
          class="rounded-circle" width="35">
-    by <a href="/profile/details/{{ review.reviewer.id }}">{{ reviewReviewer?.username }}</a>
+    by <a href="/profile/details/{{ review.reviewer.id }}">{{ reviewReviewer?.user.username }}</a>
     in {{ review.date_posted|date:'longDate' }}
     <div #rating class="nk-review-rating" [attr.data-rating]="review.rate"></div>
   </div>
