@@ -73,8 +73,15 @@ export class DetailsComponent implements OnInit, AfterViewInit {
 
   private getReviews(): void {
     this.reviewService.getReviewsFiltered(undefined, undefined, undefined, this.article.seller.id)
-      .subscribe((reviews) =>
-        this.userReviews = reviews
+      .subscribe((reviews) => {
+        this.userReviews = reviews;
+        let sum = 0;
+        for (const r of reviews ){
+          sum += r.rate;
+        }
+        this.userRating = Math.floor(sum / reviews.length);
+        this.ratingView.nativeElement.innerHTML = htmlRatingIcons(this.userRating);
+      }
     );
   }
 
@@ -114,11 +121,7 @@ export class DetailsComponent implements OnInit, AfterViewInit {
     art.items_in_article = art.items_in_article.map((a) => a.id);
 
     this.articleService.updateArticle(art).subscribe();
-    // tslint:disable-next-line:only-arrow-functions typedef
-    this.router.routeReuseStrategy.shouldReuseRoute = function() {
-      return false;
-    };
-    this.router.navigateByUrl('/articles/shopcart');
+    location.replace('/articles/shopcart');
   }
 
   AddSaved(): void{
@@ -128,10 +131,6 @@ export class DetailsComponent implements OnInit, AfterViewInit {
     art.items_in_article = art.items_in_article.map((a) => a.id);
 
     this.articleService.updateArticle(art).subscribe();
-    // tslint:disable-next-line:only-arrow-functions typedef
-    this.router.routeReuseStrategy.shouldReuseRoute = function() {
-      return false;
-    };
-    this.router.navigateByUrl('/articles/saved');
+    location.replace('/articles/saved');
   }
 }
