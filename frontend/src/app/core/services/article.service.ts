@@ -24,7 +24,7 @@ export class ArticleService {
                       timesViewed?, condition?, type?, platform?): Observable<ArticleReadModel[]> {
     let url: string = serviceURL + 'articles/?';
 
-    if (num !== undefined) {url += '&num=' + num; }
+    if (num !== undefined)      {url += '&num=' + num; }
     if (maxPrice !== undefined) {url += '&max_price=' + maxPrice; }
     if (minPrice !== undefined) {url += '&min_price=' + minPrice; }
     if (isSold !== undefined) {url += '&is_sold=' + isSold; }

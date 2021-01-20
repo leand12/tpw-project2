@@ -94,7 +94,7 @@
     <div class="nk-gap-3"></div>
 
     <!-- START: Categories -->
-    <app-view-games-filter [selected]="selectedPlatform"></app-view-games-filter>
+    <app-view-games-filter></app-view-games-filter>
     <!-- END: Categories -->
 
     <!-- END: Store -->
@@ -105,28 +105,13 @@
     <h3 class="nk-decorated-h-2"><span><span class="text-main-1">Most</span> Popular</span></h3>
     <div class="nk-gap"></div>
     <div class="row vertical-gap">
-
-<!--      {% for a in popular_articles %}-->
-<!--      <div class="col-lg-4 col-md-6">-->
-<!--        <div class="nk-product-cat">-->
-<!--          <a class="nk-product-image" href="{% url 'article_details' a.id %}">-->
-<!--            <img src="{% item_img_path a.items_in_article.all.0.id %}" alt="{{ a.name }}">-->
-<!--          </a>-->
-<!--          <div class="nk-product-cont">-->
-<!--            <h3 class="nk-product-title h5"><a-->
-<!--              href="{% url 'article_details' a.id %}">{{ a.name }}</a></h3>-->
-<!--            <div class="nk-gap-1"></div>-->
-<!--            <div class="nk-product-rating" data-rating="{% article_rating a.id %}"></div>-->
-<!--            ({% user_reviews_number a.id %})-->
-<!--            <div class="nk-gap-1"></div>-->
-<!--            <div class="nk-product-price">{{ a.total_price }} €</div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--      {% endfor %}-->
-
+      <div class="col-md-4" *ngFor="let a of popularArticles">
+        <app-compact-article-renderer [article]="a"></app-compact-article-renderer>
+      </div>
     </div>
     <!-- END: Most Popular -->
+
+    <div class="nk-gap-5"></div>
 
   </div>
 </div>

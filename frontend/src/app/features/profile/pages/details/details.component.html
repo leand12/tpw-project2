@@ -101,17 +101,12 @@
         <div class="nk-gap-2"></div>
         <h3 class="nk-decorated-h-2"><span><span class="text-main-1">{{ reviews?.length }}</span> Reviews</span></h3>
         <div class="nk-gap"></div>
-        <div class="nk-comments" *ngIf="reviews">
-          <div class="nk-comment" *ngFor="let r of reviews" >
-            <div class="nk-comment-meta">
-              <img src="{{ r }}" alt="{{ r.reviewer.username }}"
-                   class="rounded-circle" width="35"> by <a routerLink="/profile/details/{{ r.reviewer.id }}">{{ r.reviewer.username }}</a> in {{ r.date_posted|date:"d, M, Y" }}
-              <div class="nk-review-rating" data-rating="{{ r.rate }}"></div>
-            </div>
-            <div class="nk-comment-text">
-              <p>{{ r.description }}</p>
-            </div>
-          </div>
+        <div class="nk-comments">
+
+          <!-- START: Reviews -->
+          <app-review-comment *ngFor="let r of reviews" [review]="r"></app-review-comment>
+          <!-- END: Reviews -->
+
         </div>
         <!-- END: Reviews -->
 
