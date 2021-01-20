@@ -39,16 +39,6 @@
   </div>
 
   <div class="form-group row">
-    <label for="shipping_time" class="col-lg-2 col-form-label">Shipping Time:</label>
-    <div class="col-lg-10">
-      <input id="shipping_time" type="text" formControlName="shipping_time" class="form-control">
-      <div *ngFor="let e of error?.error.shipping_time">
-        <a href="#" class="error">{{ e }}</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="form-group row">
     <label for="shipping_fee" class="col-lg-2 col-form-label">Shipping Fee:</label>
     <div class="col-lg-10">
       <input id="shipping_fee" type="number" formControlName="shipping_fee" class="form-control" max="1000000000000" step="1">

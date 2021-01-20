@@ -6,7 +6,6 @@ import { ArticlesRoutingModule } from './articles-routing.module';
 import { StoreComponent } from './pages/store/store.component';
 import { SavedComponent } from './pages/saved/saved.component';
 import { ShopCartComponent } from './pages/shop-cart/shop-cart.component';
-import { SettingsComponent } from '../profile/pages/settings/settings.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { OwnedComponent } from './pages/owned/owned.component';
 import { CreateComponent } from './pages/create/create.component';
@@ -30,7 +29,6 @@ import { ReviewFormComponent } from './components/review-form/review-form.compon
     StoreComponent,
     SavedComponent,
     ShopCartComponent,
-    SettingsComponent,
     DetailsComponent,
     OwnedComponent,
     CreateComponent,
