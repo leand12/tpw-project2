@@ -42,7 +42,6 @@ urlpatterns = [
     path('ws/users/', views.get_users),
     path('ws/profile/', views.get_profile),
     path('ws/profiles/', views.get_profiles),
-    path('ws/create/profile/', views.create_profile),
     path('ws/update/profile/', views.update_profile),
     path('ws/item/', views.get_item),
     path('ws/items/', views.get_items),

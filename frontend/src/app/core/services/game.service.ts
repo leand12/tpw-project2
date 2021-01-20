@@ -49,7 +49,6 @@ export class GameService {
     if (image) {
       payload.append('file', image, image.name);
     }
-
     const url = serviceURL + 'update/game/?id=' + game.id;
     return this.http.put(url, payload);
   }

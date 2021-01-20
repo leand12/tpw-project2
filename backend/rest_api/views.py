@@ -169,23 +169,17 @@ def get_profiles(request):
     return Response(serializer.data)
 
 
-@api_view(['POST'])
-def create_profile(request):
-    serializer = UserProfileSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
 @api_view(['PUT'])
 def update_profile(request):
-    id = request.data['userid']
+    data = json.loads(request.data['data'])
+    id = data['user']
     try:
         profile = UserProfile.objects.get(user_id=id)
     except UserProfile.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
-    serializer = UserProfileSerializer(profile, data=request.data)
+    if 'file' in request.data:
+        data['avatar'] = request.data['file']
+    serializer = UserProfileSerializer(profile, data=data)
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data)
