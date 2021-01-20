@@ -9,6 +9,7 @@ import { SavedComponent } from './pages/saved/saved.component';
 import { ShopCartComponent } from './pages/shop-cart/shop-cart.component';
 import { StoreComponent } from './pages/store/store.component';
 import { AuthGuard } from '../../core/guards/auth.guard';
+import {NoAuthGuard} from '@core/guards/noauth.guard';
 
 
 const routes: Routes = [

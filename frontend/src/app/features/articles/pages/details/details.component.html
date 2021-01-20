@@ -62,27 +62,23 @@
 
               <!-- START: Add to -->
               <div class="nk-gap-2"></div>
-<!--              {% if user.is_authenticated %}-->
-<!--              <form action="." method="post" class="nk-product-addtocart">-->
-<!--                {% csrf_token %}-->
+              <form *ngIf="authService.isLoggedIn()" action="." method="post" class="nk-product-addtocart">
 
-<!--                <div class="nk-gap-1"></div>-->
-<!--                <div class="nk-product-price">{{ article?.total_price }} €</div>-->
-<!--                <div class="nk-gap-1"></div>-->
-<!--                <div class="text-white font-weight-bold">Shipping Fee:&emsp;&emsp;&emsp;{{ article?.ShippingFee }} €</div>-->
-<!--                <div class="text-white font-weight-bold">Shipping Time:&emsp;&emsp;{{ article?.ShippingTime }} days</div>-->
-<!--                <div class="nk-gap-3"></div>-->
-<!--                <div class="row justify-content-start">-->
-<!--                  <button type="submit" name="add_cart" class="nk-btn nk-btn-rounded nk-btn-color-main-1" style="margin-left: 20px">-->
-<!--                    Add to Cart-->
-<!--                  </button>-->
-<!--                  <button type="submit" name="add_saved" class="nk-btn nk-btn-rounded nk-btn-color-main-1" style="margin-left: 20px">-->
-<!--                    Add to Saved-->
-<!--                  </button>-->
-<!--                </div>-->
-<!--              </form>-->
-<!--              <div class="nk-gap-3"></div>-->
-<!--              {% endif %}-->
+                <div class="nk-gap-1"></div>
+                <div class="nk-product-price">{{ article?.total_price }} €</div>
+                <div class="nk-gap-1"></div>
+                <div class="text-white font-weight-bold">Shipping Fee:&emsp;&emsp;&emsp;{{ article?.shipping_fee }} €</div>
+                <div class="nk-gap-3"></div>
+                <div class="row justify-content-start">
+                  <button type="submit" name="add_cart" class="nk-btn nk-btn-rounded nk-btn-color-main-1" style="margin-left: 20px" (click)="AddCart()">
+                    Add to Cart
+                  </button>
+                  <button type="submit" name="add_saved" class="nk-btn nk-btn-rounded nk-btn-color-main-1" style="margin-left: 20px" (click)="AddSaved()">
+                    Add to Saved
+                  </button>
+                </div>
+              </form>
+              <div class="nk-gap-3"></div>
               <!-- END: Add to -->
 
               <!-- START: Meta -->
