@@ -9,6 +9,7 @@ from allauth.account.utils import setup_user_email
 from rest_api.models import Tag, Article, Item, Game, Console, Review, UserProfile
 from rest_framework import serializers
 
+
 class RegisterSerializer(serializers.Serializer):
     username = serializers.CharField(required=True, write_only=True)
     email = serializers.EmailField(required=allauth_settings.EMAIL_REQUIRED)
@@ -50,6 +51,8 @@ class RegisterSerializer(serializers.Serializer):
         adapter.save_user(request, user, self)
         setup_user_email(request, user, [])
         user.save()
+        profile = UserProfile(biography='', user_id=user.id)
+        profile.save()
         return user
 
 

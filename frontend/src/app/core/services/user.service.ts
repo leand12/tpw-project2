@@ -4,8 +4,7 @@ import { Observable } from 'rxjs/internal/Observable';
 
 import {UserModel} from '@core/models/user.model';
 import {serviceURL} from '@core/constants/url';
-import {UserProfileModel} from "@core/models/user-profile.model";
-import {ArticleModel} from "@core/models/article.model";
+import {UserProfileModel, UserProfileReadModel} from '@core/models/user-profile.model';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -28,23 +27,24 @@ export class UserService {
     return this.http.get<UserModel>(url, httpOptions);
   }
 
-  getProfiles(): Observable<UserProfileModel[]> {
+  getProfiles(): Observable<UserProfileReadModel[]> {
     const url = serviceURL + 'profiles/';
-    return this.http.get<UserProfileModel[]>(url, httpOptions);
+    return this.http.get<UserProfileReadModel[]>(url, httpOptions);
   }
 
-  getProfile(userid: number): Observable<UserProfileModel> {
+  getProfile(userid: number): Observable<UserProfileReadModel> {
     const url = serviceURL + 'profile/?userid=' + userid;
-    return this.http.get<UserProfileModel>(url, httpOptions);
+    return this.http.get<UserProfileReadModel>(url, httpOptions);
   }
 
-  createProfile(prof: UserProfileModel): Observable<any> {
-    const url = serviceURL + 'create/profile/';
-    return this.http.post(url, prof, httpOptions);
-  }
+  updateProfile(prof: UserProfileModel, avatar?: File): Observable<any> {
+    const payload = new FormData();
 
-  // updateProfile(prof: UserProfileModel): Observable<any> {
-  //   const url = baseURL + 'update/profile?userid=' + prof.user.id + '/';
-  //   return this.http.put(url, prof, httpOptions);
-  // }
+    payload.append('data', JSON.stringify(prof));
+    if (avatar) {
+      payload.append('file', avatar, avatar.name);
+    }
+    const url = serviceURL + 'update/profile/?userid=' + prof.user;
+    return this.http.put(url, payload);
+  }
 }
