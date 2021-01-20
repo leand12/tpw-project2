@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   login(): void {
     const user = this.loginForm.value;
     this.authService.login(user.username, user.password).subscribe(
-      success => this.router.navigate(['home']),
+      success => location.replace('/home'),
       error => {
         this.error = error;
         this.loginForm.reset();

@@ -34,22 +34,6 @@ export class DetailsComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.getURLParams();
-
-    // TODO: call api
-    this.userReviews = [];
-    this.userRating = 2;
-    this.relatedArticles = [
-      {id: 1, name: 'HARDCODED', total_price: '20.00', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting' +
-          'industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley' +
-          ' of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into' +
-          ' electronic typesetting, remaining essentially unchanged. ', shipping_fee: '0.00', date_posted: '2021-01-07', tag: [9, 11],
-        is_sold: false, times_viewed: 0, shop_cart: [], saved: [], seller: 1, buyer: null},
-      {id: 2, name: 'HARDCODED2', total_price: '15.00', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting' +
-          'industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley' +
-          ' of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into' +
-          ' electronic typesetting, remaining essentially unchanged. ', shipping_fee: '0.00', date_posted: '2021-01-07', tag: [9],
-        is_sold: false, times_viewed: 0, shop_cart: [], saved: [], seller: 1, buyer: null}
-    ];
   }
 
   handleNewReview(review: any): void {

@@ -14,7 +14,7 @@
           <img src="../../../../assets/images/logo.png" alt="GoodGames" width="199">
         </a>
         <ul class="nk-nav nk-nav-right d-none d-lg-table-cell" data-nav-mobile="#nk-nav-mobile">
-
+          <ng-container *ngIf="isLoggedIn == true; else notlogged">
           <li class=" nk-drop-item">
             <a routerLink="/articles/store">Store</a>
             <ul class="dropdown">
@@ -69,14 +69,15 @@
               </li>
             </ul>
           </li>
-
-
+          </ng-container>
+          <ng-template #notlogged>
           <li>
             <a routerLink="/login">Log In</a>
           </li>
           <li>
             <a routerLink="/signup">Sign Up</a>
           </li>
+          </ng-template>
 
 
         </ul>

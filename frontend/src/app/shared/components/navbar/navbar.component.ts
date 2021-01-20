@@ -8,19 +8,22 @@ declare var $: any;
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
-  // providers: [AuthService]
+  providers: [AuthService]
 })
 export class NavbarComponent implements OnInit, AfterViewInit {
   id: any;
+  isLoggedIn: boolean;
 
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.id = global.getUserId();
+    this.isLoggedIn = this.authService.isLoggedIn();
   }
 
   logout(): void {
     this.authService.logout();
+    this.isLoggedIn = this.authService.isLoggedIn();
     this.router.navigate(['home']);
   }
 

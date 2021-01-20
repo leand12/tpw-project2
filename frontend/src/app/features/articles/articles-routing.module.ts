@@ -14,14 +14,13 @@ import { AuthGuard } from '../../core/guards/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    canActivate: [AuthGuard],
     children: [
-      {path: 'create', component: CreateComponent},
-      {path: 'details/:id', component: DetailsComponent},
-      {path: 'edit/:id', component: EditComponent},
-      {path: 'owned/:id', component: OwnedComponent},
-      {path: 'saved', component: SavedComponent},
-      {path: 'shopcart', component: ShopCartComponent},
+      {path: 'create', canActivate: [AuthGuard], component: CreateComponent},
+      {path: 'details/:id', canActivate: [AuthGuard], component: DetailsComponent},
+      {path: 'edit/:id', canActivate: [AuthGuard], component: EditComponent},
+      {path: 'owned/:id', canActivate: [AuthGuard], component: OwnedComponent},
+      {path: 'saved', canActivate: [AuthGuard], component: SavedComponent},
+      {path: 'shopcart', canActivate: [AuthGuard], component: ShopCartComponent},
       {path: 'store', children: [
         {path: '', component: StoreComponent},
         {path: ':type', component: StoreComponent},
