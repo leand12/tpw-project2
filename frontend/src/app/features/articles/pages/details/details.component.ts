@@ -36,7 +36,6 @@ export class DetailsComponent implements OnInit, AfterViewInit {
     this.getURLParams();
 
     // TODO: call api
-    this.userReviews = [];
     this.userRating = 2;
     this.relatedArticles = [
       {id: 1, name: 'HARDCODED', total_price: '20.00', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting' +

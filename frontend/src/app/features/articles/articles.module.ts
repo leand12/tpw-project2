@@ -45,6 +45,7 @@ import { ReviewFormComponent } from './components/review-form/review-form.compon
     ReviewFormComponent,
   ],
   exports: [
+    CompactArticleRendererComponent
   ],
 })
 export class ArticlesModule { }
