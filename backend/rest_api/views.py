@@ -70,9 +70,11 @@ def get_articles(request):
         is_sold = eval(request.GET['is_sold'].capitalize())
         articles = articles.filter(is_sold=is_sold)
     if 'shop_cart' in request.GET:
-        articles = articles.filter(shop_cart__in=request.GET['shop_cart'])
+        print(articles)
+        articles = articles.filter(shop_cart__in=[int(request.GET['shop_cart'])])
+        print(articles)
     if 'saved' in request.GET:
-        articles = articles.filter(saved__in=request.GET['saved'])
+        articles = articles.filter(saved__in=[int(request.GET['saved'])])
     if 'name' in request.GET:
         articles = articles.filter(name__contains=request.GET['name'])
     if 'times_viewed' in request.GET:

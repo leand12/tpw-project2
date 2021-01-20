@@ -107,7 +107,7 @@ export class DetailsComponent implements OnInit, AfterViewInit {
     art.tag = art.tag.map((t) => t.id);
 
     this.articleService.updateArticle(art).subscribe(() =>
-      location.replace('/articles/shopcart'));
+      this.router.navigateByUrl('/articles/shopcart'));
   }
 
   AddSaved(): void{
@@ -118,6 +118,6 @@ export class DetailsComponent implements OnInit, AfterViewInit {
     art.tag = art.tag.map((t) => t.id);
 
     this.articleService.updateArticle(art).subscribe(() =>
-      location.replace('/articles/saved'));
+      this.router.navigateByUrl('/articles/saved'));
   }
 }
