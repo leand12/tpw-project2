@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
+import {global} from '@core/utils/global';
 import {htmlRatingIcons} from '@core/utils/html-rating-icons';
 import {TagService} from '@core/services/tag.service';
 import {ArticleService} from '@core/services/article.service';
@@ -9,12 +10,13 @@ import {ReviewService} from '@core/services/review.service';
 
 import {conditionChoices} from '@core/constants/choices';
 import {baseURL} from '@core/constants/url';
+import {AuthService} from '@core/services';
 
 @Component({
   selector: 'app-article-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.css'],
-  providers: [TagService, ArticleService, ReviewService]
+  providers: [TagService, ArticleService, ReviewService, AuthService]
 })
 export class DetailsComponent implements OnInit, AfterViewInit {
   @ViewChild('rating') ratingView: ElementRef;
@@ -28,28 +30,12 @@ export class DetailsComponent implements OnInit, AfterViewInit {
   conditions = conditionChoices;
   baseURL = baseURL;
 
-  constructor(private activeRoute: ActivatedRoute,
+  constructor(private router: Router, private activeRoute: ActivatedRoute,
               private tagService: TagService, private articleService: ArticleService,
-              private reviewService: ReviewService) { }
+              private reviewService: ReviewService, public authService: AuthService) { }
 
   ngOnInit(): void {
     this.getURLParams();
-
-    // TODO: call api
-    this.userReviews = [];
-    this.userRating = 2;
-    this.relatedArticles = [
-      {id: 1, name: 'HARDCODED', total_price: '20.00', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting' +
-          'industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley' +
-          ' of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into' +
-          ' electronic typesetting, remaining essentially unchanged. ', shipping_fee: '0.00', date_posted: '2021-01-07', tag: [9, 11],
-        is_sold: false, times_viewed: 0, shop_cart: [], saved: [], seller: 1, buyer: null},
-      {id: 2, name: 'HARDCODED2', total_price: '15.00', description: 'Lorem Ipsum is simply dummy text of the printing and typesetting' +
-          'industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley' +
-          ' of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into' +
-          ' electronic typesetting, remaining essentially unchanged. ', shipping_fee: '0.00', date_posted: '2021-01-07', tag: [9],
-        is_sold: false, times_viewed: 0, shop_cart: [], saved: [], seller: 1, buyer: null}
-    ];
   }
 
   handleNewReview(review: any): void {
@@ -93,10 +79,59 @@ export class DetailsComponent implements OnInit, AfterViewInit {
   }
 
   private getRelatedArticles(): void {
-    return;
+    const s = [];
+    console.log(this.articleTags);
+    for (let t of this.articleTags) {
+      console.log(t);
+      s.push(t.name);
+    }
+    console.log(s);
+    this.articleService.getArticlesFiltered(
+      4,
+      undefined,
+      undefined,
+      false,
+      undefined,
+      undefined,
+      s,
+      undefined,
+      undefined,
+      undefined,
+      true
+    ).subscribe((articles) =>
+        this.relatedArticles = articles,
+      (err) => console.error(err));
   }
 
   ngAfterViewInit(): void {
     this.ratingView.nativeElement.innerHTML = htmlRatingIcons(this.userRating);
+  }
+
+  AddCart(): void{
+    const art = this.article;
+    art.shop_cart.push(+global.getUserId());
+    art.seller = art.seller.id;
+    art.items_in_article = art.items_in_article.map((a) => a.id);
+
+    this.articleService.updateArticle(art).subscribe();
+    // tslint:disable-next-line:only-arrow-functions typedef
+    this.router.routeReuseStrategy.shouldReuseRoute = function() {
+      return false;
+    };
+    this.router.navigateByUrl('/articles/shopcart');
+  }
+
+  AddSaved(): void{
+    const art = this.article;
+    art.saved.push(+global.getUserId());
+    art.seller = art.seller.id;
+    art.items_in_article = art.items_in_article.map((a) => a.id);
+
+    this.articleService.updateArticle(art).subscribe();
+    // tslint:disable-next-line:only-arrow-functions typedef
+    this.router.routeReuseStrategy.shouldReuseRoute = function() {
+      return false;
+    };
+    this.router.navigateByUrl('/articles/saved');
   }
 }
