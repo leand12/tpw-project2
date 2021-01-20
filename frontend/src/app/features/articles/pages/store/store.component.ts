@@ -27,7 +27,7 @@ export class StoreComponent implements OnInit, AfterViewInit {
   price: string[];
   showing = [0, 0];
   totalPages;
-  itemsPerPage = 1;
+  itemsPerPage = 10;
   curPage = 1;
 
   constructor(private tagService: TagService, private articleService: ArticleService,

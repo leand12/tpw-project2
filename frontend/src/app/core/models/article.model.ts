@@ -1,5 +1,6 @@
 import {ItemModel} from '@core/models/item.model';
 import {UserModel} from '@core/models/user.model';
+import {TagModel} from '@core/models/tag.model';
 
 export interface ArticleModel {
   id?: number;
@@ -8,7 +9,7 @@ export interface ArticleModel {
   description?: string;
   shipping_fee?: number;
   date_posted?: string;
-  tags?: number[];
+  tag?: number[];
   is_sold?: boolean;
   times_viewed?: number;
   shop_cart?: number[];
@@ -25,7 +26,7 @@ export interface ArticleReadModel {
   description: string;
   shipping_fee: number;
   date_posted: string;
-  tags: number[];
+  tag: TagModel[];
   is_sold: boolean;
   times_viewed: number;
   shop_cart: number[];
