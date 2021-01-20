@@ -14,7 +14,6 @@
           <img src="../../../../assets/images/logo.png" alt="GoodGames" width="199">
         </a>
         <ul class="nk-nav nk-nav-right d-none d-lg-table-cell" data-nav-mobile="#nk-nav-mobile">
-          <ng-container *ngIf="isLoggedIn == true; else notlogged">
           <li class=" nk-drop-item">
             <a routerLink="/articles/store">Store</a>
             <ul class="dropdown">
@@ -26,7 +25,7 @@
               </li>
             </ul>
           </li>
-
+          <ng-container *ngIf="isLoggedIn == true; else notlogged">
 
           <li>
             <a routerLink="/articles/shopcart">Shop Cart
@@ -60,9 +59,6 @@
               </li>
               <li>
                 <a routerLink="/articles/create">Sell Article</a>
-              </li>
-              <li>
-                <a routerLink="/profile/settings">Settings</a>
               </li>
               <li>
                   <a (click)="logout()" style="cursor: pointer">Log Out</a>

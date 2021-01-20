@@ -35,7 +35,7 @@ export class RichArticleRendererComponent implements OnInit, AfterViewInit {
             sum += r.rate;
           }
           this.userReviewsNum = reviews.length;
-          this.userRating = Math.floor(sum / reviews.length);
+        this.userRating = reviews.length ? Math.floor(sum / reviews.length) : 0;
           this.ratingView.nativeElement.innerHTML = htmlRatingIcons(this.userRating);
         }
       );

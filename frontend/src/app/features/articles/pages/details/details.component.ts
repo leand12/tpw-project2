@@ -29,6 +29,7 @@ export class DetailsComponent implements OnInit, AfterViewInit {
   userReviews: any;
   conditions = conditionChoices;
   baseURL = baseURL;
+  userReviewsNum: any;
 
   constructor(private router: Router, private activeRoute: ActivatedRoute,
               private tagService: TagService, private articleService: ArticleService,
@@ -79,7 +80,8 @@ export class DetailsComponent implements OnInit, AfterViewInit {
         for (const r of reviews ){
           sum += r.rate;
         }
-        this.userRating = Math.floor(sum / reviews.length);
+        this.userReviewsNum = reviews.length;
+        this.userRating = reviews.length ? Math.floor(sum / reviews.length) : 0;
         this.ratingView.nativeElement.innerHTML = htmlRatingIcons(this.userRating);
       }
     );

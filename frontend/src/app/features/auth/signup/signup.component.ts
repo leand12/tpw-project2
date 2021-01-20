@@ -32,7 +32,7 @@ export class SignupComponent implements OnInit {
   signup() {
     const user = this.signupForm.value;
     this.authService.signup(user.username, user.firstName, user.lastName, user.email, user.password1, user.password2).subscribe(
-      success => this.router.navigate(['home']),
+      success => location.replace('/home'),
       error => this.error = error
     );
   }
