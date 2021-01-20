@@ -25,7 +25,7 @@ export class SavedComponent implements OnInit, AfterViewInit {
   price: string[];
 
   constructor(private router: Router, private articleService: ArticleService,
-              private userService: UserService, public activeRoute: ActivatedRoute, ) { }
+              private userService: UserService, public activeRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getURLParams();

@@ -1,18 +1,20 @@
 <div class="nk-main">
+
+  <div class="container" *ngIf="success==true; else normal">
+        <div class="nk-info-box text-success">
+          <div class="nk-info-box-icon">
+            <i class="ion-checkmark-round"></i>
+          </div>
+          <h3>Success!</h3>
+          <em>Order Completed!</em>
+        </div>
+        <div class="nk-gap-2"></div>
+    <button type="submit" class="nk-btn nk-btn-color-main-1 float-right ml-sm-4" (click)="goHome()">Continue Browsing</button>
+  </div>
+  <ng-template #normal>
   <div class="container">
-<!--    {% if success == False %}-->
-    <app-error-box>Order Canceled: Some article was already bough. Check your cart and try again.</app-error-box>
-<!--    <div class="nk-gap-2"></div>-->
-<!--    {% elif success == True %}-->
-<!--    <div class="nk-info-box text-success">-->
-<!--      <div class="nk-info-box-icon">-->
-<!--        <i class="ion-checkmark-round"></i>-->
-<!--      </div>-->
-<!--      <h3>Success!</h3>-->
-<!--      <em>Order Completed: You have purchased these articles.</em>-->
-<!--    </div>-->
-<!--    <div class="nk-gap-2"></div>-->
-<!--    {% endif %}-->
+    <app-error-box *ngIf="failed==true">Order Canceled: Some article was already bough. Check your cart and try again.</app-error-box>
+    <div class="nk-gap-2"></div>
     <h2 class="nk-decorated-h-3"><span>Shop Cart</span></h2>
     <div class="nk-gap-1"></div>
 
@@ -53,7 +55,7 @@
           <div class="nk-gap-2"></div>
           <form method="post" action=".">
             <button [disabled]="total==0" name="buy" type="submit"
-                    class="nk-btn nk-btn-rounded nk-btn-color-main-1 float-right">
+                    class="nk-btn nk-btn-rounded nk-btn-color-main-1 float-right" (click)="buy()">
               Place Order
             </button>
           </form>
@@ -72,7 +74,7 @@
           <tr *ngFor="let a of articles">
             <td class="nk-product-cart-thumb">
               <a routerLink="/articles/details/{{ a.id }}" class="nk-image-box-1 nk-post-image">
-                <img src="{{ a.items_in_article[0].image }}" alt="{{ a.name }}" width="115">
+                <img *ngIf="a" src="{{ baseURL + a.items_in_article[0].image }}" alt="{{ a.name }}" width="115">
               </a>
             </td>
             <td class="nk-product-cart-title">
@@ -80,30 +82,24 @@
               <div class="nk-gap-1"></div>
 
               <h2 class="nk-post-title h4">
-                <a href="{% url 'article_details' ac.id %}">{{ ac.name }}</a>
+                <a routerLink="/articles/details/{{ a.id }}">{{ a.name }}</a>
               </h2>
             </td>
             <td class="nk-product-cart-price">
               <h5 class="h6">Price:</h5>
               <div class="nk-gap-1"></div>
 
-              <strong>{{ ac.total_price }} €</strong>
+              <strong>{{ a.total_price }} €</strong>
             </td>
             <td colspan="2" class="nk-product-cart-price">
               <h5 class="h6">Shipping Fee:</h5>
               <div class="nk-gap-1"></div>
 
-              <strong>{{ ac.ShippingFee }} €</strong>
+              <strong>{{ a.shipping_fee }} €</strong>
             </td>
-            <form method="post" action="." id="remove-form-{{ forloop.counter }}">
-              {% csrf_token %}
-              <input name="remove_article" value="{{ ac.id }}" hidden>
-              <td class="nk-product-cart-remove">
-                <a href="javascript:document.getElementById('remove-form-{{ forloop.counter }}').submit()">
-                  <span class="ion-android-close"></span>
-                </a>
-              </td>
-            </form>
+            <button type="submit" class="nk-btn nk-btn-color-main-1 float-right ml-sm-4" (click)="removeFromCart(a)">
+            <span class="ion-android-close"></span>
+            </button>
           </tr>
 
           </tbody>
@@ -116,6 +112,7 @@
 
     </div>
   </div>
+  </ng-template>
 
   <div class="nk-gap-2"></div>
 
