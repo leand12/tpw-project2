@@ -39,21 +39,21 @@
             <a routerLink="/articles/saved">Saved</a>
           </li>
           <li class="nk-drop-item">
-            <a routerLink="/articles/owned/1">My Articles</a>
+            <a routerLink="/articles/owned/{{ id }}">My Articles</a>
             <ul class="dropdown">
               <li>
-                <a routerLink="/articles/owned/1" fragment="onsale">On Sale</a><!-- TODO:/articles/owned/USERID -->
+                <a routerLink="/articles/owned/{{ id }}" fragment="onsale">On Sale</a><!-- TODO:/articles/owned/USERID -->
               </li>
               <li>
-                <a routerLink="/articles/owned/1" fragment="soldout">Sold Out</a>
+                <a routerLink="/articles/owned/{{ id }}" fragment="soldout">Sold Out</a>
               </li>
               <li>
-                <a routerLink="/articles/owned/1" fragment="purchased">Purchased</a>
+                <a routerLink="/articles/owned/{{ id }}" fragment="purchased">Purchased</a>
               </li>
             </ul>
           </li>
           <li class=" nk-drop-item demo-js">
-            <a routerLink="/profile/details/{{ id }}">Hello Nobody</a>
+            <a routerLink="/profile/details/{{ id }}"> Account</a>
             <ul class="dropdown">
               <li>
                 <a routerLink="/profile/details/{{ id }}">Profile</a><!-- TODO: /profile/USERID -->
